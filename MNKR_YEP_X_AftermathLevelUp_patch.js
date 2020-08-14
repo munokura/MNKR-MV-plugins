@@ -1,6 +1,6 @@
 /*
  * --------------------------------------------------
- * YEP_X_AftermathLevelUp_patch Ver.1.0.0
+ * YEP_X_AftermathLevelUp_patch Ver.1.0.1
  * Copyright (c) 2020 Munokura
  * This software is released under the MIT license.
  * http://opensource.org/licenses/mit-license.php
@@ -16,15 +16,17 @@
  * プラグイン管理で YEP_X_AftermathLevelUp の下側に配置してください。
  */
 
+(function () {
+  'use strict';
 
-Window_VictoryLevelUp.prototype.drawDarkRects = function() {
+  Window_VictoryLevelUp.prototype.drawDarkRects = function () {
     for (var i = 0; i < 8; ++i) {
       var rect = this.itemRect(i);
       this.drawDarkRect(rect.x, rect.y, rect.width, rect.height);
     }
-};
+  };
 
-Window_VictoryLevelUp.prototype.drawStatChanges = function() {
+  Window_VictoryLevelUp.prototype.drawStatChanges = function () {
     this.contents.fontSize = Yanfly.Param.ALUFontSize;
     for (var i = 0; i < 8; ++i) {
       var rect = this.itemRect(i);
@@ -34,4 +36,6 @@ Window_VictoryLevelUp.prototype.drawStatChanges = function() {
       this.drawNewParam(i, rect);
       this.drawParamDifference(i, rect);
     }
-};
+  };
+
+})();
