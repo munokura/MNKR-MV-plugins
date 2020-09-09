@@ -1,6 +1,6 @@
 /*
  * --------------------------------------------------
- * MNKR_BattleStartCommon Ver.2.0.1
+ * MNKR_BattleStartCommon Ver.2.0.2
  * Copyright (c) 2020 Munokura
  * This software is released under the MIT license.
  * http://opensource.org/licenses/mit-license.php
@@ -10,7 +10,7 @@
 /*:
  * @target MZ MV
  * @url https://raw.githubusercontent.com/munokura/MNKR-MZ-plugins/master/MNKR_BattleStartCommon.js
- * @plugindesc 戦闘開始時のメッセージをコモンイベントに置き換えます。
+ * @plugindesc v2.0.2 戦闘開始時のメッセージをコモンイベントに置き換えます。
  * @author munokura
  *
  * @param Variable Id
