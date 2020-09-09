@@ -24,7 +24,7 @@
  * @type boolean
  * @on 表示
  * @off 非表示
- * @desc デフォルトのメッセージを表示か非表示
+ * @desc 指定変数の値が0の場合に、デフォルトの戦闘開始メッセージを表示するかどうか
  * @default false
  * 
  * @help
@@ -68,7 +68,7 @@
 
     const _BattleManager_displayStartMessages = BattleManager.displayStartMessages;
     BattleManager.displayStartMessages = function () {
-        if (valueZero) {
+        if (valueZero && $gameVariables.value(variableId) === 0) {
             _BattleManager_displayStartMessages.call(this);
         } else {
             $gameTemp.reserveCommonEvent($gameVariables.value(variableId));
