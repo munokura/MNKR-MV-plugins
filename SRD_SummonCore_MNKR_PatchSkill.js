@@ -37,9 +37,15 @@
  * この問題はこのパッチプラグインでも解消していません。
  * よって、データベースで召喚されるアクターの初期レベルは1にしておくことをお勧めします。
  * 
- * 利用規約
+ *
+ * プラグインコマンドや設定はありません。
+ *
+ *
+ * 利用規約:
  *   MITライセンスです。
- *   http://opensource.org/licenses/mit-license.php
+ *   https://ja.osdn.net/projects/opensource/wiki/licenses%2FMIT_license
+ *   作者に無断で改変、再配布が可能で、
+ *   利用形態（商用、18禁利用等）についても制限はありません。
  */
 
 var SRD = SRD || {};

@@ -20,11 +20,20 @@
  * 並び替えシーン SceneFormation ver1.093 （以降SceneFormation）用の
  * パッチプラグインです。
  * 動作には SceneFormation が必要です。
- * https://plugin.fungamemake.com/archives/2061
+ * https://raw.githubusercontent.com/munokura/Yana-MV-plugins/master/Menu/SceneFormation.js
  * 
  * プラグイン管理で、このプラグインをSceneFormationの下方に配置してください。
  * 
  * SceneFormationのシーン表示能力値を攻撃力、防御力、敏捷性の３つにします。
+ *
+ * プラグインコマンドや設定はありません。
+ *
+ *
+ * 利用規約:
+ *   MITライセンスです。
+ *   https://ja.osdn.net/projects/opensource/wiki/licenses%2FMIT_license
+ *   作者に無断で改変、再配布が可能で、
+ *   利用形態（商用、18禁利用等）についても制限はありません。
  */
 
  (function () {
