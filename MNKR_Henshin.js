@@ -1,6 +1,6 @@
 ﻿/*
  * --------------------------------------------------
- * MNKR_Henshin Ver.1.0.0
+ * MNKR_Henshin Ver.1.0.1
  * Copyright (c) 2020 Munokura
  * This software is released under the MIT license.
  * http://opensource.org/licenses/mit-license.php
@@ -48,15 +48,15 @@
 
   const _Game_Interpreter_pluginCommand = Game_Interpreter.prototype.pluginCommand;
   Game_Interpreter.prototype.pluginCommand = function (command, args) {
+    _Game_Interpreter_pluginCommand.call(this, command, args);
     if (command == pluginName) {
       if ($gameParty._actors.contains(Number(args[0])) && !$gameParty._actors.contains(Number(args[1]))) {
         const i = $gameParty._actors.indexOf(Number(args[0]));
-        $gameParty._actors.splice(i, 1, (Number(args[1])));
+        $gameParty._actors.splice(i, 1, Number(args[1]));
         $gamePlayer.refresh();
         $gameMap.requestRefresh();
       }
     }
-    return;
   };
 
 })();
