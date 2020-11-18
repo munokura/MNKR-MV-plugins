@@ -10,11 +10,11 @@
 /*:
  * @target MV
  * @url https://raw.githubusercontent.com/munokura/MNKR-MV-plugins/master/MNKR_AddIconSave.js
- * @plugindesc 
+ * @plugindesc セーブデータにアイコンを追加表示できます。
  * @author munokura
  *
  * @help
- * セーブデータにアイコンを追加表示します。
+ * セーブデータにアイコンを追加表示できます。
  * プラグインパラメーターで変数IDを指定し、
  * その変数にアイコンIDを代入すると表示されます。
  * 
