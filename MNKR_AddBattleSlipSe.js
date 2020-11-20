@@ -1,6 +1,6 @@
 /*
  * --------------------------------------------------
- * MNKR_AddSeHpSlip Ver.0.0.1
+ * MNKR_AddBattleSlipSe Ver.0.0.1
  * Copyright (c) 2020 Munokura
  * This software is released under the MIT license.
  * http://opensource.org/licenses/mit-license.php
@@ -9,7 +9,7 @@
 
 /*:
  * @target MV
- * @url https://raw.githubusercontent.com/munokura/MNKR-MV-plugins/master/MNKR_AddSeHpSlip.js
+ * @url https://raw.githubusercontent.com/munokura/MNKR-MV-plugins/master/MNKR_AddBattleSlipSe.js
  * @plugindesc 戦闘中のスリップダメージ・HPリジェネにSEを追加できます。
  * @author munokura
  *
@@ -84,8 +84,16 @@
   const setUpSlipDamageSe = (slipDamageSe.name !== '');
   const setUpRegenerateHpSe = (regenerateHpSe.name !== '');
 
-  Game_Battler.prototype.regenerateHp = function () {
-    var value = Math.floor(this.mhp * this.hrg);
+  const _Game_Battler_regenerateAll = Game_Battler.prototype.regenerateAll;
+  Game_Battler.prototype.regenerateAll = function () {
+    if (this.isAlive()) {
+      this.regenerateHpSe();
+    }
+    _Game_Battler_regenerateAll.call(this);
+  };
+
+  Game_Battler.prototype.regenerateHpSe = function () {
+    let value = Math.floor(this.mhp * this.hrg);
     value = Math.max(value, -this.maxSlipDamage());
     if (value !== 0) {
       if (value > 0 && setUpRegenerateHpSe) {
@@ -94,7 +102,6 @@
       if (value < 0 && setUpSlipDamageSe) {
         AudioManager.playSe(slipDamageSe);
       }
-      this.gainHp(value);
     }
   };
 
