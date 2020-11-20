@@ -1,6 +1,6 @@
 /*
  * --------------------------------------------------
- * MNKR_AddBattleSlipSe Ver.0.0.1
+ * MNKR_AddSeBattleRegenerate Ver.0.0.1
  * Copyright (c) 2020 Munokura
  * This software is released under the MIT license.
  * http://opensource.org/licenses/mit-license.php
@@ -9,7 +9,7 @@
 
 /*:
  * @target MV
- * @url https://raw.githubusercontent.com/munokura/MNKR-MV-plugins/master/MNKR_AddBattleSlipSe.js
+ * @url https://raw.githubusercontent.com/munokura/MNKR-MV-plugins/master/MNKR_AddSeBattleRegenerate.js
  * @plugindesc 戦闘中のスリップダメージ・HPリジェネにSEを追加できます。
  * @author munokura
  *
