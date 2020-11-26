@@ -1,5 +1,5 @@
 //=============================================================================
-// MNKR_AltMenuScreen3.js (ver0.0.1)
+// MNKR_AltMenuScreen3.js (ver0.0.2)
 //=============================================================================
 
 /*
@@ -177,7 +177,7 @@
  * @noteRequire 1
  * @noteDir img/pictures/
  * @noteType file
- * @noteData actor
+ * @noteData actors
  */
 
 (function () {
