@@ -1,6 +1,6 @@
 /*
  * --------------------------------------------------
- * MNKR_AltMenuScreen3 Ver.0.1.0
+ * MNKR_AltMenuScreen3 Ver.0.1.1
  * Copyright (c) 2020 Munokura
  * This software is released under the MIT license.
  * http://opensource.org/licenses/mit-license.php
@@ -565,13 +565,9 @@
     Bitmap.prototype.bltStand = function (source, sx, sy, sw, sh, dx, dy, dw, dh) {
         dw = dw || sw;
         dh = dh || sh;
-        try {
-            this._context.globalCompositeOperation = 'source-over';
-            this._context.drawImage(source._canvas, sx, sy, sw, sh, dx, dy, dw, dh);
-            this._setDirty();
-        } catch (e) {
-            //
-        }
+        this._context.globalCompositeOperation = 'source-over';
+        this._context.drawImage(source._canvas, sx, sy, sw, sh, dx, dy, dw, dh);
+        this._setDirty();
     };
 
 })();
