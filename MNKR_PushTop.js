@@ -1,6 +1,6 @@
 /*
  * --------------------------------------------------
- * MNKR_PushTop Ver.0.0.1
+ * MNKR_PushTop Ver.0.0.2
  * Copyright (c) 2020 Munokura
  * This software is released under the MIT license.
  * http://opensource.org/licenses/mit-license.php
@@ -78,12 +78,12 @@
     }, this);
 
     let pushActor = 0;
-    let formation = 0;
+    let formation = false;
     if (command === pluginName) {
       switch (args[0]) {
         case 'push':
           pushActor = Number(args[1]);
-          formation = Number(args[2]) === 1;
+          formation = args[2] === '1';
           $gameParty._lastActors = $gameParty._actors.clone();
           if ($gameParty.members().contains($gameActors.actor(pushActor))) {
             $gameParty.removeActor(pushActor);
@@ -96,7 +96,7 @@
           }
           break;
         case 'return':
-          formation = Number(args[1]) === 1;
+          formation = args[1] === '1';
           $gameParty._actors = $gameParty._lastActors;
           $gamePlayer.refresh();
           $gameMap.requestRefresh();
