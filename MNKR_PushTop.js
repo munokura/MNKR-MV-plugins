@@ -1,6 +1,6 @@
 /*
  * --------------------------------------------------
- * MNKR_PushTop Ver.0.0.2
+ * MNKR_PushTop Ver.0.0.3
  * Copyright (c) 2020 Munokura
  * This software is released under the MIT license.
  * http://opensource.org/licenses/mit-license.php
@@ -73,13 +73,15 @@
   const _Game_Interpreter_pluginCommand = Game_Interpreter.prototype.pluginCommand;
   Game_Interpreter.prototype.pluginCommand = function (command, args) {
     _Game_Interpreter_pluginCommand.apply(this, arguments);
-    args = args.map(function (element) {
-      return Window_Base.prototype.convertEscapeCharacters.call(this, element);
-    }, this);
 
-    let pushActor = 0;
-    let formation = false;
     if (command === pluginName) {
+
+      args = args.map(function (element) {
+        return Window_Base.prototype.convertEscapeCharacters.call(this, element);
+      }, this);
+
+      let pushActor = 0;
+      let formation = false;
       switch (args[0]) {
         case 'push':
           pushActor = Number(args[1]);
