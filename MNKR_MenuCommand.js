@@ -1,6 +1,7 @@
-﻿/*
+/*
  * --------------------------------------------------
- * MNKR_MenuCommand Ver.1.0.1
+ * MNKR_MenuCommand.js
+ *   Ver.1.0.1
  * Copyright (c) 2020 Munokura
  * This software is released under the MIT license.
  * http://opensource.org/licenses/mit-license.php
@@ -8,26 +9,8 @@
  */
 
 /*:
- * @param Max Cols
- * @text 横コマンド数
- * @type number
- * @min 1
- * @desc ツクールデフォルト:1
- * @default 2
- *
- * @param Command Alignment
- * @text コマンド行揃え
- * @type select
- * @option 左
- * @value left
- * @option 中央
- * @value center
- * @option 右
- * @value right
- * @desc 左:left / 中央:center / 右:right
- * ツクールデフォルト:left
- * @default left
- *
+ * @target MV
+ * @url https://raw.githubusercontent.com/munokura/MNKR-MV-plugins/master/MNKR_MenuCommand.js
  * @plugindesc メインメニューのコマンドウィンドウの表示を設定します。
  * @author munokura
  *
@@ -55,9 +38,30 @@
  *
  * 利用規約:
  *   MITライセンスです。
- *   https://ja.osdn.net/projects/opensource/wiki/licenses%2FMIT_license
+ *   https://licenses.opensource.jp/MIT/MIT.html
  *   作者に無断で改変、再配布が可能で、
  *   利用形態（商用、18禁利用等）についても制限はありません。
+ *
+ *
+ * @param Max Cols
+ * @text 横コマンド数
+ * @type number
+ * @min 1
+ * @desc ツクールデフォルト:1
+ * @default 2
+ *
+ * @param Command Alignment
+ * @text コマンド行揃え
+ * @type select
+ * @option 左
+ * @value left
+ * @option 中央
+ * @value center
+ * @option 右
+ * @value right
+ * @desc 左:left / 中央:center / 右:right
+ * ツクールデフォルト:left
+ * @default left
  */
 
 (function(){

@@ -1,6 +1,7 @@
 /*
  * --------------------------------------------------
- * SRD_SummonCore_MNKR_PatchSkill Ver.1.0.0
+ * SRD_SummonCore_MNKR_PatchSkill.js
+ *   Ver.1.0.0
  * Copyright (c) 2020 Munokura
  * This software is released under the MIT license.
  * http://opensource.org/licenses/mit-license.php
@@ -12,6 +13,8 @@
  */
 
  /*:
+ * @target MV
+ * @url https://raw.githubusercontent.com/munokura/MNKR-MV-plugins/master/SRD_SummonCore_MNKR_PatchSkill.js
  * @plugindesc SRD_SummonCoreで召喚されたアクターがレベルに合わせたスキルを習得しないのを習得するように変更するパッチプラグイン
  * @author Munokura
  * @license MIT
@@ -43,7 +46,7 @@
  *
  * 利用規約:
  *   MITライセンスです。
- *   https://ja.osdn.net/projects/opensource/wiki/licenses%2FMIT_license
+ *   https://licenses.opensource.jp/MIT/MIT.html
  *   作者に無断で改変、再配布が可能で、
  *   利用形態（商用、18禁利用等）についても制限はありません。
  */

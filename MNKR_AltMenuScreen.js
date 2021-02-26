@@ -1,17 +1,22 @@
-﻿//============================================================================
+﻿/*
+ * --------------------------------------------------
+ * MNKR_AltMenuScreen.js
+ *   Ver.0.0.1
+ * Copyright (c) 2020 Munokura
+ * This software is released under the MIT license.
+ * http://opensource.org/licenses/mit-license.php
+ * --------------------------------------------------
+ */
+
+/============================================================================
 // AltMenuScreen.js
 //============================================================================
 
-/*:
- * @plugindesc Alternative menu screen layout.
- * @author Yoji Ojima
- *
- * @help This plugin does not provide plugin commands.
- */
-
 /*:ja
+ * @target MV
+ * @url https://raw.githubusercontent.com/munokura/MNKR-MV-plugins/master/MNKR_AltMenuScreen.js
  * @plugindesc メニュー画面のレイアウトを変更します。
- * @author Yoji Ojima
+ * @author Yoji Ojima (改変 munokura)
  *
  * @help このプラグインには、プラグインコマンドはありません。
  *
@@ -19,11 +24,16 @@
  * メインメニュー画面をシンプルにしたものです。
  *
  *
- * 利用規約
- *   改変者の著作権を放棄します。
- *   RPGツクールMVの収録素材の改変素材です。
- *   ツクールシリーズ利用規約に従ってご利用ください。
- *   https://tkool.jp/support/
+ *
+ *   RPGツクールMV公式プラグインを改変したものです。
+ *   質問は改変者へお願いいたします。
+ *
+ *
+ * 利用規約:
+ *   MITライセンスです。
+ *   https://licenses.opensource.jp/MIT/MIT.html
+ *   作者に無断で改変、再配布が可能で、
+ *   利用形態（商用、18禁利用等）についても制限はありません。
  */
 
 (function() {

@@ -3,6 +3,8 @@
 //============================================================================
 
 /*:ja
+ * @target MV
+ * @url https://raw.githubusercontent.com/munokura/MNKR-MV-plugins/master/MOGHexpan.js
  * @plugindesc ver1.04 MOG_BattleHud(v5.04)拡張
  * @author まっつＵＰ (改変:munokura)
  *

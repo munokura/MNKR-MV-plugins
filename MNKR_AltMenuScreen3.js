@@ -1,6 +1,7 @@
 /*
  * --------------------------------------------------
- * MNKR_AltMenuScreen3 Ver.0.1.1
+ * MNKR_AltMenuScreen3.js
+ *   Ver.0.1.1
  * Copyright (c) 2020 Munokura
  * This software is released under the MIT license.
  * http://opensource.org/licenses/mit-license.php
@@ -11,7 +12,7 @@
  * @target MV
  * @url https://raw.githubusercontent.com/munokura/MNKR-MV-plugins/master/MNKR_AltMenuScreen3.js
  * @plugindesc メニュー画面にアクターの顔画像の代わりに立ち絵を表示できます。
- * @author 神無月サスケ (改変:ムノクラ)
+ * @author 神無月サスケ (改変 munokura)
  * 
  * @help
  * メニュー画面にアクターの顔画像の代わりに立ち絵を表示できます。
@@ -41,8 +42,9 @@
  * 
  * このプラグインには、プラグインコマンドはありません。
  * 
- * このプラグインは AltMenuScreen2MZ を元となる AltMenuScreen3 と
- * ムノクラの技量の範囲で合体させたものです。
+ * このプラグインは AltMenuScreen2MZ を元ととして
+ * AltMenuScreen3を改変したものです。
+ * 質問は改変者へお願いいたします。
  * 
  * 
  * 利用規約:

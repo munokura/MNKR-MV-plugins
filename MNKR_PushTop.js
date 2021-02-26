@@ -1,6 +1,7 @@
 /*
  * --------------------------------------------------
- * MNKR_PushTop Ver.0.0.3
+ * MNKR_PushTop.js
+ *   Ver.0.0.3
  * Copyright (c) 2020 Munokura
  * This software is released under the MIT license.
  * http://opensource.org/licenses/mit-license.php
