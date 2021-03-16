@@ -1,6 +1,6 @@
 /*
  * --------------------------------------------------
- * TMRingCommandPatchFormation.js
+ * MNKR_TMRingCommandPatchFormation.js
  *   Ver.0.0.1
  * Copyright (c) 2021 Munokura
  * This software is released under the MIT license.
@@ -9,14 +9,14 @@
  */
 /*:
  * @target MV
- * @url https://raw.githubusercontent.com/munokura/MNKR-MV-plugins/master/TMRingCommandPatchFormation.js
- * @plugindesc TMRingCommandPatchFormation の並べ替え表示を簡易にします。
+ * @url https://raw.githubusercontent.com/munokura/MNKR-MV-plugins/master/MNKR_TMRingCommandPatchFormation.js
+ * @plugindesc TMRingCommand の並べ替え表示を簡易にします。
  * @author munokura
  *
  * @help
- * TMRingCommandPatchFormation のパッチプラグインです。
- * TMRingCommandPatchFormation の並べ替え表示を簡易にします。
- * プラグイン管理で TMRingCommandPatchFormation の下側に配置してください。
+ * TMRingCommand のパッチプラグインです。
+ * TMRingCommand の並べ替え表示を簡易にします。
+ * プラグイン管理で TMRingCommand の下側に配置してください。
  * 
  * ウィンドウの位置と大きさの調整は GraphicalDesignMode.js を使用してください。
  * https://triacontane.blogspot.com/2016/03/gui.html
