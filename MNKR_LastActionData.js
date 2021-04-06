@@ -27,7 +27,7 @@
  * 
  * --データ種別
  * Skill / S - 直前に使用したスキルのID
- * Item  / I- 直前に使用したアイテムのID
+ * Item  / I - 直前に使用したアイテムのID
  * ActionActor / AA - 直前に行動したアクターのID
  * ActionEnemy / AE - 直前に行動した敵キャラのインデックス
  * TargetActor / TA - 直前に行動した敵キャラのインデックス
