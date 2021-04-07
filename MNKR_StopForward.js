@@ -52,7 +52,6 @@
 
   const _Sprite_Actor_updateTargetPosition = Sprite_Actor.prototype.updateTargetPosition;
   Sprite_Actor.prototype.updateTargetPosition = function () {
-
     if (this._actor.isInputting()) {
       if (input) {
         this.stepForward();
