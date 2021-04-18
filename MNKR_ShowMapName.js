@@ -1,7 +1,7 @@
 /*
  * --------------------------------------------------
  * MNKR_ShowMapName.js
- *   Ver.0.0.3
+ *   Ver.0.0.4
  * Copyright (c) 2021 Munokura
  * This software is released under the MIT license.
  * http://opensource.org/licenses/mit-license.php
@@ -58,8 +58,11 @@
   Window_MapName.prototype.update = function () {
     const showMapName = $dataMap.meta.MNKR_ShowMapName || globalSetting;
     if (showMapName) {
-      Window_Base.prototype.update.call(this);
-      this.updateFadeIn();
+      if ($gameMap.isNameDisplayEnabled()) {
+        this.updateFadeIn();
+      } else {
+        this.updateFadeOut();
+      }
     } else {
       _Window_MapName_update.call(this);
     }
@@ -79,20 +82,20 @@
 
   const _Game_Screen_startFadeOut = Game_Screen.prototype.startFadeOut;
   Game_Screen.prototype.startFadeOut = function (duration) {
+    _Game_Screen_startFadeOut.call(this, duration);
     const showMapName = $dataMap.meta.MNKR_ShowMapName || globalSetting;
     if (showMapName) {
       $gameMap.disableNameDisplay();
     }
-    _Game_Screen_startFadeOut.call(this, duration);
   };
 
   const _Game_Screen_startFadeIn = Game_Screen.prototype.startFadeIn;
   Game_Screen.prototype.startFadeIn = function (duration) {
+    _Game_Screen_startFadeIn.call(this, duration);
     const showMapName = $dataMap.meta.MNKR_ShowMapName || globalSetting;
     if (showMapName) {
       $gameMap.enableNameDisplay();
     }
-    _Game_Screen_startFadeIn.call(this, duration);
   };
 
 })();
