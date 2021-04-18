@@ -1,7 +1,7 @@
 /*
  * --------------------------------------------------
  * MNKR_ShowMapName.js
- *   Ver.0.0.2
+ *   Ver.0.0.3
  * Copyright (c) 2021 Munokura
  * This software is released under the MIT license.
  * http://opensource.org/licenses/mit-license.php
@@ -59,9 +59,7 @@
     const showMapName = $dataMap.meta.MNKR_ShowMapName || globalSetting;
     if (showMapName) {
       Window_Base.prototype.update.call(this);
-      if (this._showCount > 0 && $gameMap.isNameDisplayEnabled()) {
-        this.updateFadeIn();
-      }
+      this.updateFadeIn();
     } else {
       _Window_MapName_update.call(this);
     }
