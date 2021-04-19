@@ -1,7 +1,7 @@
 /*
  * --------------------------------------------------
  * MNKR_ShowMapName.js
- *   Ver.0.1.0
+ *   Ver.0.1.1
  * Copyright (c) 2021 Munokura
  * This software is released under the MIT license.
  * http://opensource.org/licenses/mit-license.php
@@ -9,7 +9,7 @@
  */
 
 /*:
- * @target MV
+ * @target MZ MV
  * @url https://raw.githubusercontent.com/munokura/MNKR-MV-plugins/master/MNKR_ShowMapName.js
  * @plugindesc マップ名を表示したままにします。
  * @author munokura
@@ -52,15 +52,6 @@
   const parameters = PluginManager.parameters(pluginName);
   const globalSetting = parameters['globalSetting'] === 'true';
 
-  const _Scene_Map_start = Scene_Map.prototype.start;
-  Scene_Map.prototype.start = function () {
-    _Scene_Map_start.call(this);
-    const showMapName = $dataMap.meta.MNKR_ShowMapName || globalSetting;
-    if (showMapName) {
-      this._mapNameWindow.open();
-    }
-  };
-
   const _Window_MapName_update = Window_MapName.prototype.update;
   Window_MapName.prototype.update = function () {
     const showMapName = $dataMap.meta.MNKR_ShowMapName || globalSetting;
@@ -72,18 +63,6 @@
       }
     } else {
       _Window_MapName_update.call(this);
-    }
-  };
-
-  const _Window_MapName_updateFadeIn = Window_MapName.prototype.updateFadeIn;
-  Window_MapName.prototype.updateFadeIn = function () {
-    const showMapName = $dataMap.meta.MNKR_ShowMapName || globalSetting;
-    if (showMapName) {
-      if (this.contentsOpacity < 256) {
-        this.contentsOpacity += 16;
-      }
-    } else {
-      _Window_MapName_updateFadeIn.call(this);
     }
   };
 
