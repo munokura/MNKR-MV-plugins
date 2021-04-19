@@ -1,7 +1,7 @@
 /*
  * --------------------------------------------------
  * MNKR_ShowMapName.js
- *   Ver.0.0.5
+ *   Ver.0.1.0
  * Copyright (c) 2021 Munokura
  * This software is released under the MIT license.
  * http://opensource.org/licenses/mit-license.php
@@ -20,6 +20,13 @@
  * マップのメモ欄に
  * <MNKR_ShowMapName>
  * と入れたマップに反映されます。
+ * 
+ * マップ名表示マップで一時的に非表示にしたい（フェードアウト等）場合、
+ * 下記スクリプトを実行してください。
+ * $gameMap.disableNameDisplay();
+ * 
+ * 再表示する場合、下記スクリプトを実行してください。
+ * $gameMap.enableNameDisplay();
  * 
  * 
  * 利用規約:
@@ -78,24 +85,6 @@
     } else {
       _Window_MapName_updateFadeIn.call(this);
     }
-  };
-
-  const _Game_Screen_startFadeOut = Game_Screen.prototype.startFadeOut;
-  Game_Screen.prototype.startFadeOut = function (duration) {
-    const showMapName = $dataMap.meta.MNKR_ShowMapName || globalSetting;
-    if (showMapName) {
-      $gameMap.disableNameDisplay();
-    }
-    _Game_Screen_startFadeOut.call(this, duration);
-  };
-
-  const _Game_Screen_startFadeIn = Game_Screen.prototype.startFadeIn;
-  Game_Screen.prototype.startFadeIn = function (duration) {
-    const showMapName = $dataMap.meta.MNKR_ShowMapName || globalSetting;
-    if (showMapName) {
-      $gameMap.enableNameDisplay();
-    }
-    _Game_Screen_startFadeIn.call(this, duration);
   };
 
 })();
