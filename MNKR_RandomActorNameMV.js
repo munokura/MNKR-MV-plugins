@@ -76,7 +76,7 @@
 
   const _Game_Interpreter_pluginCommand = Game_Interpreter.prototype.pluginCommand;
   Game_Interpreter.prototype.pluginCommand = function (command, args) {
-    _Game_Interpreter_pluginCommand.apply(this, arguments);
+    _Game_Interpreter_pluginCommand.call(this, command, args);
 
     if (command == pluginName) {
       args = args.map(function (element) {
