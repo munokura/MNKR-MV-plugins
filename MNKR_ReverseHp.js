@@ -1,7 +1,7 @@
 /*
  * --------------------------------------------------
  * MNKR_ReverseHp.js
- *   Ver.0.0.1
+ *   Ver.0.0.2
  * Copyright (c) 2021 Munokura
  * This software is released under the MIT license.
  * http://opensource.org/licenses/mit-license.php
@@ -16,7 +16,6 @@
  *
  * @help
  * HPの表示を蓄積ダメージに変更します。
- * 試作品です。
  * 
  * 
  * 利用規約:
@@ -36,17 +35,12 @@
         this.drawGauge(x, y, width, actor.hpRate(), color1, color2);
         this.changeTextColor(this.systemColor());
         this.drawText(TextManager.hpA, x, y, 44);
-
         const reverseHp = actor.mhp - actor.hp;
-
-        // this.drawCurrentAndMax(actor.hp, actor.mhp, x, y, width,
-        //     this.hpColor(actor), this.normalColor());
         this.drawCurrentAndMax(reverseHp, actor.mhp, x, y, width,
             this.hpColor(actor), this.normalColor());
     };
 
     Game_BattlerBase.prototype.hpRate = function () {
-        // return this.hp / this.mhp;
         return (this.mhp - this.hp) / this.mhp;
     };
 
