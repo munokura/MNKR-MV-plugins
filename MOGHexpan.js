@@ -43,7 +43,7 @@
  *
  * 利用規約(2020/04/03変更)：
  * この作品は マテリアル・コモンズ・ブルー・ライセンスの下に提供されています。
- * https://materialcommons.tk/mtcm-b-summary/
+ * https://ja.materialcommons.org/mtcm-b-summary/
  * クレジット表示：まっつＵＰ (改変munokura)
  *
  */
