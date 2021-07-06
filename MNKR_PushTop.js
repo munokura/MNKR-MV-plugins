@@ -1,7 +1,7 @@
 /*
  * --------------------------------------------------
  * MNKR_PushTop.js
- *   Ver.0.0.3
+ *   Ver.0.0.4
  * Copyright (c) 2020 Munokura
  * This software is released under the MIT license.
  * http://opensource.org/licenses/mit-license.php
@@ -49,16 +49,6 @@
  * 並び替えの禁止を解除します。
  * 
  * 
- * 補足
- * 各因数（数字で指定する箇所）は制御文字が使用できます。
- * これにより変数を活用することが可能です。
- * 
- * 例
- * MNKR_PushTop push \V[1] \V[2]
- * 変数ID1のアクターを先頭に出します。
- * 変数ID2が1ならば並び替えを禁止にします。
- * 
- * 
  * 利用規約:
  *   MITライセンスです。
  *   https://licenses.opensource.jp/MIT/MIT.html
@@ -77,9 +67,9 @@
 
     if (command === pluginName) {
 
-      args = args.map(function (element) {
-        return Window_Base.prototype.convertEscapeCharacters.call(this, element);
-      }, this);
+      // args = args.map(function (element) {
+      //   return Window_Base.prototype.convertEscapeCharacters.call(this, element);
+      // }, this);
 
       let pushActor = 0;
       let formation = false;

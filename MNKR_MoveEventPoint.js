@@ -1,7 +1,7 @@
 /*
  * --------------------------------------------------
  * MNKR_MoveEventPoint.js
- *   Ver.0.0.1
+ *   Ver.0.0.2
  * Copyright (c) 2021 Munokura
  * This software is released under the MIT license.
  * http://opensource.org/licenses/mit-license.php
@@ -29,13 +29,6 @@
  * MNKR_MoveEventPoint 0 5 10 1
  * プラグインコマンドを実行したイベントがマップ5,10へ移動します。
  * 
- * 補足
- * 各引数は制御文字が使用できます。
- * これにより変数を使用することが可能です。
- * 
- * 例
- * MNKR_MoveEventPoint \V[1] \V[2] \V[3] \V[4]
- * 
  * 
  * 利用規約:
  *   MITライセンスです。
@@ -58,9 +51,9 @@
 
     if (command === pluginName) {
 
-      args = args.map(function (element) {
-        return Window_Base.prototype.convertEscapeCharacters.call(this, element);
-      }, this);
+      // args = args.map(function (element) {
+      //   return Window_Base.prototype.convertEscapeCharacters.call(this, element);
+      // }, this);
 
       const eventId = Number(args[0]);
       const mapX = Number(args[1]);

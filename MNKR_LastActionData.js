@@ -1,7 +1,7 @@
 /*
  * --------------------------------------------------
  * MNKR_LastActionData.js
- *   Ver.0.0.1
+ *   Ver.0.0.2
  * Copyright (c) 2021 Munokura
  * This software is released under the MIT license.
  * http://opensource.org/licenses/mit-license.php
@@ -23,7 +23,6 @@
  * 
  * --変数ID
  * 数値が変数IDになります。
- * 制御文字 \V[n] も使用できます。
  * 
  * --データ種別
  * Skill / S - 直前に使用したスキルのID
@@ -77,9 +76,9 @@
 	Game_Interpreter.prototype.pluginCommand = function (command, args) {
 		_Game_Interpreter_pluginCommand.call(this, command, args);
 		if (command == pluginName) {
-			args = args.map(function (element) {
-				return Window_Base.prototype.convertEscapeCharacters.call(this, element);
-			}, this);
+			// args = args.map(function (element) {
+			// 	return Window_Base.prototype.convertEscapeCharacters.call(this, element);
+			// }, this);
 			const variableId = Number(args[0]);
 			const lastAction = lastActionType(args[1].toLowerCase());
 			$gameVariables.setValue(variableId, $gameTemp.lastActionData(lastAction));
