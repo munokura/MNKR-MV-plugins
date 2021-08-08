@@ -29,6 +29,11 @@
  * MNKR_MoveEventPoint 0 5 10 1
  * プラグインコマンドを実行したイベントがマップ5,10へ移動します。
  * 
+ * 注意事項
+ *   ツクールのプレイヤーがタッチ指定された座標へ移動する仕組みを流用しています。
+ *   画面外の遠い位置への指定はトラブルを生みやすいです。
+ *   近めの座標を指定することを推奨します。
+ * 
  * 
  * 利用規約:
  *   MITライセンスです。
@@ -50,11 +55,6 @@
     _Game_Interpreter_pluginCommand.apply(this, arguments);
 
     if (command === pluginName) {
-
-      // args = args.map(function (element) {
-      //   return Window_Base.prototype.convertEscapeCharacters.call(this, element);
-      // }, this);
-
       const eventId = Number(args[0]);
       const mapX = Number(args[1]);
       const mapY = Number(args[2]);
