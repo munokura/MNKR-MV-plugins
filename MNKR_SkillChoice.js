@@ -22,8 +22,18 @@
  * アクターIDで指定したスキルの一覧ウィンドウを開き、
  * 選択したスキルのIDを指定変数に代入します。
  * 
+ * 
+ * スキルを増やす
  * MNKR_SkillChoice learn アクターID スキルID
  * 
+ * 
+ * スキルを減らす
+ * MNKR_SkillChoice forget アクターID スキルID
+ * 
+ * 
+ * 引数に変数を使いたい場合、下記のプラグインを併用ください。
+ * http://newrpg.seesaa.net/article/475509661.html
+ * NRP_EvalPluginCommand.js
  * 
  * 
  * 利用規約:
@@ -47,11 +57,18 @@
                 case 'select':
                     if (!$gameMessage.isBusy()) {
                         this.setupSkillChoice(selectParams);
+                        console.log('selectParams');
                         console.log(selectParams);
                         this._index++;
                         this.setWaitMode('message');
                     }
                     return false;
+                    break;
+                case 'learn':
+                    $gameActors.actor(selectParams[0]).learnSkill(selectParams[1]);
+                    break;
+                case 'forget':
+                    $gameActors.actor(selectParams[0]).forgetSkill(selectParams[1]);
                     break;
                 default:
             }
@@ -86,8 +103,13 @@
         this.initialize.apply(this, arguments);
     }
 
-    Window_EventSkill.prototype = Object.create(Scene_MenuBase.prototype);
-    // Window_EventSkill.prototype = Object.create(Window_SkillList.prototype);
+    const _Window_Message_createSubWindows = Window_Message.prototype.createSubWindows;
+    Window_Message.prototype.createSubWindows = function () {
+        _Window_Message_createSubWindows.call(this);
+        this._skillWindow = new Window_EventSkill(this);
+    };
+
+    Window_EventSkill.prototype = Object.create(Window_SkillList.prototype);
     // Window_EventSkill.prototype = Object.create(Window_ItemList.prototype);
     Window_EventSkill.prototype.constructor = Window_EventSkill;
 
@@ -96,8 +118,7 @@
         this._messageWindow = messageWindow;
         var width = Graphics.boxWidth;
         var height = this.windowHeight();
-        Scene_MenuBase.prototype.initialize.call(this, 0, 0, width, height);
-        // Window_SkillList.prototype.initialize.call(this, 0, 0, width, height);
+        Window_SkillList.prototype.initialize.call(this, 0, 0, width, height);
         // Window_ItemList.prototype.initialize.call(this, 0, 0, width, height);
         this.openness = 0;
         this.deactivate();
