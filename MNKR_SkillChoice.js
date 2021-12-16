@@ -1,7 +1,7 @@
 /*
  * --------------------------------------------------
  * MNKR_SkillChoice.js
- *   Ver.0.0.2
+ *   Ver.0.0.3
  * Copyright (c) 2021 Munokura
  * This software is released under the MIT license.
  * http://opensource.org/licenses/mit-license.php
@@ -99,7 +99,6 @@
                     this.drawSkill(index);
                 }
             }
-            MNKR_SkillChoice.modeSelect = false;
         } else {
             _Window_ItemList_drawAllItems.call(this);
         }
@@ -114,6 +113,18 @@
             this.drawItemName(item, rect.x, rect.y, rect.width);
             this.changePaintOpacity(1);
         }
+    };
+
+    const _Window_EventItem_onOk = Window_EventItem.prototype.onOk;
+    Window_EventItem.prototype.onOk = function () {
+        _Window_EventItem_onOk.call(this);
+        MNKR_SkillChoice.modeSelect = false;
+    };
+
+    const _Window_EventItem_onCancel = Window_EventItem.prototype.onCancel;
+    Window_EventItem.prototype.onCancel = function () {
+        _Window_EventItem_onCancel.call(this);
+        MNKR_SkillChoice.modeSelect = false;
     };
 
 })();
