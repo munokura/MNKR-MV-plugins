@@ -1,7 +1,7 @@
 /*
  * --------------------------------------------------
  * MNKR_SkillChoice.js
- *   Ver.0.0.1
+ *   Ver.0.0.2
  * Copyright (c) 2021 Munokura
  * This software is released under the MIT license.
  * http://opensource.org/licenses/mit-license.php
@@ -91,8 +91,8 @@
 
     const _Window_ItemList_drawAllItems = Window_ItemList.prototype.drawAllItems;
     Window_ItemList.prototype.drawAllItems = function () {
-        const topIndex = this.topIndex();
         if (MNKR_SkillChoice.modeSelect) {
+            const topIndex = this.topIndex();
             for (let i = 0; i < this.maxPageItems(); i++) {
                 const index = topIndex + i;
                 if (index < this.maxItems()) {
