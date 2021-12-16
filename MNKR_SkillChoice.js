@@ -1,7 +1,7 @@
 /*
  * --------------------------------------------------
  * MNKR_SkillChoice.js
- *   Ver.0.0.3
+ *   Ver.0.0.4
  * Copyright (c) 2021 Munokura
  * This software is released under the MIT license.
  * http://opensource.org/licenses/mit-license.php
@@ -84,9 +84,9 @@
         if (MNKR_SkillChoice.modeSelect) {
             this._data = $gameActors.actor(MNKR_SkillChoice.actorId).skills();
             const item = this._data;
-            return this.includes(item);
+        } else {
+            _Window_ItemList_makeItemList.call(this);
         }
-        _Window_ItemList_makeItemList.call(this);
     };
 
     const _Window_ItemList_drawAllItems = Window_ItemList.prototype.drawAllItems;
