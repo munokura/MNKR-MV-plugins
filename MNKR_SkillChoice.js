@@ -48,10 +48,10 @@
 
     const pluginName = document.currentScript.src.split("/").pop().replace(/\.js$/, "");
     const MNKR_SkillChoice = {
-        choose: null,
-        actorId: null,
+        choose: '',
+        actorId: 0,
         modeSkill: false,
-        variableId: null
+        variableId: 0
     };
 
     const _Game_Interpreter_pluginCommand = Game_Interpreter.prototype.pluginCommand;
