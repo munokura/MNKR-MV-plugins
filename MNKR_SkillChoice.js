@@ -1,7 +1,7 @@
 /*
  * --------------------------------------------------
  * MNKR_SkillChoice.js
- *   Ver.0.0.4
+ *   Ver.0.0.5
  * Copyright (c) 2021 Munokura
  * This software is released under the MIT license.
  * http://opensource.org/licenses/mit-license.php
@@ -47,7 +47,12 @@
     "use strict";
 
     const pluginName = document.currentScript.src.split("/").pop().replace(/\.js$/, "");
-    const MNKR_SkillChoice = {};
+    const MNKR_SkillChoice = {
+        choose: null,
+        actorId: null,
+        modeSkill: false,
+        variableId: null
+    };
 
     const _Game_Interpreter_pluginCommand = Game_Interpreter.prototype.pluginCommand;
     Game_Interpreter.prototype.pluginCommand = function (command, args) {
@@ -57,7 +62,7 @@
             MNKR_SkillChoice.actorId = Number(args[1]);
             switch (MNKR_SkillChoice.choose) {
                 case 'select':
-                    MNKR_SkillChoice.modeSelect = true;
+                    MNKR_SkillChoice.modeSkill = true;
                     MNKR_SkillChoice.variableId = Number(args[2]);
                     this._params = [MNKR_SkillChoice.variableId, MNKR_SkillChoice.actorId];
                     if (!$gameMessage.isBusy()) {
@@ -81,7 +86,7 @@
 
     const _Window_ItemList_makeItemList = Window_ItemList.prototype.makeItemList;
     Window_ItemList.prototype.makeItemList = function () {
-        if (MNKR_SkillChoice.modeSelect) {
+        if (MNKR_SkillChoice.modeSkill) {
             this._data = $gameActors.actor(MNKR_SkillChoice.actorId).skills();
             const item = this._data;
         } else {
@@ -91,7 +96,7 @@
 
     const _Window_ItemList_drawAllItems = Window_ItemList.prototype.drawAllItems;
     Window_ItemList.prototype.drawAllItems = function () {
-        if (MNKR_SkillChoice.modeSelect) {
+        if (MNKR_SkillChoice.modeSkill) {
             const topIndex = this.topIndex();
             for (let i = 0; i < this.maxPageItems(); i++) {
                 const index = topIndex + i;
@@ -118,13 +123,13 @@
     const _Window_EventItem_onOk = Window_EventItem.prototype.onOk;
     Window_EventItem.prototype.onOk = function () {
         _Window_EventItem_onOk.call(this);
-        MNKR_SkillChoice.modeSelect = false;
+        MNKR_SkillChoice.modeSkill = false;
     };
 
     const _Window_EventItem_onCancel = Window_EventItem.prototype.onCancel;
     Window_EventItem.prototype.onCancel = function () {
         _Window_EventItem_onCancel.call(this);
-        MNKR_SkillChoice.modeSelect = false;
+        MNKR_SkillChoice.modeSkill = false;
     };
 
 })();
