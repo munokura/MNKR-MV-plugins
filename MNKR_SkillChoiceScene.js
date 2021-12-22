@@ -1,7 +1,7 @@
 /*
  * --------------------------------------------------
  * MNKR_SkillChoiceScene.js
- *   Ver.0.0.1
+ *   Ver.0.0.2
  * Copyright (c) 2021 Munokura
  * This software is released under the MIT license.
  * http://opensource.org/licenses/mit-license.php
@@ -78,6 +78,8 @@
 	param.windowY = Number(parameters['windowY'] || 0);
 	param.windowWidth = Number(parameters['windowWidth'] || 0);
 	param.windowHeight = Number(parameters['windowHeight'] || 0);
+	param.windowWidth = param.windowWidth === 0 ? Graphics.boxWidth : param.windowWidth;
+	param.windowHeight = param.windowHeight === 0 ? Graphics.boxHeight : param.windowHeight;
 
 	const MNKR_SkillChoice = {
 		choose: '',
@@ -118,15 +120,11 @@
 		this.initialize.apply(this, arguments);
 	}
 
-	MNKR_Scene_SkillChoice.prototype = Object.create(Scene_Skill.prototype);
+	MNKR_Scene_SkillChoice.prototype = Object.create(Scene_MenuBase.prototype);
 	MNKR_Scene_SkillChoice.prototype.constructor = MNKR_Scene_SkillChoice;
 
-	MNKR_Scene_SkillChoice.prototype.initialize = function () {
-		Scene_ItemBase.prototype.initialize.call(this);
-	};
-
 	MNKR_Scene_SkillChoice.prototype.create = function () {
-		Scene_ItemBase.prototype.create.call(this);
+		Scene_MenuBase.prototype.create.call(this);
 		this.createSkillChoiceWindow();
 	};
 
@@ -137,11 +135,8 @@
 		this.addWindow(this._skillChoiceWindow);
 	};
 
-	MNKR_Scene_SkillChoice.prototype.start = function () {
-		Scene_ItemBase.prototype.start.call(this);
-	};
-
 	MNKR_Scene_SkillChoice.prototype.onItemOk = function () {
+		MNKR_SkillChoice.selectSkillId = this._skillChoiceWindow.item().id;
 		$gameVariables.setValue(MNKR_SkillChoice.variableId, MNKR_SkillChoice.selectSkillId);
 		this.popScene();
 	};
@@ -161,19 +156,12 @@
 	MNKR_Window_SkillChoice.prototype.constructor = MNKR_Window_SkillChoice;
 
 	MNKR_Window_SkillChoice.prototype.initialize = function () {
-		param.windowWidth = param.windowWidth === 0 ? Graphics.boxWidth : param.windowWidth;
-		param.windowHeight = param.windowHeight === 0 ? Graphics.boxHeight : param.windowHeight;
-		Window_Selectable.prototype.initialize.call(this, param.windowX, param.windowY, param.windowWidth, param.windowHeight);
+		Window_SkillList.prototype.initialize.call(this, param.windowX, param.windowY, param.windowWidth, param.windowHeight);
 		this._actor = $gameActors.actor(MNKR_SkillChoice.actorId);
 		this._data = this._actor.skills();
 		this.refresh();
 		this.select(0);
 		this.activate();
-	};
-
-	MNKR_Window_SkillChoice.prototype.update = function () {
-		Window_Selectable.prototype.update.call(this);
-		MNKR_SkillChoice.selectSkillId = this.item().id;
 	};
 
 	MNKR_Window_SkillChoice.prototype.refresh = function () {
@@ -190,7 +178,7 @@
 		}
 	};
 
-	MNKR_Window_SkillChoice.prototype.isEnabled = function (item) {
+	MNKR_Window_SkillChoice.prototype.isEnabled = function () {
 		return true;
 	};
 
