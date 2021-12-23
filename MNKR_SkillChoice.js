@@ -36,6 +36,16 @@
  * NRP_EvalPluginCommand.js
  * 
  * 
+ * 注意事項
+ * このプラグインはイベントコマンド「アイテム選択の処理」を
+ * 間借りする形で作成されています。
+ * このため、TMEventItemEx（アイテム選択拡張）プラグインの機能が動作します。
+ * 
+ * 「アイテム選択の処理」に関係するプラグインと競合しやすいです。
+ * 競合した場合、MNKR_SkillChoiceScene を代用することをご検討ください。
+ * https://raw.githubusercontent.com/munokura/MNKR-MV-plugins/master/MNKR_SkillChoiceScene.js
+ * 
+ * 
  * 利用規約:
  *   MITライセンスです。
  *   https://licenses.opensource.jp/MIT/MIT.html
