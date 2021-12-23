@@ -1,7 +1,7 @@
 /*
  * --------------------------------------------------
  * MNKR_SkillChoice.js
- *   Ver.0.0.6
+ *   Ver.0.0.7
  * Copyright (c) 2021 Munokura
  * This software is released under the MIT license.
  * http://opensource.org/licenses/mit-license.php
@@ -67,12 +67,15 @@
                     this._params = [MNKR_SkillChoice.variableId, MNKR_SkillChoice.actorId];
                     if (!$gameMessage.isBusy()) {
                         this.setupItemChoice(this._params);
-                        this._index++;
                         this.setWaitMode('message');
                     }
                     return false;
                 case 'learn':
                     MNKR_SkillChoice.skillId = Number(args[2]);
+                    console.log('actorId');
+                    console.log(MNKR_SkillChoice.actorId);
+                    console.log('skillId');
+                    console.log(MNKR_SkillChoice.skillId);
                     $gameActors.actor(MNKR_SkillChoice.actorId).learnSkill(MNKR_SkillChoice.skillId);
                     break;
                 case 'forget':
