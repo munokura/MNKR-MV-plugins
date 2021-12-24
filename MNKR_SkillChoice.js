@@ -82,10 +82,6 @@
                     return false;
                 case 'learn':
                     MNKR_SkillChoice.skillId = Number(args[2]);
-                    console.log('actorId');
-                    console.log(MNKR_SkillChoice.actorId);
-                    console.log('skillId');
-                    console.log(MNKR_SkillChoice.skillId);
                     $gameActors.actor(MNKR_SkillChoice.actorId).learnSkill(MNKR_SkillChoice.skillId);
                     break;
                 case 'forget':
