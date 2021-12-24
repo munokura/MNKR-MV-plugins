@@ -1,7 +1,7 @@
 /*
  * --------------------------------------------------
  * MNKR_SkillChoiceScene.js
- *   Ver.0.0.2
+ *   Ver.0.0.3
  * Copyright (c) 2021 Munokura
  * This software is released under the MIT license.
  * http://opensource.org/licenses/mit-license.php
@@ -73,13 +73,12 @@
 
 	const pluginName = document.currentScript.src.split("/").pop().replace(/\.js$/, "");
 	const parameters = PluginManager.parameters(pluginName);
+
 	const param = {};
 	param.windowX = Number(parameters['windowX'] || 0);
 	param.windowY = Number(parameters['windowY'] || 0);
 	param.windowWidth = Number(parameters['windowWidth'] || 0);
 	param.windowHeight = Number(parameters['windowHeight'] || 0);
-	param.windowWidth = param.windowWidth === 0 ? Graphics.boxWidth : param.windowWidth;
-	param.windowHeight = param.windowHeight === 0 ? Graphics.boxHeight : param.windowHeight;
 
 	const MNKR_SkillChoice = {
 		choose: '',
@@ -156,6 +155,8 @@
 	MNKR_Window_SkillChoice.prototype.constructor = MNKR_Window_SkillChoice;
 
 	MNKR_Window_SkillChoice.prototype.initialize = function () {
+		param.windowWidth = param.windowWidth === 0 ? Number(Graphics.boxWidth) : param.windowWidth;
+		param.windowHeight = param.windowHeight === 0 ? Number(Graphics.boxHeight) : param.windowHeight;
 		Window_SkillList.prototype.initialize.call(this, param.windowX, param.windowY, param.windowWidth, param.windowHeight);
 		this._actor = $gameActors.actor(MNKR_SkillChoice.actorId);
 		this._data = this._actor.skills();
