@@ -1,7 +1,7 @@
 /*
  * --------------------------------------------------
  * MNKR_SkillChoiceScene.js
- *   Ver.0.0.3
+ *   Ver.0.0.4
  * Copyright (c) 2021 Munokura
  * This software is released under the MIT license.
  * http://opensource.org/licenses/mit-license.php
@@ -130,17 +130,13 @@
 	MNKR_Scene_SkillChoice.prototype.createSkillChoiceWindow = function () {
 		this._skillChoiceWindow = new MNKR_Window_SkillChoice(0, 0);
 		this._skillChoiceWindow.setHandler('ok', this.onItemOk.bind(this));
-		this._skillChoiceWindow.setHandler('cancel', this.onItemCancel.bind(this));
+		this._skillChoiceWindow.setHandler('cancel', this.popScene.bind(this));
 		this.addWindow(this._skillChoiceWindow);
 	};
 
 	MNKR_Scene_SkillChoice.prototype.onItemOk = function () {
 		MNKR_SkillChoice.selectSkillId = this._skillChoiceWindow.item().id;
 		$gameVariables.setValue(MNKR_SkillChoice.variableId, MNKR_SkillChoice.selectSkillId);
-		this.popScene();
-	};
-
-	MNKR_Scene_SkillChoice.prototype.onItemCancel = function () {
 		this.popScene();
 	};
 
