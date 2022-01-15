@@ -1,7 +1,7 @@
 /*
  * --------------------------------------------------
  * MNKR_SkillChoiceScene.js
- *   Ver.0.0.4
+ *   Ver.0.0.5
  * Copyright (c) 2021 Munokura
  * This software is released under the MIT license.
  * http://opensource.org/licenses/mit-license.php
@@ -21,6 +21,7 @@
  * MNKR_SkillChoice select アクターID 変数ID
  * アクターIDで指定したスキルの一覧ウィンドウを開き、
  * 選択したスキルのIDを指定変数に代入します。
+ * キャンセルした場合、指定変数に-1を代入します。
  * 
  * 
  * スキルを増やす
@@ -130,13 +131,18 @@
 	MNKR_Scene_SkillChoice.prototype.createSkillChoiceWindow = function () {
 		this._skillChoiceWindow = new MNKR_Window_SkillChoice(0, 0);
 		this._skillChoiceWindow.setHandler('ok', this.onItemOk.bind(this));
-		this._skillChoiceWindow.setHandler('cancel', this.popScene.bind(this));
+		this._skillChoiceWindow.setHandler('cancel', this.onItemCancel.bind(this));
 		this.addWindow(this._skillChoiceWindow);
 	};
 
 	MNKR_Scene_SkillChoice.prototype.onItemOk = function () {
 		MNKR_SkillChoice.selectSkillId = this._skillChoiceWindow.item().id;
 		$gameVariables.setValue(MNKR_SkillChoice.variableId, MNKR_SkillChoice.selectSkillId);
+		this.popScene();
+	};
+
+	MNKR_Scene_SkillChoice.prototype.onItemCancel = function () {
+		$gameVariables.setValue(MNKR_SkillChoice.variableId, -1);
 		this.popScene();
 	};
 
