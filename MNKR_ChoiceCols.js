@@ -1,7 +1,7 @@
 /*
  * --------------------------------------------------
  * MNKR_ChoiceCols.js
- *   Ver.0.1.0
+ *   Ver.0.1.1
  * Copyright (c) 2021 Munokura
  * This software is released under the MIT license.
  * http://opensource.org/licenses/mit-license.php
@@ -17,6 +17,12 @@
  * @help
  * 選択肢の列数・Y軸位置を変更する機能を追加します。
  * プラグインパラメーターで変数IDを指定し、その変数の値が選択に反映されます。
+ * 
+ * 注意
+ * 1.Y位置指定の変数はゲーム開始時のままだと0なので、画面最上部に出ます。
+ *   デフォルト動作にするには -1 などのマイナスの値を予め代入する必要があります。
+ * 2.Y位置指定の変数の値が大きすぎて画面外にはみ出る場合、
+ *   自動的に画面最下部に調整されます。
  * 
  * 
  * 利用規約:
@@ -47,10 +53,11 @@
     const param = {};
     param.choiceColsVariableId = Number(parameters['choiceColsVariableId'] || 0);
     param.choiceYpositionVariableId = Number(parameters['choiceYpositionVariableId'] || 0);
-    param.setCols = param.choiceColsVariableId > 0;
-    param.setYpos = param.choiceYpositionVariableId > 0;
 
-    if (param.setCols) {
+    const useCols = param.choiceColsVariableId > 0;
+    const useYpos = param.choiceYpositionVariableId > 0;
+
+    if (useCols) {
         const _Window_ChoiceList_maxCols = Window_ChoiceList.prototype.maxCols;
         Window_ChoiceList.prototype.maxCols = function () {
             const choiceCols = $gameVariables.value(param.choiceColsVariableId);
@@ -80,13 +87,15 @@
         };
     }
 
-    if (param.setYpos) {
+    if (useYpos) {
         const _Window_ChoiceList_updatePlacement = Window_ChoiceList.prototype.updatePlacement;
         Window_ChoiceList.prototype.updatePlacement = function () {
             _Window_ChoiceList_updatePlacement.call(this);
             const choiceY = $gameVariables.value(param.choiceYpositionVariableId);
             if (choiceY >= 0) {
-                this.y = choiceY;
+                const maxY = Graphics.boxHeight - this.windowHeight();
+                const fixChoiceY = choiceY > maxY ? maxY : choiceY;
+                this.y = fixChoiceY;
             }
         };
     }
