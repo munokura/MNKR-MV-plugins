@@ -1,7 +1,7 @@
 /*
  * --------------------------------------------------
  * MNKR_WeaponSlotName.js
- *   Ver.0.0.1
+ *   Ver.0.1.0
  * Copyright (c) 2021 Munokura
  * This software is released under the MIT license.
  * http://opensource.org/licenses/mit-license.php
@@ -11,13 +11,14 @@
 /*:
  * @target MV
  * @url https://raw.githubusercontent.com/munokura/MNKR-MV-plugins/master/MNKR_WeaponSlotName.js
- * @plugindesc 装備シーンの武器の項目名をアクター毎に変更します。
+ * @plugindesc 装備シーンの武器の項目名を変更します。
  * @author munokura
  *
  * @help
- * 装備シーンの武器の装備タイプ名をアクター毎に変更します。
+ * 装備シーンの武器の装備タイプ名を変更します。
  *
- * アクターのメモ欄に下記のように入力してください。
+ * アクター・職業のメモ欄に下記のように入力してください。
+ * アクター・職業の両方に書かれている場合、職業が優先されます。
  * <MNKR_WeaponSlotName:声>
  *
  *
@@ -36,10 +37,12 @@
     const _Window_EquipSlot_slotName = Window_EquipSlot.prototype.slotName;
     Window_EquipSlot.prototype.slotName = function (index) {
         const actorMeta = $dataActors[this._actor._actorId].meta.MNKR_WeaponSlotName;
-        const slot0 = index === 0 && actorMeta;
-        const slot1 = index === 1 && actorMeta && hasDualWield;
+        const classMeta = $dataClasses[this._actor._classId].meta.MNKR_WeaponSlotName;
+        const hasMeta = classMeta ? classMeta : actorMeta;
+        const slot0 = index === 0 && hasMeta;
+        const slot1 = index === 1 && hasMeta && hasDualWield;
         if (slot0 || slot1) {
-            return actorMeta;
+            return hasMeta;
         }
         return _Window_EquipSlot_slotName.call(this, index);
     };
