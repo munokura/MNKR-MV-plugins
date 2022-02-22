@@ -2,7 +2,7 @@
  * --------------------------------------------------
  * MNKR_WeaponSlotName.js
  *   Ver.0.1.0
- * Copyright (c) 2021 Munokura
+ * Copyright (c) 2022 Munokura
  * This software is released under the MIT license.
  * http://opensource.org/licenses/mit-license.php
  * --------------------------------------------------
