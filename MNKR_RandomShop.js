@@ -1,7 +1,7 @@
 /*
  * --------------------------------------------------
  * MNKR_RandomShop.js
- *   Ver.0.0.3
+ *   Ver.0.0.4
  * Copyright (c) 2022 Munokura
  * This software is released under the MIT license.
  * http://opensource.org/licenses/mit-license.php
@@ -126,7 +126,7 @@
     const goodsCount = Math.floor((Math.random() * maxRange) + minRange);
     const randomGoods = [];
     for (let i = 0; i < goodsCount; i++) {
-      randomGoods.push(goods[Math.floor(Math.random() * goods.length)].map(function (n) { return n; }));
+      randomGoods.push(goods[Math.floor(Math.random() * goods.length)].map(n => n));
     }
     return randomGoods;
   }
