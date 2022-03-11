@@ -1,7 +1,7 @@
 /*
  * --------------------------------------------------
  * MNKR_RandomShop.js
- *   Ver.0.0.2
+ *   Ver.0.0.3
  * Copyright (c) 2022 Munokura
  * This software is released under the MIT license.
  * http://opensource.org/licenses/mit-license.php
@@ -40,6 +40,9 @@
  * ショップの商品リストから、
  * プラグインコマンドで指定した範囲の商品リストを生成するショップになります。
  * 
+ * プラグインコマンドを使用しなければ、
+ * 「ショップの処理」は通常のショップとして機能します。
+ * 
  * 使用例イベントコマンド
  * -----
  * ◆プラグインコマンド：MNKR_RandomShop 2 4
@@ -62,6 +65,7 @@
  *   https://licenses.opensource.jp/MIT/MIT.html
  *   作者に無断で改変、再配布が可能で、
  *   利用形態（商用、18禁利用等）についても制限はありません。
+ * 
  * 
  * @param stockOutWord
  * @text 売り切れ時ワード
@@ -107,6 +111,7 @@
       const randomGoods = this.MNKR_RandomGoods(goods);
       SceneManager.push(Scene_MNKR_RandomShop);
       SceneManager.prepareNextScene(randomGoods, onlyBuy);
+      return true;
     } else {
       return _Game_Interpreter_command302.call(this);
     }
@@ -117,12 +122,11 @@
     goods[0].splice(4, 1);
     for (let i = 0; i < goods.length; i++) {
       goods[i].push(true);
-      goods[i].push(true);
     }
     const goodsCount = Math.floor((Math.random() * maxRange) + minRange);
-    let randomGoods = [];
+    const randomGoods = [];
     for (let i = 0; i < goodsCount; i++) {
-      randomGoods.push(goods[Math.floor(Math.random() * goods.length)]);
+      randomGoods.push(goods[Math.floor(Math.random() * goods.length)].map(function (n) { return n; }));
     }
     return randomGoods;
   }
@@ -165,8 +169,7 @@
   Scene_MNKR_RandomShop.prototype.doBuy = function (number) {
     $gameParty.loseGold(number * this.buyingPrice());
     $gameParty.gainItem(this._item, number);
-    this._goods[this._buyWindow.index()][5] = false;
-    // this._goods[this._buyWindow.index()].splice(5, 1, false);
+    this._goods[this._buyWindow.index()][4] = false;
     this.activateBuyWindow();
   };
 
@@ -190,7 +193,7 @@
   const _Window_ShopBuy_isCurrentItemEnabled = Window_ShopBuy.prototype.isCurrentItemEnabled;
   Window_ShopBuy.prototype.isCurrentItemEnabled = function () {
     if (MNKR_RandomShop) {
-      const hasEnabled = this.isEnabled(this._data[this.index()]) && this._shopGoods[this.index()][5];
+      const hasEnabled = this.isEnabled(this._data[this.index()]) && this._shopGoods[this.index()][4];
       return hasEnabled;
     }
     return _Window_ShopBuy_isCurrentItemEnabled.call(this);
@@ -203,7 +206,7 @@
       const rect = this.itemRect(index);
       const priceWidth = 96;
       rect.width -= this.textPadding();
-      const stock = this._shopGoods[index][5];
+      const stock = this._shopGoods[index][4];
       const displayPrice = stock ? this.price(item) : PRM_stockOutWord;
       this.changePaintOpacity(this.isEnabled(item));
       this.drawItemName(item, rect.x, rect.y, rect.width - priceWidth);
