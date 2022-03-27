@@ -1,7 +1,7 @@
 /*
  * --------------------------------------------------
  * MNKR_RandomShop.js
- *   Ver.0.0.5
+ *   Ver.0.1.0
  * Copyright (c) 2022 Munokura
  * This software is released under the MIT license.
  * http://opensource.org/licenses/mit-license.php
@@ -29,12 +29,14 @@
  *
  * @help
  * 商品リストがランダムになるショップを作れるようになります。
+ * 入退店を繰り返すと商品が再入荷されます。
+ * その場限りの店などの使い方に向いているでしょう。
  * 
  * プラグインコマンド
- * MNKR_RandomShop 品揃え最小数 品揃え最大数
+ * MNKR_RandomShop range 品揃え最小数 品揃え最大数
  * 
  * 
- * 使い方
+ * --- 基本的な使い方 ---
  * プラグインコマンドを実行直後に、
  * イベントコマンドの「ショップの処理」を実行してください。
  * ショップの商品リストから、
@@ -45,14 +47,41 @@
  * 
  * 使用例イベントコマンド
  * -----
- * ◆プラグインコマンド：MNKR_RandomShop 2 4
+ * ◆プラグインコマンド：MNKR_RandomShop range 2 4
  * ◆ショップの処理：ポーション
  * ：　　　　　　　：ハイポーション
  * ：　　　　　　　：ショートソード
  * ：　　　　　　　：ハードレザー
  * -----
- * 入退店を繰り返すと商品が再入荷されます。
- * その場限りの店などの使い方に向いているでしょう。
+ * 
+ * --- 応用編 ---
+ * -- 品揃えを追加する --
+ * MNKR_RandomShop add [商品種別(i/w/a)] [開始ID] [最終ID]
+ * 
+ * 例：アイテムをID1からID10を追加
+ * MNKR_RandomShop add i 1 5
+ * 
+ * 
+ * -- ショップを開く --
+ * MNKR_RandomShop open 1(省略可能)
+ * MNKR_RandomShop add で用意されたショップを開きます。
+ * 
+ * 最後の1を入れると「購入のみ」のショップになります。
+ * 省略すると、売買可能です。
+ * 
+ * -- 実用例 --
+ * アイテムID7から9、
+ * 武器ID1から5、
+ * 防具ID2から6の
+ * ランダムショップ(2個から4個)を開く
+ * 
+ * 以下のプラグインコマンドを順に実行
+ * MNKR_RandomShop range 2 4
+ * MNKR_RandomShop add i 7 9
+ * MNKR_RandomShop add w 1 5
+ * MNKR_RandomShop add a 2 6
+ * MNKR_RandomShop open
+ * 
  * 
  * 
  * M.GAMES mo-to 氏作の MG_RandomShop.js を参考に
@@ -85,6 +114,7 @@
   let MNKR_RandomShop = false;
   let minRange = 0;
   let maxRange = 0;
+  const goodsList = [];
 
   //-----------------------------------------------------------------------------
   // Game_Interpreter
@@ -93,9 +123,25 @@
   Game_Interpreter.prototype.pluginCommand = function (command, args) {
     _Game_Interpreter_pluginCommand.call(this, command, args);
     if (command === pluginName) {
-      MNKR_RandomShop = true;
-      minRange = Number(args[0] || 1);
-      maxRange = Number(args[1] || 1);
+      switch (args[0]) {
+        case 'open':
+          const onlyBuy = Number(args[1]) === 1;
+          const randomGoods = this.MNKR_RandomGoods(goodsList);
+          SceneManager.push(Scene_MNKR_RandomShop);
+          SceneManager.prepareNextScene(randomGoods, onlyBuy);
+          break;
+        case 'add':
+          const categoryWord = args[1];
+          const categoryId = this.MNKR_categoryId(categoryWord);
+          const startId = Number(args[2]);
+          const endId = Number(args[3]);
+          this.MNKR_AddGoods(categoryId, startId, endId);
+          break;
+        case 'range':
+          MNKR_RandomShop = true;
+          minRange = Number(args[1] || 1);
+          maxRange = Number(args[2] || 1);
+      }
     }
   };
 
@@ -131,6 +177,25 @@
     return randomGoods;
   }
 
+  Game_Interpreter.prototype.MNKR_categoryId = function (categoryWord) {
+    if (categoryWord === 'i') {
+      return 0;
+    }
+    if (categoryWord === 'w') {
+      return 1;
+    }
+    if (categoryWord === 'a') {
+      return 2;
+    }
+  }
+
+  Game_Interpreter.prototype.MNKR_AddGoods = function (categoryId, startId, endId) {
+    for (let i = startId; i < endId + 1; i++) {
+      goodsList.push([categoryId, i, 0, 0]);
+    }
+  };
+
+
   //-----------------------------------------------------------------------------
   // Scene_MNKR_RandomShop
 
@@ -150,13 +215,8 @@
     this._commandWindow.y = this._helpWindow.height;
     this._commandWindow.setHandler('buyRandom', this.commandBuy.bind(this));
     this._commandWindow.setHandler('sell', this.commandSell.bind(this));
-    this._commandWindow.setHandler('cancel', this.MNKR_popScene.bind(this));
+    this._commandWindow.setHandler('cancel', this.popScene.bind(this));
     this.addWindow(this._commandWindow);
-  };
-
-  Scene_MNKR_RandomShop.prototype.MNKR_popScene = function () {
-    MNKR_RandomShop = false;
-    this.popScene();
   };
 
   Scene_MNKR_RandomShop.prototype.onBuyOk = function () {
@@ -171,6 +231,13 @@
     $gameParty.gainItem(this._item, number);
     this._goods[this._buyWindow.index()][4] = false;
     this.activateBuyWindow();
+  };
+
+  const _Scene_MNKR_RandomShop_popScene = Scene_MNKR_RandomShop.prototype.popScene;
+  Scene_MNKR_RandomShop.prototype.popScene = function () {
+    MNKR_RandomShop = false;
+    goodsList.length = 0;
+    _Scene_MNKR_RandomShop_popScene.call(this);
   };
 
   //-----------------------------------------------------------------------------
