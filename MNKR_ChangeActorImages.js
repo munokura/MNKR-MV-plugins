@@ -1,7 +1,7 @@
 /*
  * --------------------------------------------------
  * MNKR_ChangeActorImages.js
- *   Ver.0.0.1
+ *   Ver.0.0.2
  * Copyright (c) 2021 Munokura
  * This software is released under the MIT license.
  * http://opensource.org/licenses/mit-license.php
@@ -44,15 +44,15 @@
 
     const pluginName = document.currentScript.src.split("/").pop().replace(/\.js$/, "");
     const pluginParameters = PluginManager.parameters(pluginName);
-    const RaiseSwitch = Number(pluginParameters['raiseSwitch'] || 0);
-    const ActorIdVariableId = Number(pluginParameters['actorIdVariableId'] || 0);
+    const PRM_raiseSwitch = Number(pluginParameters['raiseSwitch'] || 0);
+    const PRM_actorIdVariableId = Number(pluginParameters['actorIdVariableId'] || 0);
 
     // Change Actor Images
     const _Game_Interpreter_command322 = Game_Interpreter.prototype.command322;
     Game_Interpreter.prototype.command322 = function () {
-        const raise = RaiseSwitch === 0 ? true : $gameSwitches.value(RaiseSwitch);
+        const raise = PRM_raiseSwitch === 0 ? true : $gameSwitches.value(PRM_raiseSwitch);
         if (raise) {
-            const actor = $gameActors.actor($gameVariables.value(ActorIdVariableId));
+            const actor = $gameActors.actor($gameVariables.value(PRM_actorIdVariableId));
             if (actor) {
                 actor.setCharacterImage(this._params[1], this._params[2]);
                 actor.setFaceImage(this._params[3], this._params[4]);
@@ -61,7 +61,8 @@
             $gamePlayer.refresh();
             return true;
         } else {
-            _Game_Interpreter_command322.call(this);
+            return _Game_Interpreter_command322.call(this);
         };
     };
+
 })();
