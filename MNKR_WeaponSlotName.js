@@ -1,7 +1,7 @@
 /*
  * --------------------------------------------------
  * MNKR_WeaponSlotName.js
- *   Ver.0.1.0
+ *   Ver.0.1.1
  * Copyright (c) 2022 Munokura
  * This software is released under the MIT license.
  * http://opensource.org/licenses/mit-license.php
@@ -32,12 +32,14 @@
 (() => {
     "use strict";
 
-    let hasDualWield = false;
-
     const _Window_EquipSlot_slotName = Window_EquipSlot.prototype.slotName;
     Window_EquipSlot.prototype.slotName = function (index) {
-        const actorMeta = $dataActors[this._actor._actorId].meta.MNKR_WeaponSlotName;
-        const classMeta = $dataClasses[this._actor._classId].meta.MNKR_WeaponSlotName;
+        if (index > 1) {
+            return _Window_EquipSlot_slotName.call(this, index);
+        }
+        const actorMeta = this._actor.actor().meta.MNKR_WeaponSlotName || false;
+        const classMeta = this._actor.currentClass().meta.MNKR_WeaponSlotName || false;
+        const hasDualWield = this._actor.isDualWield();
         const hasMeta = classMeta ? classMeta : actorMeta;
         const slot0 = index === 0 && hasMeta;
         const slot1 = index === 1 && hasMeta && hasDualWield;
@@ -45,12 +47,6 @@
             return hasMeta;
         }
         return _Window_EquipSlot_slotName.call(this, index);
-    };
-
-    const _Game_Actor_equipSlots = Game_Actor.prototype.equipSlots;
-    Game_Actor.prototype.equipSlots = function () {
-        hasDualWield = this.isDualWield();
-        return _Game_Actor_equipSlots.call(this);
     };
 
 })();
