@@ -1,7 +1,7 @@
 /*
  * --------------------------------------------------
  * MNKR_EnemyIcon.js
- *   Ver.1.0.2
+ *   Ver.1.0.3
  * Copyright (c) 2020 Munokura
  * This software is released under the MIT license.
  * http://opensource.org/licenses/mit-license.php
@@ -30,9 +30,9 @@
  *   作者に無断で改変、再配布が可能で、
  *   利用形態（商用、18禁利用等）についても制限はありません。
  * 
- * @param Default Icon
+ * @param defaultIcon
  * @text デフォルトアイコン
- * @type string
+ * @type number
  * @desc メモタグを入れない場合に表示するアイコン。デフォルト16
  * 0にすると、非表示で左に詰まります。
  * @default 16
@@ -41,22 +41,23 @@
 
 (function () {
     'use strict';
-    var parameters = PluginManager.parameters('MNKR_MNKR_EnemyIcon');
-    var defaultIcon = parseInt(parameters['Default Icon'] || 16);
+    const pluginName = document.currentScript.src.split("/").pop().replace(/\.js$/, "");
+    const parameters = PluginManager.parameters(pluginName);
+    const PRM_defaultIcon = Number(parameters['defaultIcon'] || 0);
 
     const _Window_BattleEnemy_drawItem = Window_BattleEnemy.prototype.drawItem
     Window_BattleEnemy.prototype.drawItem = function (index) {
         this.resetTextColor();
-        var enemy = this._enemies[index];
-        var icon = parseInt(enemy.enemy().meta.MNKR_EnemyIcon) || defaultIcon;
-        if (icon) {
-            var name = enemy.name();
-            var rect = this.itemRectForText(index);
-            var iconBoxWidth = Window_Base._iconWidth + 4;
-            this.drawIcon(icon, rect.x + 2, rect.y + 2);
+        const enemyObj = this._enemies[index];
+        const iconId = Number(enemyObj.enemy().meta.MNKR_EnemyIcon) || PRM_defaultIcon;
+        if (iconId > 0) {
+            const name = enemyObj.name();
+            const rect = this.itemRectForText(index);
+            const iconBoxWidth = Window_Base._iconWidth + 4;
+            this.drawIcon(iconId, rect.x + 2, rect.y + 2);
             this.drawText(name, rect.x + iconBoxWidth, rect.y, rect.width - iconBoxWidth);
         } else {
-            _Window_BattleEnemy_drawItem.apply(this, arguments);
+            _Window_BattleEnemy_drawItem.call(this, index);
         };
     };
 
