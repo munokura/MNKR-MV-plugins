@@ -1,7 +1,7 @@
 /*
  * --------------------------------------------------
  * MNKR_ChangeFade.js
- *   Ver.0.0.1
+ *   Ver.0.0.2
  * Copyright (c) 2022 Munokura
  * This software is released under the MIT license.
  * http://opensource.org/licenses/mit-license.php
@@ -73,7 +73,7 @@
 
     const _Game_Interpreter_command221 = Game_Interpreter.prototype.command221;
     Game_Interpreter.prototype.command221 = function () {
-        this.MNKR_ChangeFadeColor();
+        changeFadeColor();
         const fadeDuration = PRM_fadeDurationVariables === 0 ? 0 : $gameVariables.value(PRM_fadeDurationVariables);
         if (fadeDuration <= 0) {
             return _Game_Interpreter_command221.call(this);
@@ -88,7 +88,7 @@
 
     const _Game_Interpreter_command222 = Game_Interpreter.prototype.command222;
     Game_Interpreter.prototype.command222 = function () {
-        this.MNKR_ChangeFadeColor();
+        changeFadeColor();
         const fadeDuration = PRM_fadeDurationVariables === 0 ? 0 : $gameVariables.value(PRM_fadeDurationVariables);
         if (fadeDuration <= 0) {
             return _Game_Interpreter_command222.call(this);
@@ -101,7 +101,7 @@
         return false;
     };
 
-    Game_Interpreter.prototype.MNKR_ChangeFadeColor = function () {
+    function changeFadeColor() {
         if (PRM_Red > -1) {
             SceneManager._scene._spriteset._fadeSprite.setColor(PRM_Red, PRM_Green, PRM_Blue);
         }
