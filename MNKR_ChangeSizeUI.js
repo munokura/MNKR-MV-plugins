@@ -1,7 +1,7 @@
 /*
  * --------------------------------------------------
  * MNKR_ChangeSizeUI.js
- *   Ver.0.0.2
+ *   Ver.0.0.3
  * Copyright (c) 2021 Munokura
  * This software is released under the MIT license.
  * http://opensource.org/licenses/mit-license.php
@@ -45,17 +45,17 @@
 
   const pluginName = document.currentScript.src.split("/").pop().replace(/\.js$/, "");
   const parameters = PluginManager.parameters(pluginName);
-  const param = {};
-  param.boxWidth = Number(parameters['boxWidth'] || 816);
-  param.boxHeight = Number(parameters['boxHeight'] || 624);
+  const PRM_boxWidth = Number(parameters['boxWidth'] || 816);
+  const PRM_boxHeight = Number(parameters['boxHeight'] || 624);
 
   const _SceneManager_initGraphics = SceneManager.initGraphics;
   SceneManager.initGraphics = function () {
     _SceneManager_initGraphics.call(this);
-    Graphics.boxWidth = param.boxWidth;
-    Graphics.boxHeight = param.boxHeight;
+    Graphics.boxWidth = PRM_boxWidth;
+    Graphics.boxHeight = PRM_boxHeight;
   };
 
+  // override
   Spriteset_Base.prototype.createPictures = function () {
     const width = Graphics.width;
     const height = Graphics.height;
