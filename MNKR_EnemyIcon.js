@@ -1,7 +1,7 @@
 /*
  * --------------------------------------------------
  * MNKR_EnemyIcon.js
- *   Ver.1.0.3
+ *   Ver.1.0.4
  * Copyright (c) 2020 Munokura
  * This software is released under the MIT license.
  * http://opensource.org/licenses/mit-license.php
@@ -36,21 +36,21 @@
  * @desc メモタグを入れない場合に表示するアイコン。デフォルト16
  * 0にすると、非表示で左に詰まります。
  * @default 16
- *
  */
 
-(function () {
+(() => {
     'use strict';
+
     const pluginName = document.currentScript.src.split("/").pop().replace(/\.js$/, "");
     const parameters = PluginManager.parameters(pluginName);
     const PRM_defaultIcon = Number(parameters['defaultIcon'] || 0);
 
     const _Window_BattleEnemy_drawItem = Window_BattleEnemy.prototype.drawItem
     Window_BattleEnemy.prototype.drawItem = function (index) {
-        this.resetTextColor();
         const enemyObj = this._enemies[index];
         const iconId = Number(enemyObj.enemy().meta.MNKR_EnemyIcon) || PRM_defaultIcon;
         if (iconId > 0) {
+            this.resetTextColor();
             const name = enemyObj.name();
             const rect = this.itemRectForText(index);
             const iconBoxWidth = Window_Base._iconWidth + 4;
