@@ -1,7 +1,7 @@
 /*
  * --------------------------------------------------
  * MNKR_AddIconSave.js
- *   Ver.0.0.1
+ *   Ver.0.1.0
  * Copyright (c) 2020 Munokura
  * This software is released under the MIT license.
  * http://opensource.org/licenses/mit-license.php
@@ -34,6 +34,22 @@
  * @type variable
  * @desc 表示するアイコンIDの値を入れる変数を指定します。
  * @default 0
+ *
+ * @param offSetX
+ * @text アイコン位置X
+ * @type number
+ * @min -9007
+ * @max 9007
+ * @desc 表示アイコンを横方向にオフセットする量。正:右/負:左
+ * @default 0
+ *
+ * @param offSetY
+ * @text アイコン位置Y
+ * @type number
+ * @min -9007
+ * @max 9007
+ * @desc 表示アイコンを横方向にオフセットする量。正:上/負:下
+ * @default 0
  */
 
 
@@ -42,22 +58,25 @@
 
   const pluginName = document.currentScript.src.split("/").pop().replace(/\.js$/, "");
   const parameters = PluginManager.parameters(pluginName);
-  const iconVariableId = Number(parameters['iconVariableId'] || 0);
+  const PRM_iconVariableId = Number(parameters['iconVariableId'] || 0);
+  const PRM_offSetX = Number(parameters['offSetX'] || 0);
+  const PRM_offSetY = Number(parameters['offSetY'] || 0);
 
   const _Window_SavefileList_drawContents = Window_SavefileList.prototype.drawContents;
   Window_SavefileList.prototype.drawContents = function (info, rect, valid) {
-    _Window_SavefileList_drawContents.apply(this, arguments);
-    let bottom = rect.y + rect.height;
-    let lineHeight = this.lineHeight();
-    if (info.iconVariableId) {
-      this.drawIcon(info.iconVariableId, rect.x, bottom - lineHeight * 2);
+    _Window_SavefileList_drawContents.call(this, info, rect, valid);
+    const bottom = rect.y + rect.height;
+    const lineHeight = this.lineHeight();
+    if (info.variableIconId) {
+      this.drawIcon(info.variableIconId, rect.x + PRM_offSetX, bottom - lineHeight * 2 + PRM_offSetY);
     }
   };
 
   const _DataManager_makeSavefileInfo = DataManager.makeSavefileInfo;
   DataManager.makeSavefileInfo = function () {
-    let info = _DataManager_makeSavefileInfo.call(this);
-    info.iconVariableId = iconVariableId ? $gameVariables.value(iconVariableId) : 0;
+    const info = _DataManager_makeSavefileInfo.call(this);
+    const iconId = $gameVariables.value(PRM_iconVariableId);
+    info.variableIconId = iconId > 0 ? iconId : 0;
     return info;
   };
 
