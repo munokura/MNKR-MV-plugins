@@ -1,7 +1,7 @@
 /*
  * --------------------------------------------------
  * MNKR_AddIconSave.js
- *   Ver.0.1.0
+ *   Ver.0.1.1
  * Copyright (c) 2020 Munokura
  * This software is released under the MIT license.
  * http://opensource.org/licenses/mit-license.php
@@ -9,8 +9,8 @@
  */
 
 /*:
- * @target MV
- * @url https://raw.githubusercontent.com/munokura/MNKR-MV-plugins/master/MNKR_AddIconSave.js
+ * @target MZ MV
+ * @url https://raw.githubusercontent.com/munokura/MNKR-MZ-plugins/master/MNKR_AddIconSave.js
  * @plugindesc セーブデータにアイコンを追加表示できます。
  * @author munokura
  *
@@ -49,6 +49,7 @@
  * @min -9007
  * @max 9007
  * @desc 表示アイコンを横方向にオフセットする量。正:上/負:下
+ * 参考値 MV:0 / MZ:36
  * @default 0
  */
 
@@ -65,9 +66,9 @@
   const _Window_SavefileList_drawContents = Window_SavefileList.prototype.drawContents;
   Window_SavefileList.prototype.drawContents = function (info, rect, valid) {
     _Window_SavefileList_drawContents.call(this, info, rect, valid);
-    const bottom = rect.y + rect.height;
-    const lineHeight = this.lineHeight();
-    if (info.variableIconId) {
+    if (info.variableIconId > 0) {
+      const bottom = rect.y + rect.height;
+      const lineHeight = this.lineHeight();
       this.drawIcon(info.variableIconId, rect.x + PRM_offSetX, bottom - lineHeight * 2 + PRM_offSetY);
     }
   };
