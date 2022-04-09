@@ -1,7 +1,7 @@
 /*
  * --------------------------------------------------
  * MNKR_WeaponSlotName.js
- *   Ver.0.1.1
+ *   Ver.0.1.2
  * Copyright (c) 2022 Munokura
  * This software is released under the MIT license.
  * http://opensource.org/licenses/mit-license.php
@@ -37,9 +37,10 @@
         if (index > 1) {
             return _Window_EquipSlot_slotName.call(this, index);
         }
-        const actorMeta = this._actor.actor().meta.MNKR_WeaponSlotName || false;
-        const classMeta = this._actor.currentClass().meta.MNKR_WeaponSlotName || false;
-        const hasDualWield = this._actor.isDualWield();
+        const actorObj = this._actor;
+        const actorMeta = actorObj.actor().meta.MNKR_WeaponSlotName || false;
+        const classMeta = actorObj.currentClass().meta.MNKR_WeaponSlotName || false;
+        const hasDualWield = actorObj.isDualWield();
         const hasMeta = classMeta ? classMeta : actorMeta;
         const slot0 = index === 0 && hasMeta;
         const slot1 = index === 1 && hasMeta && hasDualWield;
