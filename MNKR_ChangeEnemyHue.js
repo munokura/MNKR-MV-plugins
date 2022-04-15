@@ -1,7 +1,7 @@
 /*
  * --------------------------------------------------
  * MNKR_ChangeEnemyHue.js
- *   Ver.0.0.1
+ *   Ver.0.0.2
  * Copyright (c) 2022 Munokura
  * This software is released under the MIT license.
  * http://opensource.org/licenses/mit-license.php
@@ -42,9 +42,9 @@
   Sprite_Enemy.prototype.updateBitmap = function () {
     _Sprite_Enemy_updateBitmap.call(this);
     const enemyStatesArray = this._enemy.states();
-    const hasHueStateIndex = enemyStatesArray.findIndex(value => value.meta.MNKR_ChangeEnemyHue);
-    if (hasHueStateIndex > -1) {
-      const hue = Number(enemyStatesArray[hasHueStateIndex].meta.MNKR_ChangeEnemyHue);
+    const hasHueStateObject = enemyStatesArray.find(value => value.meta.MNKR_ChangeEnemyHue);
+    if (hasHueStateObject) {
+      const hue = Number(hasHueStateObject.meta.MNKR_ChangeEnemyHue);
       if (this._battlerHue !== hue) {
         const name = this._enemy.battlerName();
         this._battlerHue = hue;
