@@ -46,7 +46,6 @@
 
   const _Sprite_Enemy_updateBitmap = Sprite_Enemy.prototype.updateBitmap;
   Sprite_Enemy.prototype.updateBitmap = function () {
-    console.log(this._battlerMetaHue);
     const enemyStatesArray = this._enemy.states();
     const hasHueStateObject = enemyStatesArray.find(value => value.meta.MNKR_ChangeEnemyHue);
     if (hasHueStateObject) {
