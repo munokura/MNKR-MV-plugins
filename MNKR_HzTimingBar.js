@@ -1,7 +1,7 @@
 /*
  * --------------------------------------------------
  * MNKR_HzTimingBar.js
- *   Ver.0.0.1
+ *   Ver.0.0.2
  * Copyright (c) 2022 Munokura
  * This software is released under the MIT license.
  * http://opensource.org/licenses/mit-license.php
@@ -14,6 +14,8 @@ MITライセンスの下で公開されています。
 */
 
 /*:
+ * @target MV
+ * @url https://raw.githubusercontent.com/munokura/MNKR-MV-plugins/master/MNKR_HzTimingBar.js
  * @plugindesc タイミングを合わせてボタン入力するタイミングバーを実行します。
  * @author hiz（改変munokura）
  * 
@@ -64,13 +66,14 @@ MITライセンスの下で公開されています。
  * タイミングを合わせてボタン入力するタイミングバーを実行します。
  * プラグインコマンドでタイミングバーを設定・実行します。
  * 
- * カーソルがバー終了地点まで動きます。
+ * カーソルがバー終了地点に向かって動きます。
  * 何もない範囲で入力した時点で終了し、0が代入されます。
  * 終了までに、ヒット(1)・クリティカル(2)のどちらかを入力したポイントの高い方が
  * 変数に代入されます。
  * ただし、入力必須範囲がある場合、それを入力していないと0が代入されます。
  * 
- * バーが終了した時点で変数が代入されます。
+ * バー末端に来るか、クリア条件（必須、ヒット、クリティカルの全てをヒット済）
+ * を満たした時点で変数が代入され終了します。
  * 
  * ■プラグインコマンド:
  * HzTimingBar [var_no] [hit_area] [critical_area] [require_area] [x] [y]
@@ -115,7 +118,7 @@ MITライセンスの下で公開されています。
  * # ヒット範囲は70-90、クリティカル範囲は90-95。
  * 結果は変数番号１にセットされる。
  * 
- * HzTimingBar 1 70-90 90-95 [10-30,40-60]    
+ * HzTimingBar 1 70-90 90-95 [10-30,40-60]
  * # ヒット範囲は70-90、クリティカル範囲は90-95。
  * 結果は変数番号１にセットされる。
  * # 10-30・40-60の両方の範囲内でボタン入力しないとミス。
@@ -126,17 +129,22 @@ MITライセンスの下で公開されています。
  * # 10-20の範囲内でボタン入力しないとミス。
  * # コマンドの表示位置は画面中央上端。
  * 
- * Ver.0.0.1 by munokura (2022/4/12)
- * 変数に値が代入されない不具合を修正
- * プラグインコマンド後に文章の表示がない場合、無限ループになる不具合を修正
- * 必須エリアが他エリアの後ろにある場合、必ずミスになる不具合を修正
- * 
  * 
  * 利用規約:
  *   MITライセンスです。
  *   https://licenses.opensource.jp/MIT/MIT.html
  *   作者に無断で改変、再配布が可能で、
  *   利用形態（商用、18禁利用等）についても制限はありません。
+ * 
+ * Ver.0.0.1 by munokura (2022/4/12)
+ * 変数に値が代入されない不具合を修正
+ * プラグインコマンド後に文章の表示がない場合、無限ループになる不具合を修正
+ * 必須エリアが他エリアの後ろにある場合、必ずミスになる不具合を修正
+ * 
+ * Ver.0.0.2 by munokura (2023/5/7)
+ * クリティカルの後にヒットを取ると、ヒットの値を取得する不具合を修正
+ * 2回目以降に前回のスコアが影響してしまう不具合を修正
+ * ヒット時にクリア条件が揃っている場合、末端まで待たずにクリアする仕様変更
  */
 
 // 必須エリア追加
@@ -154,24 +162,38 @@ MITライセンスの下で公開されています。
     var criticalSe = parameters['critical SE'];
     var missSe = parameters['miss SE'];
 
+    var result = 0;
+    var hitAreaHitted = false;
+    var criticalAreaHitted = false;
 
     var _Game_Interpreter_pluginCommand =
         Game_Interpreter.prototype.pluginCommand;
     Game_Interpreter.prototype.pluginCommand = function (command, args) {
         _Game_Interpreter_pluginCommand.call(this, command, args);
+        result = 0;
+        hitAreaHitted = false;
+        criticalAreaHitted = false;
+
         // スクリプトコマンド「HZCOMMAND」
         if (command.toUpperCase() === 'HZTIMINGBAR') {
             this.setWaitMode("hzTimingBar");
             var varNo = Number(args[0]);
             var hitAreaParm = String(args[1]);
-            // var criticalAreaParm = String(args[2]);
-            // var requiredAreaParm = String(args[3]);
-            var criticalAreaParm = args[2] || false;
-            var requiredAreaParm = args[3] || false;
+            var criticalAreaParm = String(args[2]);
+            var requiredAreaParm = String(args[3]);
             // var x = args[4] != null ? Number(args[4]) : SceneManager._screenWidth / 2;
             // var y = args[5] != null ? Number(args[5]) : SceneManager._screenHeight / 2;
             var x = Number(args[4] || -1) < 0 ? Graphics.width / 2 : Number(args[4]);
             var y = Number(args[5] || -1) < 0 ? Graphics.height / 2 : Number(args[5]);
+
+            if (!hitAreaParm) {
+                hitAreaHitted = true;
+            }
+
+            if (!criticalAreaParm) {
+                criticalAreaHitted = true;
+            }
+
             var hitArea = hitAreaParm.split("-").map(function (elm) { return Number(elm); });
             if (criticalAreaParm) {
                 var criticalArea = criticalAreaParm.split("-").map(function (elm) {
@@ -360,7 +382,7 @@ MITライセンスの下で公開されています。
         // ボタン押下時の判定 (マウス対応追加)
         var inputCheck = Input.isTriggered('ok') || TouchInput.isTriggered();
         if (inputCheck && this._frame >= 0) {
-            var result = 0;
+
             // 必須エリアチェック
             for (var i = 0; i < this._requiredAreas.length; i++) {
                 var requiredArea = this._requiredAreas[i];
@@ -381,6 +403,10 @@ MITライセンスの下で公開されています。
                 }
                 // 追加
                 $gameVariables.setValue(this._varNo, result);
+                criticalAreaHitted = true;
+                if (this.allRequiredAreaHitted() && hitAreaHitted && criticalAreaHitted) {
+                    return false;
+                }
                 return true;
                 // }
             } else if (this._hitArea[0] <= this._frame && this._frame < this._hitArea[1]) {
@@ -392,6 +418,10 @@ MITライセンスの下で公開されています。
                 }
                 // 追加
                 $gameVariables.setValue(this._varNo, result);
+                hitAreaHitted = true;
+                if (this.allRequiredAreaHitted() && hitAreaHitted && criticalAreaHitted) {
+                    return false;
+                }
                 return true;
                 // }
             }
@@ -399,8 +429,8 @@ MITライセンスの下で公開されています。
             if (missSe) {
                 AudioManager.playSe({ name: missSe, volume: 90, pitch: 100, pan: 0 });
             }
-            // 追加
-            $gameVariables.setValue(this._varNo, 0);
+            result = 0;
+            $gameVariables.setValue(this._varNo, result);
             this._frame = HzTimingBar.maxFrame;
             // }
             // $gameVariables.setValue(this._varNo, result);
