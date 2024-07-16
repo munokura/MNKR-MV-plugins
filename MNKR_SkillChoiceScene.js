@@ -1,7 +1,7 @@
 /*
  * --------------------------------------------------
  * MNKR_SkillChoiceScene.js
- *   Ver.0.0.5
+ *   Ver.0.0.6
  * Copyright (c) 2021 Munokura
  * This software is released under the MIT license.
  * http://opensource.org/licenses/mit-license.php
@@ -37,6 +37,11 @@
  * NRP_EvalPluginCommand.js
  * 
  * 
+ * Ver.0.0.5 ヘルプ表示機能を追加
+ *  バージョンアップされる方は、プラグインファイルを差し替え後、
+ *  プラグイン管理からパラメーター設定画面を開いてください。
+ * 
+ * 
  * 利用規約:
  *   MITライセンスです。
  *   https://licenses.opensource.jp/MIT/MIT.html
@@ -67,6 +72,14 @@
  * @type number
  * @default 0
  * @desc スキル選択シーンのウィンドウ高さ。0の場合、画面最大にします。
+ *
+ * @param helpWindow
+ * @text ヘルプウィンドウ表示
+ * @desc スキルのヘルプウィンドウを表示します。
+ * @type boolean
+ * @on 表示
+ * @off 非表示
+ * @default true
  */
 
 (() => {
@@ -80,6 +93,7 @@
 	param.windowY = Number(parameters['windowY'] || 0);
 	param.windowWidth = Number(parameters['windowWidth'] || 0);
 	param.windowHeight = Number(parameters['windowHeight'] || 0);
+	param.helpWindow = parameters['helpWindow'] === "true";
 
 	const MNKR_SkillChoice = {
 		choose: '',
@@ -125,11 +139,27 @@
 
 	MNKR_Scene_SkillChoice.prototype.create = function () {
 		Scene_MenuBase.prototype.create.call(this);
+		if (param.helpWindow) {
+			this.createHelpWindow();
+		}
 		this.createSkillChoiceWindow();
 	};
 
 	MNKR_Scene_SkillChoice.prototype.createSkillChoiceWindow = function () {
-		this._skillChoiceWindow = new MNKR_Window_SkillChoice(0, 0);
+		const wx = param.windowX;
+		const ww = param.windowWidth === 0 ? Graphics.boxWidth : param.windowWidth;
+		let wy, wh;
+		if (param.helpWindow) {
+			wy = param.windowY === 0 ? this._helpWindow.height : param.windowY;
+			wh = param.windowHeight === 0 ? Graphics.boxHeight - this._helpWindow.height : param.windowHeight;
+		} else {
+			wy = param.windowY;
+			wh = param.windowHeight === 0 ? Graphics.boxHeight : param.windowHeight;
+		}
+		this._skillChoiceWindow = new MNKR_Window_SkillChoice(wx, wy, ww, wh);
+		if (param.helpWindow) {
+			this._skillChoiceWindow.setHelpWindow(this._helpWindow);
+		}
 		this._skillChoiceWindow.setHandler('ok', this.onItemOk.bind(this));
 		this._skillChoiceWindow.setHandler('cancel', this.onItemCancel.bind(this));
 		this.addWindow(this._skillChoiceWindow);
@@ -156,10 +186,8 @@
 	MNKR_Window_SkillChoice.prototype = Object.create(Window_SkillList.prototype);
 	MNKR_Window_SkillChoice.prototype.constructor = MNKR_Window_SkillChoice;
 
-	MNKR_Window_SkillChoice.prototype.initialize = function () {
-		param.windowWidth = param.windowWidth === 0 ? Number(Graphics.boxWidth) : param.windowWidth;
-		param.windowHeight = param.windowHeight === 0 ? Number(Graphics.boxHeight) : param.windowHeight;
-		Window_SkillList.prototype.initialize.call(this, param.windowX, param.windowY, param.windowWidth, param.windowHeight);
+	MNKR_Window_SkillChoice.prototype.initialize = function (x, y, width, height) {
+		Window_Selectable.prototype.initialize.call(this, x, y, width, height);
 		this._actor = $gameActors.actor(MNKR_SkillChoice.actorId);
 		this._data = this._actor.skills();
 		this.refresh();
