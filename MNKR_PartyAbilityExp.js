@@ -1,7 +1,7 @@
 /*
  * --------------------------------------------------
  * MNKR_PartyAbilityExp.js
- *   Ver.0.1.1
+ *   Ver.0.1.2
  * Copyright (c) 2024 Munokura
  * This software is released under the MIT license.
  * http://opensource.org/licenses/mit-license.php
@@ -53,10 +53,7 @@
     Game_BattlerBase.prototype.partyExpRate = function (pluginName) {
         let metaArray = [];
         const battlerTrait = this.traitObjects();
-
-        for (let i = 0; i < battlerTrait.length; i++) {
-            metaArray.push(battlerTrait[i].meta[pluginName]);
-        }
+        metaArray = battlerTrait.map(obj => obj.meta[pluginName]);
         metaArray = metaArray.filter(item => item).map(Number);
         const maxMeta = Math.max(...metaArray);
         return maxMeta;
