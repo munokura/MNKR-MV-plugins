@@ -8,7 +8,7 @@
  * --------------------------------------------------
  */
 
-/*:ja
+/*:
  * @target MZ MV
  * @url https://raw.githubusercontent.com/munokura/MNKR-MV-plugins/master/MNKR_PartyAbilityExp.js
  * @plugindesc パーティスキルに経験値の増加を追加します。
