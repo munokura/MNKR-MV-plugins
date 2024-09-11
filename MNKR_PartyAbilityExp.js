@@ -1,14 +1,14 @@
 /*
  * --------------------------------------------------
  * MNKR_PartyAbilityExp.js
- *   Ver.0.1.0
+ *   Ver.0.1.1
  * Copyright (c) 2024 Munokura
  * This software is released under the MIT license.
  * http://opensource.org/licenses/mit-license.php
  * --------------------------------------------------
  */
 
-/*:
+/*:ja
  * @target MZ MV
  * @url https://raw.githubusercontent.com/munokura/MNKR-MV-plugins/master/MNKR_PartyAbilityExp.js
  * @plugindesc パーティスキルに経験値の増加を追加します。
@@ -50,9 +50,10 @@
     'use strict';
     const pluginName = document.currentScript.src.split("/").pop().replace(/\.js$/, "");
 
-    Game_BattlerBase.prototype.partyAbilityRate = function (pluginName) {
+    Game_BattlerBase.prototype.partyExpRate = function (pluginName) {
         let metaArray = [];
         const battlerTrait = this.traitObjects();
+
         for (let i = 0; i < battlerTrait.length; i++) {
             metaArray.push(battlerTrait[i].meta[pluginName]);
         }
@@ -61,10 +62,10 @@
         return maxMeta;
     };
 
-    Game_Party.prototype.partyAbilityRate = function (pluginName) {
+    Game_Party.prototype.partyExpRate = function (pluginName) {
         let result = null;
         this.battleMembers().forEach(function (actor) {
-            result = actor.partyAbilityRate(pluginName);
+            result = actor.partyExpRate(pluginName);
         });
         result === null ? 100 : result;
         return result;
@@ -72,17 +73,16 @@
 
     const _Game_Troop_expTotal = Game_Troop.prototype.expTotal;
     Game_Troop.prototype.expTotal = function () {
-        const expTotal = Math.floor(_Game_Troop_expTotal.call(this) * this.expRate());
-        return expTotal;
+        return Math.floor(_Game_Troop_expTotal.call(this) * this.expRate());
     };
 
     Game_Troop.prototype.expRate = function () {
-        const rate = $gameParty.getExpRate() / 100;
+        const rate = 1 * $gameParty.getExpRate() / 100;
         return rate;
     };
 
     Game_Party.prototype.getExpRate = function () {
-        const expRate = this.partyAbilityRate(pluginName) < 0 ? 0 : this.partyAbilityRate(pluginName);
+        const expRate = this.partyExpRate(pluginName) < 0 ? 0 : this.partyExpRate(pluginName);
         return expRate;
     };
 
