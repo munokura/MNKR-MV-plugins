@@ -1,7 +1,7 @@
 /*
  * --------------------------------------------------
  * MNKR_ChangeWinAction.js
- *   Ver.1.0.1
+ *   Ver.1.0.2
  * Copyright (c) 2020 Munokura
  * This software is released under the MIT license.
  * http://opensource.org/licenses/mit-license.php
@@ -9,15 +9,15 @@
  */
 
 /*:
- * @target MV
+ * @target MZ MV
  * @url https://raw.githubusercontent.com/munokura/MNKR-MV-plugins/master/MNKR_ChangeWinAction.js
  * @plugindesc 指定スイッチがONの場合、戦闘勝利時にSVアクターが指定動作をします。
  * @author munokura
  *
  * @param Switch Id
- * @text 指定スイッチ
+ * @text 発動スイッチ
  * @type switch
- * @desc 発動させるスイッチID
+ * @desc 発動させるスイッチID。0（なし）を指定した場合、常に発動します。
  * @default 11
  *
  * @param Select Action
@@ -75,20 +75,23 @@
  *   利用形態（商用、18禁利用等）についても制限はありません。
  */
 
-(function(){
+(() => {
 	'use strict';
 
-	var parameters = PluginManager.parameters('MNKR_ChangeWinAction');
-	var switchId = Number(parameters['Switch Id'] || 11);
-	var selectAction = String(parameters['Select Action'] || 'dying');
+	const pluginName = document.currentScript.src.split("/").pop().replace(/\.js$/, "");
+	const parameters = PluginManager.parameters(pluginName);
+	const param = {};
+	param.switchId = Number(parameters['Switch Id'] || 11);
+	param.selectAction = parameters['Select Action'] || 'dying';
 
 	const _Game_Actor_performVictory = Game_Actor.prototype.performVictory;
-	Game_Actor.prototype.performVictory = function() {
-		if($gameSwitches.value(switchId) && this.canMove()) {
-				this.requestMotion(selectAction);
+	Game_Actor.prototype.performVictory = function () {
+		const switchevalue = param.switchId > 0 ? $gameSwitches.value(param.switchId) : true;
+		if (switchevalue && this.canMove()) {
+			this.requestMotion(param.selectAction);
 		} else {
-			_Game_Actor_performVictory.apply(this, arguments);
+			_Game_Actor_performVictory.call(this);
 		};
 	};
-	
+
 })();
