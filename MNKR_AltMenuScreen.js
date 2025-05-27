@@ -42,6 +42,7 @@
         this._statusWindow.x = 0;
         this._statusWindow.y = this._commandWindow.height + 232;	//munokura
         this._goldWindow.x = Graphics.boxWidth - this._goldWindow.width;
+        this._goldWindow.y = 340;	//munokura
     };
 
     Window_MenuCommand.prototype.windowWidth = function () {
