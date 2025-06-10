@@ -1,7 +1,7 @@
 /*
  * --------------------------------------------------
  * MNKR_ChoiceCustomMV.js
- *   Ver.0.1.1
+ *   Ver.0.1.2
  * Copyright (c) 2025 Munokura
  * This software is released under the MIT license.
  * http://opensource.org/licenses/mit-license.php
@@ -56,7 +56,10 @@
  *
  * ## Y軸位置について
  * - Y位置指定の値が大きすぎて画面外にはみ出る場合、
- *   自動的に画面最下部に調整されます
+ *   自動的に画面最上部に調整されます
+ * - 行数指定により解像度を越えるウィンドウサイズになる場合、
+ *   ウィンドウサイズが自動的に調整され、
+ *   画面最上部に表示されます。
  *
  * ## 行数と列数の組み合わせ
  * - 行数指定は、列数指定と組み合わせて使用できます
@@ -149,11 +152,22 @@
     const _Window_ChoiceList_updatePlacement = Window_ChoiceList.prototype.updatePlacement;
     Window_ChoiceList.prototype.updatePlacement = function () {
         _Window_ChoiceList_updatePlacement.call(this);
-        if (settings.yPosition < 0) {
-            return;
+
+        // ウィンドウサイズの自動調整
+        if (settings.rows > 0) {
+            const maxHeight = Graphics.boxHeight;
+            if (this.height > maxHeight) {
+                this.height = maxHeight;
+                this.y = 0; // 画面最上部に表示
+                return; // サイズ調整後はY軸位置の調整をスキップ
+            }
         }
-        const maxY = Graphics.boxHeight - this.windowHeight();
-        this.y = Math.min(settings.yPosition, maxY);
+
+        // Y軸位置の調整
+        if (settings.yPosition >= 0) {
+            const maxY = Graphics.boxHeight - this.height;
+            this.y = Math.min(settings.yPosition, maxY);
+        }
     };
 
 })();
