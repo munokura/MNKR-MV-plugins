@@ -9,63 +9,122 @@
  */
 
 /*:
- * @target MV
- * @url https://raw.githubusercontent.com/munokura/MNKR-MV-plugins/master/MNKR_LastActionData.js
- * @plugindesc 直前の行動データを変数に代入できます。
- * @author munokura
- *
- * @help
- * 直前の行動データを変数に代入できます。
- * 
- * ---プラグインコマンド---
- * 
- * MNKR_LastActionData 変数ID データ種別
- * 
- * --変数ID
- * 数値が変数IDになります。
- * 
- * --データ種別
- * Skill / S - 直前に使用したスキルのID
- * Item  / I - 直前に使用したアイテムのID
- * ActionActor / AA - 直前に行動したアクターのID
- * ActionEnemy / AE - 直前に行動した敵キャラのインデックス
- * TargetActor / TA - 直前に行動した敵キャラのインデックス
- * TargetEnemy / TE - 直前に対象となった敵キャラのインデックス
- * 
- * 使用例
- * MNKR_LastActionData 1 AA
- * 効果：変数ID1 に 直前に行動したアクターのID を代入
- * 
- * 
- * ---スクリプト---
- * 
- * 「変数の操作」で下記スクリプトを代入します。
- * 
- * - 直前に使用したスキルのID
- * $gameTemp.lastActionData(0)
- * 
- * - 直前に使用したアイテムのID
- * $gameTemp.lastActionData(1)
- * 
- * - 直前に行動したアクターのID
- * $gameTemp.lastActionData(2)
- * 
- * - 直前に行動した敵キャラのインデックス
- * $gameTemp.lastActionData(3)
- * 
- * - 直前に対象となったアクターのID
- * $gameTemp.lastActionData(4)
- * 
- * - 直前に対象となった敵キャラのインデックス
- * $gameTemp.lastActionData(5)
- * 
- * 
- * 利用規約:
- *   MITライセンスです。
- *   https://licenses.opensource.jp/MIT/MIT.html
- *   作者に無断で改変、再配布が可能で、
- *   利用形態（商用、18禁利用等）についても制限はありません。
- */
+@target MV
+@url https://raw.githubusercontent.com/munokura/MNKR-MV-plugins/master/MNKR_LastActionData.js
+@plugindesc You can assign the most recent action data to a variable.
+@author munokura
+@license MIT License
+
+@help
+You can assign the most recent action data to a variable.
+
+--Plugin Command---
+
+MNKR_LastActionData Variable ID Data Type
+
+--Variable ID
+The numeric value is the variable ID.
+
+--Data Type
+Skill / S - ID of the most recently used skill
+Item / I - ID of the most recently used item
+ActionActor / AA - ID of the actor who performed the most recent action
+ActionEnemy / AE - Index of the enemy character who performed the most recent
+action
+TargetActor / TA - Index of the enemy character who performed the most recent
+action
+TargetEnemy / TE - Index of the enemy character who was targeted most recently
+
+Usage Example
+MNKR_LastActionData 1 AA
+Effect: Assigns the ID of the actor who performed the most recent action to
+variable ID1.
+
+---Script---
+
+Assign the following script using "Variable Operation."
+
+- ID of the most recently used skill
+$gameTemp.lastActionData(0)
+
+- ID of the most recently used item
+$gameTemp.lastActionData(1)
+
+- ID of the actor who performed the most recently used action
+$gameTemp.lastActionData(2)
+
+- Index of the most recently used enemy character
+$gameTemp.lastActionData(3)
+
+- ID of the most recently targeted actor
+$gameTemp.lastActionData(4)
+
+- Index of the most recently targeted enemy character
+$gameTemp.lastActionData(5)
+
+Terms of Use:
+MIT License.
+http://opensource.org/licenses/mit-license.php
+Modification and redistribution are permitted without permission from the
+author, and there are no restrictions on use (commercial, 18+, etc.).
+*/
+
+/*:ja
+@target MV
+@url https://raw.githubusercontent.com/munokura/MNKR-MV-plugins/master/MNKR_LastActionData.js
+@plugindesc 直前の行動データを変数に代入できます。
+@author munokura
+
+@help
+直前の行動データを変数に代入できます。
+
+---プラグインコマンド---
+
+MNKR_LastActionData 変数ID データ種別
+
+--変数ID
+数値が変数IDになります。
+
+--データ種別
+Skill / S - 直前に使用したスキルのID
+Item  / I - 直前に使用したアイテムのID
+ActionActor / AA - 直前に行動したアクターのID
+ActionEnemy / AE - 直前に行動した敵キャラのインデックス
+TargetActor / TA - 直前に行動した敵キャラのインデックス
+TargetEnemy / TE - 直前に対象となった敵キャラのインデックス
+
+使用例
+MNKR_LastActionData 1 AA
+効果：変数ID1 に 直前に行動したアクターのID を代入
+
+---スクリプト---
+
+「変数の操作」で下記スクリプトを代入します。
+
+- 直前に使用したスキルのID
+$gameTemp.lastActionData(0)
+
+- 直前に使用したアイテムのID
+$gameTemp.lastActionData(1)
+
+- 直前に行動したアクターのID
+$gameTemp.lastActionData(2)
+
+- 直前に行動した敵キャラのインデックス
+$gameTemp.lastActionData(3)
+
+- 直前に対象となったアクターのID
+$gameTemp.lastActionData(4)
+
+- 直前に対象となった敵キャラのインデックス
+$gameTemp.lastActionData(5)
+
+利用規約:
+  MITライセンスです。
+  http://opensource.org/licenses/mit-license.php
+  作者に無断で改変、再配布が可能で、
+  利用形態（商用、18禁利用等）についても制限はありません。
+*/
 
 (() => {
 	"use strict";

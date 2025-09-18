@@ -9,60 +9,112 @@
  */
 
 /*:
- * @target MV
- * @url https://raw.githubusercontent.com/munokura/MNKR-MV-plugins/master/MNKR_MenuCommand.js
- * @plugindesc メインメニューのコマンドウィンドウの表示を設定します。
- * @author munokura
- *
- * @help
- * メインメニューのコマンドウィンドウの表示を設定します。
- *
- * 他の要素については「GUI画面デザインプラグイン（トリアコンタン様作）」で
- * 設定することをお勧めします。
- *
- * ---------------------------------------------------------------------------
- * https://triacontane.blogspot.com/2016/03/gui.html
- *   1. ウィンドウの横幅
- *   2. ウィンドウの高さ
- *   3. ウィンドウの余白
- *   4. ウィンドウのフォントサイズ
- *   5. ウィンドウの1行のあたりの高さ
- *   6. ウィンドウの背景透明度
- *   7. ウィンドウの行数
- *   8. ウィンドウの背景画像ファイル名
- *   9. ウィンドウのフォント名
- * ---------------------------------------------------------------------------
- *
- * プラグインコマンドはありません。
- *
- *
- * 利用規約:
- *   MITライセンスです。
- *   https://licenses.opensource.jp/MIT/MIT.html
- *   作者に無断で改変、再配布が可能で、
- *   利用形態（商用、18禁利用等）についても制限はありません。
- *
- *
- * @param Max Cols
- * @text 横コマンド数
- * @type number
- * @min 1
- * @desc ツクールデフォルト:1
- * @default 2
- *
- * @param Command Alignment
- * @text コマンド行揃え
- * @type select
- * @option 左
- * @value left
- * @option 中央
- * @value center
- * @option 右
- * @value right
- * @desc 左:left / 中央:center / 右:right
- * ツクールデフォルト:left
- * @default left
- */
+@target MV
+@url https://raw.githubusercontent.com/munokura/MNKR-MV-plugins/master/MNKR_MenuCommand.js
+@plugindesc Sets the visibility of the command window in the main menu.
+@author munokura
+@license MIT License
+
+@help
+Sets the display of the command window in the main menu.
+
+For other elements, we recommend using the "GUI Screen Design Plugin (by
+Triacontan)."
+
+---------------------------------------------------------------------------
+https://triacontane.blogspot.com/2016/03/gui.html
+1. Window width
+2. Window height
+3. Window margins
+4. Window font size
+5. Window line height
+6. Window background transparency
+7. Window lines
+8. Window background image filename
+9. Window font name
+---------------------------------------------------------------------------
+
+There are no plugin commands.
+
+Terms of Use:
+MIT License.
+http://opensource.org/licenses/mit-license.php
+Modification and redistribution are permitted without permission from the
+author, and there are no restrictions on use (commercial, R18, etc.).
+
+@param Max Cols
+@text Number of horizontal commands
+@desc Maker default: 1
+@type number
+@default 2
+@min 1
+
+@param Command Alignment
+@text Command justification
+@desc Left: left / Center: center / Right: right
+@type select
+@default left
+@option left
+@value left
+@option center
+@value center
+@option right
+@value right
+*/
+
+/*:ja
+@target MV
+@url https://raw.githubusercontent.com/munokura/MNKR-MV-plugins/master/MNKR_MenuCommand.js
+@plugindesc メインメニューのコマンドウィンドウの表示を設定します。
+@author munokura
+
+@help
+メインメニューのコマンドウィンドウの表示を設定します。
+
+他の要素については「GUI画面デザインプラグイン（トリアコンタン様作）」で
+設定することをお勧めします。
+
+---------------------------------------------------------------------------
+https://triacontane.blogspot.com/2016/03/gui.html
+  1. ウィンドウの横幅
+  2. ウィンドウの高さ
+  3. ウィンドウの余白
+  4. ウィンドウのフォントサイズ
+  5. ウィンドウの1行のあたりの高さ
+  6. ウィンドウの背景透明度
+  7. ウィンドウの行数
+  8. ウィンドウの背景画像ファイル名
+  9. ウィンドウのフォント名
+---------------------------------------------------------------------------
+
+プラグインコマンドはありません。
+
+利用規約:
+  MITライセンスです。
+  http://opensource.org/licenses/mit-license.php
+  作者に無断で改変、再配布が可能で、
+  利用形態（商用、18禁利用等）についても制限はありません。
+
+@param Max Cols
+@text 横コマンド数
+@type number
+@min 1
+@desc ツクールデフォルト:1
+@default 2
+
+@param Command Alignment
+@text コマンド行揃え
+@type select
+@option 左
+@value left
+@option 中央
+@value center
+@option 右
+@value right
+@desc 左:left / 中央:center / 右:right
+ツクールデフォルト:left
+@default left
+*/
 
 (function(){
 	'use strict';

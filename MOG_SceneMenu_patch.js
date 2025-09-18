@@ -9,51 +9,98 @@
  */
 
 /*:
- * @target MV
- *
- * @param cursorRepeate
- * @text メニュー左右ループ有効化
- * @type boolean
- * @on 有効
- * @off 無効
- * @default true
- *
- * @param commandZoom
- * @text コマンドズーム有効化
- * @type boolean
- * @on 有効
- * @off 無効
- * @desc メインメニューのコマンド選択時ズーム動作を有効化
- * @default false
- *
- * @param selectionZoom
- * @text アクター選択ズーム有効化
- * @type boolean
- * @on 有効
- * @off 無効
- * @desc アクター選択時ズーム動作を有効化
- * @default false
- *
- * @param commandSpaceX
- * @text コマンドX間隔
- * @type number
- * @desc メインメニューのコマンド横方向間隔
- * @default 48
- *
- * @param commandSpaceY
- * @text コマンドY間隔
- * @type number
- * @desc メインメニューのコマンド縦方向間隔
- * @default 48
- *
- * @plugindesc
- * MOG_SceneMenu.js のメニューをカスタマイズする機能を追加します。
- * @author munokura
- *
- * @help
- * MOG_SceneMenu.js のメニューをカスタマイズする機能を追加します。
- * プラグイン管理でMOG_SceneMenuの下側に配置してください。
- */
+@target MV
+@url https://fungamemake.com/
+@plugindesc Adds the ability to customize the menu in MOG_SceneMenu.js.
+@author munokura
+@license MIT License
+
+@help
+Adds the ability to customize the MOG_SceneMenu.js menu.
+Place it below MOG_SceneMenu in the Plugin Manager.
+
+@param cursorRepeate
+@text Enable left and right menu loop
+@type boolean
+@on valid
+@off invalid
+@default true
+
+@param commandZoom
+@text Enable command zoom
+@desc Enable zooming when selecting commands in the main menu
+@type boolean
+@on valid
+@off invalid
+@default false
+
+@param selectionZoom
+@text Actor Selection Zoom Enabled
+@desc Enable zooming when selecting an actor
+@type boolean
+@on valid
+@off invalid
+@default false
+
+@param commandSpaceX
+@text Command X Interval
+@desc Main menu command Horizontal Spacing
+@type number
+@default 48
+
+@param commandSpaceY
+@text Command Y Spacing
+@desc Main Menu Command Vertical Spacing
+@type number
+@default 48
+*/
+
+/*:ja
+@target MV
+
+@param cursorRepeate
+@text メニュー左右ループ有効化
+@type boolean
+@on 有効
+@off 無効
+@default true
+
+@param commandZoom
+@text コマンドズーム有効化
+@type boolean
+@on 有効
+@off 無効
+@desc メインメニューのコマンド選択時ズーム動作を有効化
+@default false
+
+@param selectionZoom
+@text アクター選択ズーム有効化
+@type boolean
+@on 有効
+@off 無効
+@desc アクター選択時ズーム動作を有効化
+@default false
+
+@param commandSpaceX
+@text コマンドX間隔
+@type number
+@desc メインメニューのコマンド横方向間隔
+@default 48
+
+@param commandSpaceY
+@text コマンドY間隔
+@type number
+@desc メインメニューのコマンド縦方向間隔
+@default 48
+
+@plugindesc
+MOG_SceneMenu.js のメニューをカスタマイズする機能を追加します。
+@author munokura
+
+@help
+MOG_SceneMenu.js のメニューをカスタマイズする機能を追加します。
+プラグイン管理でMOG_SceneMenuの下側に配置してください。
+*/
 
 (function () {
 	'use strict';
@@ -221,6 +268,5 @@
 			h = h === 0 ? 1 : 0;
 		};
 	};
-
 
 })();

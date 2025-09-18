@@ -9,49 +9,88 @@
  */
 
 /*:
- * @target MV
- * @url https://raw.githubusercontent.com/munokura/MNKR-MV-plugins/master/MNKR_SkillChoice.js
- * @plugindesc スキル選択の処理とスキルの増減のプラグインコマンドを追加します。
- * @author munokura
- *
- * @help
- * スキル選択の処理とスキルの増減のプラグインコマンドを追加します。
- * 
- * スキル選択の処理
- * MNKR_SkillChoice select アクターID 変数ID
- * アクターIDで指定したスキルの一覧ウィンドウを開き、
- * 選択したスキルのIDを指定変数に代入します。
- * 
- * 
- * スキルを増やす
- * MNKR_SkillChoice learn アクターID スキルID
- * 
- * 
- * スキルを減らす
- * MNKR_SkillChoice forget アクターID スキルID
- * 
- * 
- * 引数に変数を使いたい場合、下記のプラグインを併用ください。
- * http://newrpg.seesaa.net/article/475509661.html
- * NRP_EvalPluginCommand.js
- * 
- * 
- * 注意事項
- * このプラグインはイベントコマンド「アイテム選択の処理」を
- * 間借りする形で作成されています。
- * このため、TMEventItemEx（アイテム選択拡張）プラグインの機能が動作します。
- * 
- * 「アイテム選択の処理」に関係するプラグインと競合しやすいです。
- * 競合した場合、MNKR_SkillChoiceScene を代用することをご検討ください。
- * https://raw.githubusercontent.com/munokura/MNKR-MV-plugins/master/MNKR_SkillChoiceScene.js
- * 
- * 
- * 利用規約:
- *   MITライセンスです。
- *   https://licenses.opensource.jp/MIT/MIT.html
- *   作者に無断で改変、再配布が可能で、
- *   利用形態（商用、18禁利用等）についても制限はありません。
- */
+@target MV
+@url https://raw.githubusercontent.com/munokura/MNKR-MV-plugins/master/MNKR_SkillChoice.js
+@plugindesc Adds plugin commands for skill selection processing and skill increase/decrease.
+@author munokura
+@license MIT License
+
+@help
+Adds plugin commands for skill selection and skill increase/decrease.
+
+Skill Selection
+MNKR_SkillChoice select actor ID variable ID
+Opens a list of skills specified by the actor ID and assigns the selected
+skill ID to the specified variable.
+
+Increase Skill
+MNKR_SkillChoice learn actor ID skill ID
+
+Decrease Skill
+MNKR_SkillChoice forget actor ID skill ID
+
+If you want to use variables as arguments, please use the following plugin in
+conjunction with it.
+http://newrpg.seesaa.net/article/475509661.html
+NRP_EvalPluginCommand.js
+
+Notes
+This plugin is designed to use the "Item Selection" event command.
+
+As a result, the functionality of the TMEventItemEx (Item Selection Extension)
+plugin will function.
+
+This plugin is prone to conflicts with plugins related to "Item Selection."
+
+If conflicts occur, consider using MNKR_SkillChoiceScene instead.
+https://raw.githubusercontent.com/munokura/MNKR-MV-plugins/master/MNKR_SkillChoiceScene.js
+
+Terms of Use:
+MIT License.
+http://opensource.org/licenses/mit-license.php
+You may modify and redistribute this work without permission from the author.
+There are no restrictions on its use (commercial, 18+, etc.).
+*/
+
+/*:ja
+@target MV
+@url https://raw.githubusercontent.com/munokura/MNKR-MV-plugins/master/MNKR_SkillChoice.js
+@plugindesc スキル選択の処理とスキルの増減のプラグインコマンドを追加します。
+@author munokura
+
+@help
+スキル選択の処理とスキルの増減のプラグインコマンドを追加します。
+
+スキル選択の処理
+MNKR_SkillChoice select アクターID 変数ID
+アクターIDで指定したスキルの一覧ウィンドウを開き、
+選択したスキルのIDを指定変数に代入します。
+
+スキルを増やす
+MNKR_SkillChoice learn アクターID スキルID
+
+スキルを減らす
+MNKR_SkillChoice forget アクターID スキルID
+
+引数に変数を使いたい場合、下記のプラグインを併用ください。
+http://newrpg.seesaa.net/article/475509661.html
+NRP_EvalPluginCommand.js
+
+注意事項
+このプラグインはイベントコマンド「アイテム選択の処理」を
+間借りする形で作成されています。
+このため、TMEventItemEx（アイテム選択拡張）プラグインの機能が動作します。
+
+「アイテム選択の処理」に関係するプラグインと競合しやすいです。
+競合した場合、MNKR_SkillChoiceScene を代用することをご検討ください。
+https://raw.githubusercontent.com/munokura/MNKR-MV-plugins/master/MNKR_SkillChoiceScene.js
+
+利用規約:
+  MITライセンスです。
+  http://opensource.org/licenses/mit-license.php
+  作者に無断で改変、再配布が可能で、
+  利用形態（商用、18禁利用等）についても制限はありません。
+*/
 
 (() => {
     "use strict";

@@ -2,180 +2,322 @@
  * --------------------------------------------------
  * MNKR_AltMenuScreen3.js
  *   Ver.0.1.1
- * Copyright (c) 2020 Munokura
+ * Copyright (c) 2020 Sasuke KANNAZUKI,munokura
  * This software is released under the MIT license.
  * http://opensource.org/licenses/mit-license.php
  * --------------------------------------------------
  */
 
+/*:
+@target MV
+@url https://raw.githubusercontent.com/munokura/MNKR-MV-plugins/master/MNKR_AltMenuScreen3.js
+@plugindesc You can display a portrait of the actor instead of their face on the menu screen.
+@author Sasuke KANNAZUKI,munokura
+@license MIT License
+
+@help
+You can display a stand picture instead of the actor's face image on the menu
+screen.
+You can add a background image to each menu scene.
+
+Write the following in the actor's notes:
+<stand_picture:filename> The file name will be the stand picture for that
+actor.
+Place the file in img/pictures.
+
+Desired actor stand picture size:
+Width: 3 columns: 240px, 4 columns: 174px
+Height: Command window 1 line: 444px, 2 lines: 408px
+
+You can specify the display position of the stand picture by adding
+<stand_offset_x> <stand_offset_y> to the actor's notes.
+This only affects the actor display specified with <stand_picture:filename>.
+It does not affect the normal face image.
+
+To shift the stand picture to the side:
+<stand_offset_x:10>
+*Specify the amount of shift by specifying the 10. A negative value will move
+it to the left.
+
+To shift the character image vertically
+<stand_offset_y:10>
+*Specify the offset amount where 10 is. A negative value will move it up.
+
+This plugin does not have any plugin commands.
+
+This plugin is based on AltMenuScreen2MZ
+and is a modified version of AltMenuScreen3.
+Please contact the modifier with any questions.
+
+# Terms of Use
+MIT License.
+http://opensource.org/licenses/mit-license.php
+You may modify and redistribute this plugin without permission, and there are
+no restrictions on its use (commercial, 18+, etc.).
+
+@param displayWindow
+@text Window Frame Display
+@desc Show window frame. Default: false
+@type boolean
+@on display
+@off hidden
+@default true
+
+@param bgBitmapMenu
+@text Menu background
+@desc This is the image file to be used as the menu background.
+@type file
+@require 1
+@dir img/pictures/
+
+@param bgBitmapItem
+@text Item screen background
+@desc This is the image file used as the background for the item screen.
+@type file
+@require 1
+@dir img/pictures/
+
+@param bgBitmapSkill
+@text Skill screen background
+@desc This is an image file used as the background for the skill screen.
+@type file
+@require 1
+@dir img/pictures/
+
+@param bgBitmapEquip
+@text Equipment screen background
+@desc This is an image file used as the background for the equipment screen.
+@type file
+@require 1
+@dir img/pictures/
+
+@param bgBitmapStatus
+@text Status screen background
+@desc This is the image file to be used as the background for the status screen.
+@type file
+@require 1
+@dir img/pictures/
+
+@param bgBitmapOptions
+@text Option screen background
+@desc This is the image file to be used as the background for the options screen.
+@type file
+@require 1
+@dir img/pictures/
+
+@param bgBitmapFile
+@text Save/load screen background
+@desc This is an image file used as the background for the save/load screen.
+@type file
+@require 1
+@dir img/pictures/
+
+@param bgBitmapGameEnd
+@text Game End Screen Background
+@desc This is the image file used as the background for the game end screen.
+@type file
+@dir img/pictures/
+
+@param maxColsMenu
+@text Maximum number of actors displayed
+@desc The maximum number of windows that can be registered for one screen to display actors.
+@type number
+@default 4
+
+@param commandRows
+@text Number of command lines
+@desc The number of lines in the command window.
+@type number
+@default 2
+@min 1
+
+@param isDisplayStatus
+@text Status Display
+@desc Choose whether to display the status.
+@type boolean
+@on display
+@off hidden
+@default true
+
+@param displayMapName
+@text Map name display
+@desc Choose whether to display the map name in the bottom left of the screen.
+@type boolean
+@on display
+@off hidden
+@default true
+
+@param locationString
+@text Map Name Label
+@desc The prefix to the map name, drawn in the system color.
+@type string
+@default 現在地:
+*/
+
 /*:ja
- * @target MV
- * @url https://raw.githubusercontent.com/munokura/MNKR-MV-plugins/master/MNKR_AltMenuScreen3.js
- * @plugindesc メニュー画面にアクターの顔画像の代わりに立ち絵を表示できます。
- * @author 神無月サスケ (改変 munokura)
- * 
- * @help
- * メニュー画面にアクターの顔画像の代わりに立ち絵を表示できます。
- * メニューそれぞれのシーンに背景画像を付けることが出来ます。
- *
- * アクターのメモに以下のように書いてください:
- * <stand_picture:ファイル名> ファイル名が、そのアクターの立ち絵になります。
- *   ファイルは img/pictures に置いてください。
- *
- * 望ましいアクター立ち絵のサイズ：
- * 幅：3列:240px, 4列：174px
- * 高さ： コマンドウィンドウ 1行:444px 2行:408px
- * 
- * アクターのメモに<stand_offset_x> <stand_offset_y> を入れると
- * 立ち絵の表示位置指定が出来ます。
- * <stand_picture:ファイル名>で指定したアクター表示にのみ反映されます。
- * 通常の顔画像には反映されません。
- * 
- * 立ち絵を横にずらしたい場合
- * <stand_offset_x:10>
- * ※10の部分をずらす量に指定してください。マイナスだと左に移動します。
- *
- * 立ち絵を縦にずらしたい場合
- * <stand_offset_y:10>
- * ※10の部分をずらす量に指定してください。マイナスだと上に移動します。
- * 
- * 
- * このプラグインには、プラグインコマンドはありません。
- * 
- * このプラグインは AltMenuScreen2MZ を元ととして
- * AltMenuScreen3を改変したものです。
- * 質問は改変者へお願いいたします。
- * 
- * 
- * 利用規約:
- *   MITライセンスです。
- *   https://licenses.opensource.jp/MIT/MIT.html
- *   作者に無断で改変、再配布が可能で、
- *   利用形態（商用、18禁利用等）についても制限はありません。
- * 
- * 
- * @param displayWindow
- * @text ウィンドウ枠表示
- * @desc ウィンドウ枠を表示。デフォルト:false
- * @type boolean
- * @on 表示
- * @off 非表示
- * @default true
- * 
- * @param bgBitmapMenu
- * @text メニュー背景
- * @desc メニュー背景にする画像ファイルです。
- * img/pictures に置いてください。
- * @default 
- * @require 1
- * @dir img/pictures/
- * @type file
- * 
- * @param bgBitmapItem
- * @text アイテム画面背景
- * @desc アイテム画面背景にする画像ファイルです。
- * img/pictures に置いてください。
- * @default 
- * @require 1
- * @dir img/pictures/
- * @type file
- * 
- * @param bgBitmapSkill
- * @text スキル画面背景
- * @desc スキル画面背景にする画像ファイルです。
- * img/pictures に置いてください。
- * @default 
- * @require 1
- * @dir img/pictures/
- * @type file
- * 
- * @param bgBitmapEquip
- * @text 装備画面背景
- * @desc 装備画面背景にする画像ファイルです。
- * img/pictures に置いてください。
- * @default 
- * @require 1
- * @dir img/pictures/
- * @type file
- * 
- * @param bgBitmapStatus
- * @text ステータス画面背景
- * @desc ステータス画面背景にする画像ファイルです。
- * img/pictures に置いてください。
- * @default 
- * @require 1
- * @dir img/pictures/
- * @type file
- * 
- * @param bgBitmapOptions
- * @text オプション画面背景
- * @desc オプション画面背景にする画像ファイルです。
- * img/pictures に置いてください。
- * @default 
- * @require 1
- * @dir img/pictures/
- * @type file
- * 
- * @param bgBitmapFile
- * @text セーブ／ロード画面背景
- * @desc セーブ／ロード画面背景にする画像ファイルです。
- * img/pictures に置いてください。
- * @default 
- * @require 1
- * @dir img/pictures/
- * @type file
- * 
- * @param bgBitmapGameEnd
- * @text ゲーム終了画面背景
- * @desc ゲーム終了画面背景にする画像ファイルです。
- * img/pictures に置いてください。
- * @default 
- * @dir img/pictures/
- * @type file
- * 
- * @param maxColsMenu
- * @text アクター表示最大数
- * @desc アクターを表示するウィンドウの1画面の登録最大数。
- * 0にすると、パーティ人数で自動調整
- * @type number
- * @default 4
- * 
- * @param commandRows
- * @text コマンド行数
- * @desc コマンドウィンドウの行数です。
- * @type number
- * @min 1
- * @default 2
- *
- * @param isDisplayStatus
- * @text ステータス表示
- * @desc ステータスを表示するかしないかを選びます。
- * @type boolean
- * @on 表示
- * @off 非表示
- * @default true
- * 
- * @param displayMapName
- * @text マップ名表示
- * @desc 画面左下にマップ名を表示するかを選びます。
- * @type boolean
- * @on 表示
- * @off 非表示
- * @default true
- * 
- * @param locationString
- * @text マップ名ラベル
- * @desc マップ名の前に付ける文字。システムカラーで描画されます。
- * @type string
- * @default 現在地:
- * 
- * 
- * @noteParam stand_picture
- * @noteRequire 1
- * @noteDir img/pictures/
- * @noteType file
- * @noteData actors
- */
+@target MV
+@url https://raw.githubusercontent.com/munokura/MNKR-MV-plugins/master/MNKR_AltMenuScreen3.js
+@plugindesc メニュー画面にアクターの顔画像の代わりに立ち絵を表示できます。
+@author 神無月サスケ (改変 munokura)
+
+@help
+メニュー画面にアクターの顔画像の代わりに立ち絵を表示できます。
+メニューそれぞれのシーンに背景画像を付けることが出来ます。
+
+アクターのメモに以下のように書いてください:
+<stand_picture:ファイル名> ファイル名が、そのアクターの立ち絵になります。
+  ファイルは img/pictures に置いてください。
+
+望ましいアクター立ち絵のサイズ：
+幅：3列:240px, 4列：174px
+高さ： コマンドウィンドウ 1行:444px 2行:408px
+
+アクターのメモに<stand_offset_x> <stand_offset_y> を入れると
+立ち絵の表示位置指定が出来ます。
+<stand_picture:ファイル名>で指定したアクター表示にのみ反映されます。
+通常の顔画像には反映されません。
+
+立ち絵を横にずらしたい場合
+<stand_offset_x:10>
+※10の部分をずらす量に指定してください。マイナスだと左に移動します。
+
+立ち絵を縦にずらしたい場合
+<stand_offset_y:10>
+※10の部分をずらす量に指定してください。マイナスだと上に移動します。
+
+このプラグインには、プラグインコマンドはありません。
+
+このプラグインは AltMenuScreen2MZ を元にして
+AltMenuScreen3を改変したものです。
+質問は改変者へお願いいたします。
+
+# 利用規約
+MITライセンスです。
+http://opensource.org/licenses/mit-license.php
+作者に無断で改変、再配布が可能で、
+利用形態（商用、18禁利用等）についても制限はありません。
+
+@param displayWindow
+@text ウィンドウ枠表示
+@desc ウィンドウ枠を表示。デフォルト:false
+@type boolean
+@on 表示
+@off 非表示
+@default true
+
+@param bgBitmapMenu
+@text メニュー背景
+@desc メニュー背景にする画像ファイルです。
+img/pictures に置いてください。
+@default 
+@require 1
+@dir img/pictures/
+@type file
+
+@param bgBitmapItem
+@text アイテム画面背景
+@desc アイテム画面背景にする画像ファイルです。
+img/pictures に置いてください。
+@default 
+@require 1
+@dir img/pictures/
+@type file
+
+@param bgBitmapSkill
+@text スキル画面背景
+@desc スキル画面背景にする画像ファイルです。
+img/pictures に置いてください。
+@default 
+@require 1
+@dir img/pictures/
+@type file
+
+@param bgBitmapEquip
+@text 装備画面背景
+@desc 装備画面背景にする画像ファイルです。
+img/pictures に置いてください。
+@default 
+@require 1
+@dir img/pictures/
+@type file
+
+@param bgBitmapStatus
+@text ステータス画面背景
+@desc ステータス画面背景にする画像ファイルです。
+img/pictures に置いてください。
+@default 
+@require 1
+@dir img/pictures/
+@type file
+
+@param bgBitmapOptions
+@text オプション画面背景
+@desc オプション画面背景にする画像ファイルです。
+img/pictures に置いてください。
+@default 
+@require 1
+@dir img/pictures/
+@type file
+
+@param bgBitmapFile
+@text セーブ／ロード画面背景
+@desc セーブ／ロード画面背景にする画像ファイルです。
+img/pictures に置いてください。
+@default 
+@require 1
+@dir img/pictures/
+@type file
+
+@param bgBitmapGameEnd
+@text ゲーム終了画面背景
+@desc ゲーム終了画面背景にする画像ファイルです。
+img/pictures に置いてください。
+@default 
+@dir img/pictures/
+@type file
+
+@param maxColsMenu
+@text アクター表示最大数
+@desc アクターを表示するウィンドウの1画面の登録最大数。
+0にすると、パーティ人数で自動調整
+@type number
+@default 4
+
+@param commandRows
+@text コマンド行数
+@desc コマンドウィンドウの行数です。
+@type number
+@min 1
+@default 2
+
+@param isDisplayStatus
+@text ステータス表示
+@desc ステータスを表示するかしないかを選びます。
+@type boolean
+@on 表示
+@off 非表示
+@default true
+
+@param displayMapName
+@text マップ名表示
+@desc 画面左下にマップ名を表示するかを選びます。
+@type boolean
+@on 表示
+@off 非表示
+@default true
+
+@param locationString
+@text マップ名ラベル
+@desc マップ名の前に付ける文字。システムカラーで描画されます。
+@type string
+@default 現在地:
+
+@noteParam stand_picture
+@noteRequire 1
+@noteDir img/pictures/
+@noteType file
+@noteData actors
+*/
 
 (function () {
     "use strict";

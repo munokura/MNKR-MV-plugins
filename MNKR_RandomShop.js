@@ -22,87 +22,160 @@
 //=============================================================================
 
 /*:
- * @target MV
- * @url https://raw.githubusercontent.com/munokura/MNKR-MV-plugins/master/MNKR_RandomShop.js
- * @plugindesc 商品リストがランダムになるショップを作れるようになります。
- * @author M.GAMES mo-to / 改変:munokura
- *
- * @help
- * 商品リストがランダムになるショップを作れるようになります。
- * 入退店を繰り返すと商品が再入荷されます。
- * その場限りの店などの使い方に向いているでしょう。
- * 
- * プラグインコマンド
- * MNKR_RandomShop range 品揃え最小数 品揃え最大数
- * 
- * 
- * --- 基本的な使い方 ---
- * プラグインコマンドを実行直後に、
- * イベントコマンドの「ショップの処理」を実行してください。
- * ショップの商品リストから、
- * プラグインコマンドで指定した範囲の商品リストを生成するショップになります。
- * 
- * プラグインコマンドを使用しなければ、
- * 「ショップの処理」は通常のショップとして機能します。
- * 
- * 使用例イベントコマンド
- * -----
- * ◆プラグインコマンド：MNKR_RandomShop range 2 4
- * ◆ショップの処理：ポーション
- * ：　　　　　　　：ハイポーション
- * ：　　　　　　　：ショートソード
- * ：　　　　　　　：ハードレザー
- * -----
- * 
- * --- 応用編 ---
- * -- 品揃えを追加する --
- * MNKR_RandomShop add [商品種別(i/w/a)] [開始ID] [最終ID]
- * 
- * 例：アイテムをID1からID10を追加
- * MNKR_RandomShop add i 1 5
- * 
- * 
- * -- ショップを開く --
- * MNKR_RandomShop open 1(省略可能)
- * MNKR_RandomShop add で用意されたショップを開きます。
- * 
- * 最後の1を入れると「購入のみ」のショップになります。
- * 省略すると、売買可能です。
- * 
- * -- 実用例 --
- * アイテムID7から9、
- * 武器ID1から5、
- * 防具ID2から6の
- * ランダムショップ(2個から4個)を開く
- * 
- * 以下のプラグインコマンドを順に実行
- * MNKR_RandomShop range 2 4
- * MNKR_RandomShop add i 7 9
- * MNKR_RandomShop add w 1 5
- * MNKR_RandomShop add a 2 6
- * MNKR_RandomShop open
- * 
- * 
- * 
- * M.GAMES mo-to 氏作の MG_RandomShop.js を参考に
- * RPGツクールMV用に作り変えました。
- * このプラグインへの問い合わせは改変者へお願いいたします。
- * 
- * 
- * 利用規約:
- *   MITライセンスです。
- *   https://licenses.opensource.jp/MIT/MIT.html
- *   作者に無断で改変、再配布が可能で、
- *   利用形態（商用、18禁利用等）についても制限はありません。
- * 
- * 
- * @param stockOutWord
- * @text 売り切れ時ワード
- * @desc 売り切れのとき値札に表示されるテキストです
- * @type string
- * @default 品切れ
- */
+@target MV
+@url https://raw.githubusercontent.com/munokura/MNKR-MV-plugins/master/MNKR_RandomShop.js
+@plugindesc You will be able to create a shop with a randomized product list.
+@author M.GAMES mo-to,munokura
+@license MIT License
 
+@help
+This allows you to create a shop with a randomized product list.
+Items will be restocked as the shop owner enters and exits.
+This is ideal for temporary shops.
+
+Plugin Command
+MNKR_RandomShop range Minimum number of items in stock Maximum number of items
+in stock
+
+--- Basic Usage ---
+Immediately after executing the plugin command,
+execute the "Shop Processing" event command.
+From the shop's product list,
+this will generate a product list within the range specified by the plugin
+command.
+
+If you do not use the plugin command,
+"Shop Processing" will function as a normal shop.
+
+Usage Example: Event Command
+-----
+◆Plugin Command: MNKR_RandomShop range 2 4
+◆Shop Processing: Potion
+: : Hi-Potion
+: : Short Sword
+: : Hard Leather
+-----
+
+--- Advanced ---
+-- Adding Items --
+MNKR_RandomShop add [Item Type (i/w/a)] [Starting ID] [Ending ID]
+
+Example: Add items ID1 to ID10
+MNKR_RandomShop add i 1 5
+
+-- Opening a Shop --
+MNKR_RandomShop open 1 (Optional)
+Opens the shop prepared with MNKR_RandomShop add.
+
+Adding the last 1 makes the shop a "buy-only" shop.
+
+Omitting it allows buying and selling.
+
+-- Example --
+Open a random shop (2-4 items) for item IDs 7-9,
+weapon IDs 1-5,
+and armor IDs 2-6.
+
+Execute the following plugin commands in order:
+MNKR_RandomShop range 2 4
+MNKR_RandomShop add i 7 9
+MNKR_RandomShop add w 1 5
+MNKR_RandomShop add a 2 6
+MNKR_RandomShop open
+
+This plugin was modified for RPG Maker MV using MG_RandomShop.js by M.GAMES
+mo-to as a reference.
+
+Please contact the modifier for any inquiries regarding this plugin.
+
+Terms of Use:
+MIT License.
+http://opensource.org/licenses/mit-license.php
+You may modify and redistribute this plugin without permission, and there are
+no restrictions on its use (commercial, 18+, etc.).
+
+@param stockOutWord
+@text Sold out words
+@desc The text that will be displayed on the price tag when the item is sold out
+@type string
+@default 品切れ
+*/
+
+/*:ja
+@target MV
+@url https://raw.githubusercontent.com/munokura/MNKR-MV-plugins/master/MNKR_RandomShop.js
+@plugindesc 商品リストがランダムになるショップを作れるようになります。
+@author M.GAMES mo-to / 改変:munokura
+
+@help
+商品リストがランダムになるショップを作れるようになります。
+入退店を繰り返すと商品が再入荷されます。
+その場限りの店などの使い方に向いているでしょう。
+
+プラグインコマンド
+MNKR_RandomShop range 品揃え最小数 品揃え最大数
+
+--- 基本的な使い方 ---
+プラグインコマンドを実行直後に、
+イベントコマンドの「ショップの処理」を実行してください。
+ショップの商品リストから、
+プラグインコマンドで指定した範囲の商品リストを生成するショップになります。
+
+プラグインコマンドを使用しなければ、
+「ショップの処理」は通常のショップとして機能します。
+
+使用例イベントコマンド
+-----
+◆プラグインコマンド：MNKR_RandomShop range 2 4
+◆ショップの処理：ポーション
+：　　　　　　　：ハイポーション
+：　　　　　　　：ショートソード
+：　　　　　　　：ハードレザー
+-----
+
+--- 応用編 ---
+-- 品揃えを追加する --
+MNKR_RandomShop add [商品種別(i/w/a)] [開始ID] [最終ID]
+
+例：アイテムをID1からID10を追加
+MNKR_RandomShop add i 1 5
+
+-- ショップを開く --
+MNKR_RandomShop open 1(省略可能)
+MNKR_RandomShop add で用意されたショップを開きます。
+
+最後の1を入れると「購入のみ」のショップになります。
+省略すると、売買可能です。
+
+-- 実用例 --
+アイテムID7から9、
+武器ID1から5、
+防具ID2から6の
+ランダムショップ(2個から4個)を開く
+
+以下のプラグインコマンドを順に実行
+MNKR_RandomShop range 2 4
+MNKR_RandomShop add i 7 9
+MNKR_RandomShop add w 1 5
+MNKR_RandomShop add a 2 6
+MNKR_RandomShop open
+
+M.GAMES mo-to 氏作の MG_RandomShop.js を参考に
+RPGツクールMV用に作り変えました。
+このプラグインへの問い合わせは改変者へお願いいたします。
+
+利用規約:
+  MITライセンスです。
+  http://opensource.org/licenses/mit-license.php
+  作者に無断で改変、再配布が可能で、
+  利用形態（商用、18禁利用等）についても制限はありません。
+
+@param stockOutWord
+@text 売り切れ時ワード
+@desc 売り切れのとき値札に表示されるテキストです
+@type string
+@default 品切れ
+*/
 
 (() => {
   "use strict";
@@ -194,7 +267,6 @@
       goodsList.push([categoryId, i, 0, 0]);
     }
   };
-
 
   //-----------------------------------------------------------------------------
   // Scene_MNKR_RandomShop

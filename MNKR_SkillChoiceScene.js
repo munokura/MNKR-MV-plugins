@@ -9,78 +9,143 @@
  */
 
 /*:
- * @target MV
- * @url https://raw.githubusercontent.com/munokura/MNKR-MV-plugins/master/MNKR_SkillChoiceScene.js
- * @plugindesc スキル選択シーンとスキルの増減のプラグインコマンドを追加します。
- * @author munokura
- *
- * @help
- * スキル選択シーンとスキルの増減のプラグインコマンドを追加します。
- * 
- * スキル選択シーン
- * MNKR_SkillChoice select アクターID 変数ID
- * アクターIDで指定したスキルの一覧ウィンドウを開き、
- * 選択したスキルのIDを指定変数に代入します。
- * キャンセルした場合、指定変数に-1を代入します。
- * 
- * 
- * スキルを増やす
- * MNKR_SkillChoice learn アクターID スキルID
- * 
- * 
- * スキルを減らす
- * MNKR_SkillChoice forget アクターID スキルID
- * 
- * 
- * 引数に変数を使いたい場合、下記のプラグインを併用ください。
- * http://newrpg.seesaa.net/article/475509661.html
- * NRP_EvalPluginCommand.js
- * 
- * 
- * Ver.0.0.6 ヘルプ表示機能を追加
- *  バージョンアップされる方は、プラグインファイルを差し替え後、
- *  プラグイン管理からパラメーター設定画面を開いてください。
- * 
- * 
- * 利用規約:
- *   MITライセンスです。
- *   https://licenses.opensource.jp/MIT/MIT.html
- *   作者に無断で改変、再配布が可能で、
- *   利用形態（商用、18禁利用等）についても制限はありません。
- * 
- *
- * @param windowX
- * @text ウィンドウX座標
- * @type number
- * @default 0
- * @desc スキル選択シーンのウィンドウX座標
- *
- * @param windowY
- * @text ウィンドウY座標
- * @type number
- * @default 0
- * @desc スキル選択シーンのウィンドウY座標
- *
- * @param windowWidth
- * @text ウィンドウ幅
- * @type number
- * @default 0
- * @desc スキル選択シーンのウィンドウ幅。0の場合、画面最大にします。
- *
- * @param windowHeight
- * @text ウィンドウ高さ
- * @type number
- * @default 0
- * @desc スキル選択シーンのウィンドウ高さ。0の場合、画面最大にします。
- *
- * @param helpWindow
- * @text ヘルプウィンドウ表示
- * @desc スキルのヘルプウィンドウを表示します。
- * @type boolean
- * @on 表示
- * @off 非表示
- * @default true
- */
+@target MV
+@url https://raw.githubusercontent.com/munokura/MNKR-MV-plugins/master/MNKR_SkillChoiceScene.js
+@plugindesc Adds skill selection scenes and plugin commands for increasing and decreasing skills.
+@author munokura
+@license MIT License
+
+@help
+Adds a skill selection scene and plugin commands for increasing and decreasing
+skills.
+
+Skill Selection Scene
+MNKR_SkillChoice select actor ID variable ID
+Opens a list of skills specified by the actor ID,
+and assigns the selected skill ID to the specified variable.
+If canceled, assigns -1 to the specified variable.
+
+Increase Skill
+MNKR_SkillChoice learn actor ID skill ID
+
+Decrease Skill
+MNKR_SkillChoice forget actor ID skill ID
+
+If you want to use variables as arguments, please use the following plugin in
+conjunction with this.
+http://newrpg.seesaa.net/article/475509661.html
+NRP_EvalPluginCommand.js
+
+Ver. 0.0.6 Added help display function
+If you are upgrading, please replace the plugin file and
+open the parameter setting screen from Plugin Manager.
+
+Terms of Use:
+MIT License.
+http://opensource.org/licenses/mit-license.php
+You may modify and redistribute this without permission from the author, and
+there are no restrictions on its use (commercial, R18, etc.).
+
+@param windowX
+@text Window X coordinate
+@desc Window X coordinate of the skill selection scene
+@type number
+@default 0
+
+@param windowY
+@text Window Y coordinate
+@desc Window Y coordinate of the skill selection scene
+@type number
+@default 0
+
+@param windowWidth
+@text Window Width
+@desc Window width for skill selection scene. If 0, maximize the screen.
+@type number
+@default 0
+
+@param windowHeight
+@text Window Height
+@desc Window height for skill selection scene. If 0, maximize the screen.
+@type number
+@default 0
+
+@param helpWindow
+@text Help window display
+@desc Displays the skill's help window.
+@type boolean
+@on display
+@off hidden
+@default true
+*/
+
+/*:ja
+@target MV
+@url https://raw.githubusercontent.com/munokura/MNKR-MV-plugins/master/MNKR_SkillChoiceScene.js
+@plugindesc スキル選択シーンとスキルの増減のプラグインコマンドを追加します。
+@author munokura
+
+@help
+スキル選択シーンとスキルの増減のプラグインコマンドを追加します。
+
+スキル選択シーン
+MNKR_SkillChoice select アクターID 変数ID
+アクターIDで指定したスキルの一覧ウィンドウを開き、
+選択したスキルのIDを指定変数に代入します。
+キャンセルした場合、指定変数に-1を代入します。
+
+スキルを増やす
+MNKR_SkillChoice learn アクターID スキルID
+
+スキルを減らす
+MNKR_SkillChoice forget アクターID スキルID
+
+引数に変数を使いたい場合、下記のプラグインを併用ください。
+http://newrpg.seesaa.net/article/475509661.html
+NRP_EvalPluginCommand.js
+
+Ver.0.0.6 ヘルプ表示機能を追加
+ バージョンアップされる方は、プラグインファイルを差し替え後、
+ プラグイン管理からパラメーター設定画面を開いてください。
+
+利用規約:
+  MITライセンスです。
+  http://opensource.org/licenses/mit-license.php
+  作者に無断で改変、再配布が可能で、
+  利用形態（商用、18禁利用等）についても制限はありません。
+
+@param windowX
+@text ウィンドウX座標
+@type number
+@default 0
+@desc スキル選択シーンのウィンドウX座標
+
+@param windowY
+@text ウィンドウY座標
+@type number
+@default 0
+@desc スキル選択シーンのウィンドウY座標
+
+@param windowWidth
+@text ウィンドウ幅
+@type number
+@default 0
+@desc スキル選択シーンのウィンドウ幅。0の場合、画面最大にします。
+
+@param windowHeight
+@text ウィンドウ高さ
+@type number
+@default 0
+@desc スキル選択シーンのウィンドウ高さ。0の場合、画面最大にします。
+
+@param helpWindow
+@text ヘルプウィンドウ表示
+@desc スキルのヘルプウィンドウを表示します。
+@type boolean
+@on 表示
+@off 非表示
+@default true
+*/
 
 (() => {
 	"use strict";

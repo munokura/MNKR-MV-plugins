@@ -20,114 +20,210 @@
 //===========================================================================
 
 /*:
- * @target MV
- * @url https://raw.githubusercontent.com/munokura/MNKR-MV-plugins/master/MNKR_TM_VariablesLevelUp.js
- * @plugindesc 経験値ではなく変数を消費して任意のタイミングで
- * アクターをレベルアップさせることができます。
- * @author tomoaky (改変 munokura)
- *
- * @help
- * TMGoldLevelUp - お金でレベルアップ ver1.2.1
- * 上記プラグインを改変したものです。
- *
- *   メニューコマンドにレベルアップコマンドが追加され、
- *   変数を消費することでアクターのレベルを上げることができるようになります。
- *
- * 注意点:
- *
- * 戦闘で変数を変化させるには、
- * バトルイベントや下記のプラグイン等を使用してください。
- *
- *   Pon Battle Gain Variable 2（ぽんぽこねるそん様作）
- *   https://plugin.fungamemake.com/archives/23488
- *   戦闘勝利時に指定の変数に倒した敵に設定した値を加算します。
- *
- * メニュー画面に変数を表示するウィンドウを追加したい場合、
- * 下記のプラグイン等を使用してください。
- * 
- *   メニューラベル（tomoaky様作）
- *   https://plugin.fungamemake.com/archives/2337
- *   メニューシーンに変数の値を表示します。
- *
- * 使い方:
- *
- *   levelUpCommand のコマンド名を削除して空にすれば
- *   メニューからレベルアップコマンドを削除することができます。
- *   この場合はプラグインコマンドを使ってイベントからレベルアップシーンを
- *   呼び出してください。
- *
- *
- * プラグインコマンド:
- *
- *   MNKR_CallLevelUp
- *   レベルアップシーンを呼び出す。
- *
- *
- * メモ欄タグ（アクター）:
- *
- *   <VariablesLevelUpRate:1.5>
- *     メモ欄にこのタグがついているアクターはレベルアップに必要な変数量が
- *     1.5 倍になります。
- *
- *
- * これはtomoaky氏作 TMGoldLevelUp.js を改変したものです。
- * 質問は改変者へお願いいたします。
- *
- * 利用規約:
- *   MITライセンスです。
- *   https://licenses.opensource.jp/MIT/MIT.html
- *   作者に無断で改変、再配布が可能で、
- *   利用形態（商用、18禁利用等）についても制限はありません。
- *
- *
- * @param variable ID
- * @text レベルアップ変数ID
- * @type variable
- * @desc レベルアップに消費する変数IDです。
- * @default 11
- *
- * @param levelUpCommand
- * @text コマンド表示テキスト
- * @desc メニューに表示するレベルアップコマンド（空にすれば無効）
- * 初期値: レベルアップ
- * @default レベルアップ
- *
- * @param currentVariables
- * @text 項目表示テキスト
- * @desc ステータスに表示する変数の項目名
- * 初期値: パーティEXP
- * @default パーティEXP
- *
- * @param learnSkill
- * @text スキルの表示テキスト
- * @desc ステータスに表示する覚えるスキルの項目名
- * 初期値: 覚えるスキル
- * @default 覚えるスキル
- *
- * @param levelUpSe
- * @text レベルアップSE
- * @desc レベルアップ時に鳴らす効果音のファイル名
- * 初期値: Up4
- * @default Up4
- * @require 1
- * @dir audio/se/
- * @type file
- *
- * @param levelUpSeParam
- * @text レベルアップSEパラメータ
- * @desc レベルアップ時に鳴らす効果音のパラメータ
- * 初期値: {"volume":90, "pitch":100, "pan":0}
- * @default {"volume":90, "pitch":100, "pan":0}
- *
- * @param useButton
- * @text アクター変更ボタン表示
- * @type boolean
- * @on 表示
- * @off 非表示
- * @desc アクター変更のボタンを表示
- * 表示:true / 非表示:false / デフォルト:true
- * @default true
- */
+@target MV
+@url https://raw.githubusercontent.com/munokura/MNKR-MV-plugins/master/MNKR_TM_VariablesLevelUp.js
+@plugindesc Consume variables instead of experience points at any time
+@author tomoaky,munokura
+@license MIT License
+
+@help
+TMGoldLevelUp - Level Up with Money ver. 1.2.1
+This is a modified version of the above plugin.
+
+A level-up command has been added to the menu commands, allowing actors to
+increase their level by consuming variables.
+
+Notes:
+
+To change variables in battle,
+use battle events or the following plugins.
+
+Pon Battle Gain Variable 2 (created by ponpokoneruson)
+https://plugin.fungamemake.com/archives/23488
+Upon victory in battle, the specified variable is added by the value set for
+the defeated enemy.
+
+To add a window displaying variables to the menu screen,
+use the following plugins.
+
+Menu Label (created by tomoaky)
+https://plugin.fungamemake.com/archives/2337
+Displays the variable value in the menu scene.
+
+How to Use:
+
+You can remove the level-up command from the menu by deleting the command name
+of levelUpCommand and making it empty.
+In this case, use the plugin command to call the level-up scene from an event.
+
+Plugin Command:
+
+MNKR_CallLevelUp
+Calls the level-up scene.
+
+Memo Tag (Actor):
+
+<VariablesLevelUpRate:1.5>
+Actors with this tag in the memo field require 1.5 times the amount of
+variables required to level up.
+
+This is a modified version of TMGoldLevelUp.js by tomoaky.
+Please contact the modifier with any questions.
+
+Terms of Use:
+MIT License.
+http://opensource.org/licenses/mit-license.php
+Modifications and redistribution are permitted without permission from the
+author, and there are no restrictions on use (commercial, R18+, etc.).
+
+@param variable ID
+@text Level Up Variable ID
+@desc The variable ID consumed for leveling up.
+@type variable
+@default 11
+
+@param levelUpCommand
+@text Command display text
+@desc Level up commands to display in the menu (disable if empty)
+@default レベルアップ
+
+@param currentVariables
+@text Item display text
+@desc Variable name to display in status
+@default パーティEXP
+
+@param learnSkill
+@text Skill display text
+@desc Skill name to display in status
+@default 覚えるスキル
+
+@param levelUpSe
+@text Level Up Sound Effects
+@desc The file name of the sound effect that plays when you level up.
+@type file
+@default Up4
+@require 1
+@dir audio/se/
+
+@param levelUpSeParam
+@text Level-up SE parameters
+@desc Parameters for the sound effect that plays when leveling up
+@default {"volume":90, "pitch":100, "pan":0}
+
+@param useButton
+@text Actor change button display
+@desc Show Change Actor button
+@type boolean
+@on display
+@off hidden
+@default true
+*/
+
+/*:ja
+@target MV
+@url https://raw.githubusercontent.com/munokura/MNKR-MV-plugins/master/MNKR_TM_VariablesLevelUp.js
+@plugindesc 経験値ではなく変数を消費して任意のタイミングで
+アクターをレベルアップさせることができます。
+@author tomoaky (改変 munokura)
+
+@help
+TMGoldLevelUp - お金でレベルアップ ver1.2.1
+上記プラグインを改変したものです。
+
+  メニューコマンドにレベルアップコマンドが追加され、
+  変数を消費することでアクターのレベルを上げることができるようになります。
+
+注意点:
+
+戦闘で変数を変化させるには、
+バトルイベントや下記のプラグイン等を使用してください。
+
+  Pon Battle Gain Variable 2（ぽんぽこねるそん様作）
+  https://plugin.fungamemake.com/archives/23488
+  戦闘勝利時に指定の変数に倒した敵に設定した値を加算します。
+
+メニュー画面に変数を表示するウィンドウを追加したい場合、
+下記のプラグイン等を使用してください。
+
+  メニューラベル（tomoaky様作）
+  https://plugin.fungamemake.com/archives/2337
+  メニューシーンに変数の値を表示します。
+
+使い方:
+
+  levelUpCommand のコマンド名を削除して空にすれば
+  メニューからレベルアップコマンドを削除することができます。
+  この場合はプラグインコマンドを使ってイベントからレベルアップシーンを
+  呼び出してください。
+
+プラグインコマンド:
+
+  MNKR_CallLevelUp
+  レベルアップシーンを呼び出す。
+
+メモ欄タグ（アクター）:
+
+  <VariablesLevelUpRate:1.5>
+    メモ欄にこのタグがついているアクターはレベルアップに必要な変数量が
+    1.5 倍になります。
+
+これはtomoaky氏作 TMGoldLevelUp.js を改変したものです。
+質問は改変者へお願いいたします。
+
+利用規約:
+  MITライセンスです。
+  http://opensource.org/licenses/mit-license.php
+  作者に無断で改変、再配布が可能で、
+  利用形態（商用、18禁利用等）についても制限はありません。
+
+@param variable ID
+@text レベルアップ変数ID
+@type variable
+@desc レベルアップに消費する変数IDです。
+@default 11
+
+@param levelUpCommand
+@text コマンド表示テキスト
+@desc メニューに表示するレベルアップコマンド（空にすれば無効）
+初期値: レベルアップ
+@default レベルアップ
+
+@param currentVariables
+@text 項目表示テキスト
+@desc ステータスに表示する変数の項目名
+初期値: パーティEXP
+@default パーティEXP
+
+@param learnSkill
+@text スキルの表示テキスト
+@desc ステータスに表示する覚えるスキルの項目名
+初期値: 覚えるスキル
+@default 覚えるスキル
+
+@param levelUpSe
+@text レベルアップSE
+@desc レベルアップ時に鳴らす効果音のファイル名
+初期値: Up4
+@default Up4
+@require 1
+@dir audio/se/
+@type file
+
+@param levelUpSeParam
+@text レベルアップSEパラメータ
+@desc レベルアップ時に鳴らす効果音のパラメータ
+初期値: {"volume":90, "pitch":100, "pan":0}
+@default {"volume":90, "pitch":100, "pan":0}
+
+@param useButton
+@text アクター変更ボタン表示
+@type boolean
+@on 表示
+@off 非表示
+@desc アクター変更のボタンを表示
+表示:true / 非表示:false / デフォルト:true
+@default true
+*/
 
 var Imported = Imported || {};
 Imported.TMVariablesLevelUp = true;
@@ -148,7 +244,6 @@ TMPlugin.VariablesLevelUp.UseButton = TMPlugin.VariablesLevelUp.Parameters['useB
 (function() {
 
 'use strict';
-
 
 var parameters = PluginManager.parameters('MNKR_TM_VariablesLevelUp');
 

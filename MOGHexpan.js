@@ -3,50 +3,93 @@
 //============================================================================
 
 /*:
- * @target MV
- * @url https://raw.githubusercontent.com/munokura/MNKR-MV-plugins/master/MOGHexpan.js
- * @plugindesc ver1.04 MOG_BattleHud(v5.04)拡張
- * @author まっつＵＰ (改変:munokura)
- *
- * @help
- * RPGで笑顔を・・・
- *
- * このヘルプとパラメータの説明をよくお読みになってからお使いください。
- *
- * Moghunter様作のMOG_BattleHudに改変を加えます。
- * MOG_BattleHudよりも下に導入してください。
- * 主にプラグインコマンドの追加をします。
- *
- * ＜戦闘フェイス画像を変更する場合＞
- * （プラグインコマンド）
- * MOGH update x y
- * xは変数ID、yは加算値（数値） 
- * 変数IDxの値と同じIDのアクターの戦闘フェイス画像を
- * Face_ + (変数IDxの値 + y).pngを指定して表示します。
- * このプラグインコマンドのよる画像変更は
- * その戦闘中のみ適用されます。
- * （次の戦闘開始時は再び初期設定の画像を表示）
- *
- * 例：
- * MOGH update 20 100
- * 変数ID20の値を1にした後
- * 変数ID20の値と同じIDのアクターの戦闘フェイス画像をFace_ 101.pngにする。
- * (この時、ID1のアクターが指定される)
- *
- *
- * ＜戦闘フェイス画像を戦闘開始時のものにする場合＞
- * （プラグインコマンド）
- * 例：
- * MOGH update 20
- * 変数ID20の値と同じIDのアクターの戦闘フェイス画像を戦闘開始時のものに戻す。
- *
- *
- * # 利用規約(2020/04/03変更)：
- * この作品は マテリアル・コモンズ・ブルー・ライセンスの下に提供されています。
- * https://ja.materialcommons.org/mtcm-b-summary/
- * クレジット表示：まっつＵＰ (改変munokura)
- *
- */
+@target MV
+@url https://raw.githubusercontent.com/munokura/MNKR-MV-plugins/master/MOGHexpan.js
+@plugindesc ver1.04 MOG_BattleHud(v5.04) expansion
+@author mattuup,munokura
+@license MIT
+
+@help
+Smile in RPG...
+
+Please read this help and parameter explanation carefully before use.
+
+This modifies MOG_BattleHud, created by Moghunter.
+Please install it below MOG_BattleHud.
+This mainly adds plugin commands.
+
+<To change the battle face image>
+(Plugin command)
+MOGH update x y
+x is the variable ID, and y is the additional value (numerical value).
+The battle face image of the actor with the ID equal to the value of variable
+IDx will be displayed as Face_ + (value of variable IDx + y).png.
+The image change made by this plugin command
+will only apply during that battle.
+(The default image will be displayed again at the start of the next battle.)
+
+Example:
+MOGH update 20 100
+After setting the value of variable ID20 to 1,
+the battle face image of the actor with the ID equal to the value of variable
+ID20 will be set to Face_ 101.png.
+(The actor with ID 1 will be specified.)
+
+<To reset the combat face image to the one at the start of the battle>
+(Plugin Command)
+Example:
+MOGH update 20
+Reset the combat face image of the actor with the same ID as variable ID 20 to
+the one at the start of the battle.
+
+# Terms of Use (Updated April 3, 2020):
+This work is licensed under the Material Commons Blue License.
+https://ja.materialcommons.org/mtcm-b-summary/
+Credit: MattsuUP (modified by munokura)
+*/
+
+/*:ja
+@target MV
+@url https://raw.githubusercontent.com/munokura/MNKR-MV-plugins/master/MOGHexpan.js
+@plugindesc ver1.04 MOG_BattleHud(v5.04)拡張
+@author まっつＵＰ (改変:munokura)
+
+@help
+RPGで笑顔を・・・
+
+このヘルプとパラメータの説明をよくお読みになってからお使いください。
+
+Moghunter様作のMOG_BattleHudに改変を加えます。
+MOG_BattleHudよりも下に導入してください。
+主にプラグインコマンドの追加をします。
+
+＜戦闘フェイス画像を変更する場合＞
+（プラグインコマンド）
+MOGH update x y
+xは変数ID、yは加算値（数値） 
+変数IDxの値と同じIDのアクターの戦闘フェイス画像を
+Face_ + (変数IDxの値 + y).pngを指定して表示します。
+このプラグインコマンドのよる画像変更は
+その戦闘中のみ適用されます。
+（次の戦闘開始時は再び初期設定の画像を表示）
+
+例：
+MOGH update 20 100
+変数ID20の値を1にした後
+変数ID20の値と同じIDのアクターの戦闘フェイス画像をFace_ 101.pngにする。
+(この時、ID1のアクターが指定される)
+
+＜戦闘フェイス画像を戦闘開始時のものにする場合＞
+（プラグインコマンド）
+例：
+MOGH update 20
+変数ID20の値と同じIDのアクターの戦闘フェイス画像を戦闘開始時のものに戻す。
+
+# 利用規約(2020/04/03変更)：
+この作品は マテリアル・コモンズ・ブルー・ライセンスの下に提供されています。
+https://ja.materialcommons.org/mtcm-b-summary/
+クレジット表示：まっつＵＰ (改変munokura)
+*/
 
 var parameters = PluginManager.parameters('MOGHexpan');
 

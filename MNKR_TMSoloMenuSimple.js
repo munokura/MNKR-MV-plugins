@@ -19,36 +19,68 @@
 //=============================================================================
 
 /*:
- * @target MV
- * @url https://raw.githubusercontent.com/munokura/MNKR-MV-plugins/master/MNKR_TMSoloMenuSimple.js
- * @plugindesc 一人旅の時、アクター選択を省略します
- *
- * @author tomoaky (改変 munokura)
- *
- * @param forceChangeSoloMenu
- * @text 一人旅機能
- * @type boolean
- * @on 常時ON
- * @off パーティの人数で変化
- * @desc 初期値: 常にアクター選択を省略 (true)
- * @default true
- *
- * @help
- * TMPlugin - 一人旅メニュー ver0.1.3b の改変です。
- * メニュー系シーンでのアクター選択の処理が省略される部分のみを残しました。
- *
- *   プラグインコマンドはありません。
- * 
- * このプラグインについて
- *   RPGツクールMV用に作成されたプラグインを改変したものです。
- *   お問い合わせは改変者へお願いいたします。
- *
- * 利用規約:
- *   MITライセンスです。
- *   https://licenses.opensource.jp/MIT/MIT.html
- *   作者に無断で改変、再配布が可能で、
- *   利用形態（商用、18禁利用等）についても制限はありません。
- */
+@target MV
+@url https://raw.githubusercontent.com/munokura/MNKR-MV-plugins/master/MNKR_TMSoloMenuSimple.js
+@plugindesc When traveling alone, skip actor selection.
+@author tomoaky,munokura
+@license MIT License
+
+@help
+This is a modification of TMPlugin - Solo Travel Menu ver. 0.1.3b.
+Only the actor selection process in menu scenes has been omitted.
+
+There are no plugin commands.
+
+About this plugin
+This is a modified version of a plugin created for RPG Maker MV.
+Please contact the original author for any inquiries.
+
+Terms of Use:
+MIT License.
+http://opensource.org/licenses/mit-license.php
+This plugin may be modified and redistributed without permission from the
+author, and there are no restrictions on its use (commercial, 18+, etc.).
+
+@param forceChangeSoloMenu
+@text Solo travel feature
+@desc Default: Always omit actor selection (true)
+@type boolean
+@on Always ON
+@off Varies depending on the number of people in the party
+@default true
+*/
+
+/*:ja
+@target MV
+@url https://raw.githubusercontent.com/munokura/MNKR-MV-plugins/master/MNKR_TMSoloMenuSimple.js
+@plugindesc 一人旅の時、アクター選択を省略します
+
+@author tomoaky (改変 munokura)
+
+@param forceChangeSoloMenu
+@text 一人旅機能
+@type boolean
+@on 常時ON
+@off パーティの人数で変化
+@desc 初期値: 常にアクター選択を省略 (true)
+@default true
+
+@help
+TMPlugin - 一人旅メニュー ver0.1.3b の改変です。
+メニュー系シーンでのアクター選択の処理が省略される部分のみを残しました。
+
+  プラグインコマンドはありません。
+
+このプラグインについて
+  RPGツクールMV用に作成されたプラグインを改変したものです。
+  お問い合わせは改変者へお願いいたします。
+
+利用規約:
+  MITライセンスです。
+  http://opensource.org/licenses/mit-license.php
+  作者に無断で改変、再配布が可能で、
+  利用形態（商用、18禁利用等）についても制限はありません。
+*/
 
 var Imported = Imported || {};
 Imported.TMSoloMenu = true;

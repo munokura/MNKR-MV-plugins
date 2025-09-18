@@ -9,95 +9,61 @@
  */
 
 /*:
- * @target MV
- * @url https://raw.githubusercontent.com/munokura/MNKR-MV-plugins/master/MNKR_RandomSeAnimation.js
- * @plugindesc アニメーションのSEをランダムにします。
- * @author munokura
- *
- * @help
- * プラグインパラメーターで対象となる
- * ・アニメーション
- * ・フレーム
- * ・SEリスト
- * を登録してください。
- * アニメーション再生時に、SEが候補からランダムに再生されます。
- * 戦闘中でもマップ上でも反映されます。
- *
- * プラグインコマンドはありません。
- *
- *
- * 利用規約:
- * MITライセンスです。
- * 　https://licenses.opensource.jp/MIT/MIT.html
- * 　作者に無断で改変、再配布が可能で、
- * 　利用形態（商用、18禁利用等）についても制限はありません。
- *
- * @param animeLists
- * @text ランダムSE対象リスト
- * @desc ランダムSE対象リストを入力。
- * @type struct<animeList>[]
- */
+@target MV
+@url https://raw.githubusercontent.com/munokura/MNKR-MV-plugins/master/MNKR_RandomSeAnimation.js
+@plugindesc Randomizes the animation sound effects.
+@author munokura
+@license MIT License
 
-/*~struct~animeList:
- * @param animeId
- * @text アニメーションID
- * @type animation
- * @default 0
- * @desc 対象となるアニメーションを選択
- *
- * @param frameList
- * @text SEをランダムにするフレーム設定
- * @default []
- * @type struct<frameData>[]
- * @desc SEをランダムにするフレーム番号とSEを設定
- *
- */
+@help
+Please register the target sound effects (animation, frame, sound effects
+list) in the plugin parameters.
+When an animation is played, a sound effect will be played randomly from the
+list.
+This applies both in battle and on the map.
 
-/*~struct~frameData:
- * @param frame
- * @text 対象フレーム番号
- * @type number
- * @default 0
- * @desc SEをランダムにするフレーム番号を入力。0を入力した場合、全てのフレームが対象となります。
- *
- * @param seList
- * @text SE設定リスト
- * @default []
- * @type struct<SeData>[]
- * @desc ランダム再生されるSEと、音量・ピッチ・パンを設定
- */
+There are no plugin commands.
 
-/*~struct~SeData:
- * @param name
- * @text ファイル名
- * @type file
- * @dir audio/se
- * @desc SEのファイル名を拡張子なしで入力
- *
- * @param volume
- * @text 音量
- * @type number
- * @min 0
- * @max 100
- * @default 90
- * @desc SEの音量(0-100)
- *
- * @param pitch
- * @text ピッチ
- * @type number
- * @min 50
- * @max 150
- * @default 100
- * @desc SEのピッチ(50-150)
- *
- * @param pan
- * @text パン
- * @type number
- * @min -100
- * @max 100
- * @default 0
- * @desc SEのパン(-100:左 -0:中央 -100:右)
- */
+Terms of Use:
+MIT License.
+http://opensource.org/licenses/mit-license.php
+You may modify and redistribute this without permission from the author, and
+there are no restrictions on its use (commercial, 18+, etc.).
+
+@param animeLists
+@text Random SE Target List
+@desc Enter the random SE target list.
+@type struct<animeList>[]
+*/
+
+/*:ja
+@target MV
+@url https://raw.githubusercontent.com/munokura/MNKR-MV-plugins/master/MNKR_RandomSeAnimation.js
+@plugindesc アニメーションのSEをランダムにします。
+@author munokura
+
+@help
+プラグインパラメーターで対象となる
+・アニメーション
+・フレーム
+・SEリスト
+を登録してください。
+アニメーション再生時に、SEが候補からランダムに再生されます。
+戦闘中でもマップ上でも反映されます。
+
+プラグインコマンドはありません。
+
+利用規約:
+MITライセンスです。
+　http://opensource.org/licenses/mit-license.php
+　作者に無断で改変、再配布が可能で、
+　利用形態（商用、18禁利用等）についても制限はありません。
+
+@param animeLists
+@text ランダムSE対象リスト
+@desc ランダムSE対象リストを入力。
+@type struct<animeList>[]
+*/
 
 (() => {
     'use strict';

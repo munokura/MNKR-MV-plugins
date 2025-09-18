@@ -9,36 +9,64 @@
  */
 
 /*:
- * @target MV
- * @url https://raw.githubusercontent.com/munokura/MNKR-MV-plugins/master/MNKR_ChangeSizeUI.js
- * @plugindesc UIエリアの大きさを指定します。
- * @author munokura
- *
- * @help
- * UIエリアの大きさを指定します。
- * 
- * 解像度の指定は公式プラグインCommunity_Basic.js等を使用してください。
- * このプラグインはCommunity_Basic.jsよりも下に配置してください。
- * 
- *
- * 利用規約:
- *   MITライセンスです。
- *   https://licenses.opensource.jp/MIT/MIT.html
- *   作者に無断で改変、再配布が可能で、
- *   利用形態（商用、18禁利用等）についても制限はありません。
- *
- *
- * @param boxWidth
- * @text UIエリアの幅
- * @type number
- * @default 816
- *
- * @param boxHeight
- * @text UIエリアの高さ
- * @type number
- * @default 624
- */
+@target MV
+@url https://raw.githubusercontent.com/munokura/MNKR-MV-plugins/master/MNKR_ChangeSizeUI.js
+@plugindesc Specifies the size of the UI area.
+@author munokura
+@license MIT License
 
+@help
+Specifies the size of the UI area.
+
+To specify the resolution, use the official plugin Community_Basic.js.
+
+Place this plugin below Community_Basic.js.
+
+Terms of Use:
+MIT License.
+http://opensource.org/licenses/mit-license.php
+You may modify and redistribute this without permission from the author, and
+there are no restrictions on its use (commercial, R18+, etc.).
+
+@param boxWidth
+@text UI Area Width
+@type number
+@default 816
+
+@param boxHeight
+@text UI area height
+@type number
+@default 624
+*/
+
+/*:ja
+@target MV
+@url https://raw.githubusercontent.com/munokura/MNKR-MV-plugins/master/MNKR_ChangeSizeUI.js
+@plugindesc UIエリアの大きさを指定します。
+@author munokura
+
+@help
+UIエリアの大きさを指定します。
+
+解像度の指定は公式プラグインCommunity_Basic.js等を使用してください。
+このプラグインはCommunity_Basic.jsよりも下に配置してください。
+
+利用規約:
+  MITライセンスです。
+  http://opensource.org/licenses/mit-license.php
+  作者に無断で改変、再配布が可能で、
+  利用形態（商用、18禁利用等）についても制限はありません。
+
+@param boxWidth
+@text UIエリアの幅
+@type number
+@default 816
+
+@param boxHeight
+@text UIエリアの高さ
+@type number
+@default 624
+*/
 
 (() => {
   "use strict";

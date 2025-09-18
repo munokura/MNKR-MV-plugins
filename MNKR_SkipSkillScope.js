@@ -9,21 +9,37 @@
  */
 
 /*:
- * @target MZ MV
- * @url https://raw.githubusercontent.com/munokura/MNKR-MV-plugins/master/MNKR_SkipSkillScope.js
- * @plugindesc マップ上でスキル(範囲が利用者)使用時に、対象選択をスキップします。
- * @author ムノクラ
- *
- * @help
- * マップ上でスキル(範囲が利用者)使用時に、対象選択をスキップします。
- * 
- * 
- * 利用規約:
- *   MITライセンスです。
- *   https://licenses.opensource.jp/MIT/MIT.html
- *   作者に無断で改変、再配布が可能で、
- *   利用形態（商用、18禁利用等）についても制限はありません。
- */
+@target MZ MV
+@url https://raw.githubusercontent.com/munokura/MNKR-MV-plugins/master/MNKR_SkipSkillScope.js
+@plugindesc Skip target selection when using skills (range is user) on the map.
+@author munokura
+@license MIT License
+
+@help
+Skips target selection when using a skill (with a user range) on the map.
+
+Terms of Use:
+MIT License.
+http://opensource.org/licenses/mit-license.php
+You may modify and redistribute this without permission, and there are no
+restrictions on its use (commercial, 18+, etc.).
+*/
+
+/*:ja
+@target MZ MV
+@url https://raw.githubusercontent.com/munokura/MNKR-MV-plugins/master/MNKR_SkipSkillScope.js
+@plugindesc マップ上でスキル(範囲が利用者)使用時に、対象選択をスキップします。
+@author munokura
+
+@help
+マップ上でスキル(範囲が利用者)使用時に、対象選択をスキップします。
+
+利用規約:
+  MITライセンスです。
+  http://opensource.org/licenses/mit-license.php
+  作者に無断で改変、再配布が可能で、
+  利用形態（商用、18禁利用等）についても制限はありません。
+*/
 
 (() => {
 	"use strict";

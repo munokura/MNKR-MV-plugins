@@ -9,38 +9,69 @@
  */
 
 /*:
- * @target MV
- * @url https://raw.githubusercontent.com/munokura/MNKR-MV-plugins/master/MNKR_StopForward.js
- * @plugindesc SV戦闘時にアクターが前進する動作を止めます。
- * @author munokura
- *
- * @help
- * SV戦闘時にアクターが前進する動作を止めます。
- * 
- * 
- * 利用規約:
- *   MITライセンスです。
- *   https://licenses.opensource.jp/MIT/MIT.html
- *   作者に無断で改変、再配布が可能で、
- *   利用形態（商用、18禁利用等）についても制限はありません。
- *
- * @param input
- * @text コマンド入力時
- * @type boolean
- * @on 前進する
- * @off 前進しない
- * @default true
- * @desc コマンド入力時に前進させるか選択
- *
- * @param action
- * @text 行動時
- * @type boolean
- * @on 前進する
- * @off 前進しない
- * @default false
- * @desc 行動時に前進させるか選択
- */
+@target MV
+@url https://raw.githubusercontent.com/munokura/MNKR-MV-plugins/master/MNKR_StopForward.js
+@plugindesc Stops the actor from moving forward during SV combat.
+@author munokura
+@license MIT License
 
+@help
+Prevents the actor from moving forward during SV combat.
+
+Terms of Use:
+MIT License.
+http://opensource.org/licenses/mit-license.php
+You may modify and redistribute this without permission from the author, and
+there are no restrictions on its use (commercial, R18+, etc.).
+
+@param input
+@text When entering a command
+@desc Select whether to move forward when entering a command
+@type boolean
+@on Moving forward
+@off No progress
+@default true
+
+@param action
+@text When taking action
+@desc Choose whether to move forward when taking action
+@type boolean
+@on Moving forward
+@off No progress
+@default false
+*/
+
+/*:ja
+@target MV
+@url https://raw.githubusercontent.com/munokura/MNKR-MV-plugins/master/MNKR_StopForward.js
+@plugindesc SV戦闘時にアクターが前進する動作を止めます。
+@author munokura
+
+@help
+SV戦闘時にアクターが前進する動作を止めます。
+
+利用規約:
+  MITライセンスです。
+  http://opensource.org/licenses/mit-license.php
+  作者に無断で改変、再配布が可能で、
+  利用形態（商用、18禁利用等）についても制限はありません。
+
+@param input
+@text コマンド入力時
+@type boolean
+@on 前進する
+@off 前進しない
+@default true
+@desc コマンド入力時に前進させるか選択
+
+@param action
+@text 行動時
+@type boolean
+@on 前進する
+@off 前進しない
+@default false
+@desc 行動時に前進させるか選択
+*/
 
 (() => {
   "use strict";

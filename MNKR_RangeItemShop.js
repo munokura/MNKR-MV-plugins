@@ -9,46 +9,80 @@
  */
 
 /*:
- * @target MV
- * @url https://raw.githubusercontent.com/munokura/MNKR-MV-plugins/master/MNKR_RangeItemShop.js
- * @plugindesc ショップの品揃えを範囲指定で設定できるプラグインコマンドが使えます。
- * @author munokura
- *
- * @help
- * ショップの品揃えを範囲指定で設定できるプラグインコマンドが使えます。
- * 
- * -- 品揃えを追加する --
- * MNKR_RangeItemShop add [商品種別(i/w/a)] [開始ID] [最終ID]
- * 
- * 例：アイテムをID1からID10を追加
- * MNKR_RangeItemShop add i 1 5
- * 
- * 
- * -- ショップを開く --
- * MNKR_RangeItemShop addで準備されたショップを開きます。
- * MNKR_RangeItemShop open 1(省略可能)
- * 
- * 最後の1を入れると「購入のみ」のショップになります。
- * 省略すると、売買可能です。
- * 
- * -- 実用例 --
- * アイテムID7から9、武器ID1から5、防具ID2から6のショップを開く
- * 
- * MNKR_RangeItemShop add i 7 9
- * MNKR_RangeItemShop add w 1 5
- * MNKR_RangeItemShop add a 2 6
- * MNKR_RangeItemShop open
- * 
- *
- * 利用規約:
- *   MITライセンスです。
- *   https://licenses.opensource.jp/MIT/MIT.html
- *   作者に無断で改変、再配布が可能で、
- *   利用形態（商用、18禁利用等）についても制限はありません。
- *
- *
- */
+@target MV
+@url https://raw.githubusercontent.com/munokura/MNKR-MV-plugins/master/MNKR_RangeItemShop.js
+@plugindesc You can use a plugin command that allows you to set the shop's product lineup by specifying a range.
+@author munokura
+@license MIT License
 
+@help
+You can use a plugin command to set the shop's product lineup by specifying a
+range.
+
+-- Add product lineup --
+MNKR_RangeItemShop add [Product Type (i/w/a)] [Start ID] [End ID]
+
+Example: Add items ID1 to ID10
+MNKR_RangeItemShop add i 1 5
+
+-- Open shop --
+Opens a shop prepared with MNKR_RangeItemShop add.
+MNKR_RangeItemShop open 1 (optional)
+
+Adding a 1 at the end makes the shop a "purchase only" shop.
+Omitting the 1 allows buying and selling.
+
+-- Practical Example --
+Open a shop for item IDs 7 to 9, weapon IDs 1 to 5, and armor IDs 2 to 6.
+
+MNKR_RangeItemShop add i 7 9
+MNKR_RangeItemShop add w 1 5
+MNKR_RangeItemShop add a 2 6
+MNKR_RangeItemShop open
+
+Terms of Use:
+MIT License.
+http://opensource.org/licenses/mit-license.php
+You may modify and redistribute this without permission from the author, and
+there are no restrictions on its use (commercial, 18+, etc.).
+*/
+
+/*:ja
+@target MV
+@url https://raw.githubusercontent.com/munokura/MNKR-MV-plugins/master/MNKR_RangeItemShop.js
+@plugindesc ショップの品揃えを範囲指定で設定できるプラグインコマンドが使えます。
+@author munokura
+
+@help
+ショップの品揃えを範囲指定で設定できるプラグインコマンドが使えます。
+
+-- 品揃えを追加する --
+MNKR_RangeItemShop add [商品種別(i/w/a)] [開始ID] [最終ID]
+
+例：アイテムをID1からID10を追加
+MNKR_RangeItemShop add i 1 5
+
+-- ショップを開く --
+MNKR_RangeItemShop addで準備されたショップを開きます。
+MNKR_RangeItemShop open 1(省略可能)
+
+最後の1を入れると「購入のみ」のショップになります。
+省略すると、売買可能です。
+
+-- 実用例 --
+アイテムID7から9、武器ID1から5、防具ID2から6のショップを開く
+
+MNKR_RangeItemShop add i 7 9
+MNKR_RangeItemShop add w 1 5
+MNKR_RangeItemShop add a 2 6
+MNKR_RangeItemShop open
+
+利用規約:
+  MITライセンスです。
+  http://opensource.org/licenses/mit-license.php
+  作者に無断で改変、再配布が可能で、
+  利用形態（商用、18禁利用等）についても制限はありません。
+*/
 
 (() => {
   "use strict";

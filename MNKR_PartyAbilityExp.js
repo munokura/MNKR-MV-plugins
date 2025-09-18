@@ -9,42 +9,79 @@
  */
 
 /*:
- * @target MZ MV
- * @url https://raw.githubusercontent.com/munokura/MNKR-MV-plugins/master/MNKR_PartyAbilityExp.js
- * @plugindesc パーティスキルに経験値の増加を追加します。
- * @author ムノクラ
- *
- * @help
- * # 機能
- * パーティスキルに経験値の増加を追加します。
- * 
- * # 使い方
- * 特徴欄があるデータベースのメモ欄に以下を入力してください。
- * <MNKR_PartyAbilityExp:増加率(%)>
- * 複数のレートが重複した場合、最大の数値が採用されます。
- * 
- * ## 記述例
- * <MNKR_PartyAbilityExp:200>
- * パーティの獲得経験値が200%になります。
- * 
- * <MNKR_PartyAbilityExp:0>
- * パーティの獲得経験値が0%になります。
- * ※負の値を入れても0として扱われます。
- * 
- * 
- * ## 特徴欄があるデータベース
- * - アクター
- * - 職業
- * - 武器
- * - 防具
- * - ステート
- *
- * # 利用規約:
- *   MITライセンスです。
- *   https://licenses.opensource.jp/MIT/MIT.html
- *   作者に無断で改変、再配布が可能で、
- *   利用形態（商用、18禁利用等）についても制限はありません。
- */
+@target MZ MV
+@url https://raw.githubusercontent.com/munokura/MNKR-MV-plugins/master/MNKR_PartyAbilityExp.js
+@plugindesc Adds experience gain to party skills.
+@author munokura
+@license MIT License
+
+@help
+# Function
+Adds an experience point increase to a party skill.
+
+# Usage
+Enter the following in the memo field of a database with a feature field.
+<MNKR_PartyAbilityExp: Increase Rate (%)>
+If multiple rates overlap, the highest value will be used.
+
+## Example
+<MNKR_PartyAbilityExp:200>
+Party experience points will be increased by 200%.
+
+<MNKR_PartyAbilityExp:0>
+Party experience points will be increased by 0%.
+*Negative values will be treated as 0.
+
+## Database with a feature field
+- Actor
+- Occupation
+- Weapon
+- Armor
+- State
+
+# Terms of Use:
+MIT License.
+http://opensource.org/licenses/mit-license.php
+Modifications and redistribution are permitted without permission from the
+author, and there are no restrictions on use (commercial, 18+, etc.).
+*/
+
+/*:ja
+@target MZ MV
+@url https://raw.githubusercontent.com/munokura/MNKR-MV-plugins/master/MNKR_PartyAbilityExp.js
+@plugindesc パーティスキルに経験値の増加を追加します。
+@author munokura
+
+@help
+# 機能
+パーティスキルに経験値の増加を追加します。
+
+# 使い方
+特徴欄があるデータベースのメモ欄に以下を入力してください。
+<MNKR_PartyAbilityExp:増加率(%)>
+複数のレートが重複した場合、最大の数値が採用されます。
+
+## 記述例
+<MNKR_PartyAbilityExp:200>
+パーティの獲得経験値が200%になります。
+
+<MNKR_PartyAbilityExp:0>
+パーティの獲得経験値が0%になります。
+※負の値を入れても0として扱われます。
+
+## 特徴欄があるデータベース
+- アクター
+- 職業
+- 武器
+- 防具
+- ステート
+
+# 利用規約:
+  MITライセンスです。
+  http://opensource.org/licenses/mit-license.php
+  作者に無断で改変、再配布が可能で、
+  利用形態（商用、18禁利用等）についても制限はありません。
+*/
 
 (() => {
     'use strict';

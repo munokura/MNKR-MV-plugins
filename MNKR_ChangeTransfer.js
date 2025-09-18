@@ -8,57 +8,61 @@
  * --------------------------------------------------
  */
 /*:
- * @target MV
- * @url https://raw.githubusercontent.com/munokura/MNKR-MV-plugins/master/MNKR_ChangeTransfer.js
- * @plugindesc イベントコマンド「場所移動」のフェード挙動を変更します。
- * @author munokura
- *
- * @help
- * イベントコマンド「場所移動」のフェード挙動を変更します。
- * 
- * 
- * 利用規約:
- *   MITライセンスです。
- *   https://licenses.opensource.jp/MIT/MIT.html
- *   作者に無断で改変、再配布が可能で、
- *   利用形態（商用、18禁利用等）についても制限はありません。
- * 
- * 
- * @param fadeDurationVariables
- * @text フェード速度変数
- * @type variable
- * @desc 変数の値がフェード時間になります。ツクールデフォルトは30。値が0/変数の指定がない時はデフォルト動作。
- * @default 0
- * 
- * @param fadeColor
- * @text フェード色
- * @type struct<color>
- * @desc RGBの値を入力します。機能を使用しない場合、赤(R)に-1と入力。
- * @default {"red":"255","green":"0","blue":"0"}
- */
-/*~struct~color:
- * @param red
- * @text 赤
- * @default 255
- * @type number
- * @min -1
- * @max 255
- * @desc フェードの色。0から255。機能を使用しない場合、-1と入力
- *
- * @param green
- * @text 緑
- * @default 0
- * @type number
- * @max 255
- * @desc フェードの色。0から255。
- *
- * @param blue
- * @text 青
- * @default 0
- * @type number
- * @max 255
- * @desc フェードの色。0から255。
- */
+@target MV
+@url https://raw.githubusercontent.com/munokura/MNKR-MV-plugins/master/MNKR_ChangeTransfer.js
+@plugindesc Changed the fade behavior of the event command "Move Location."
+@author munokura
+@license MIT License
+
+@help
+Changes the fade behavior of the "Move Location" event command.
+
+Terms of Use:
+MIT License.
+http://opensource.org/licenses/mit-license.php
+You may modify and redistribute this without permission from the author, and
+there are no restrictions on its use (commercial, R18+, etc.).
+
+@param fadeDurationVariables
+@text Fade Speed Variable
+@desc The value of the variable is the fade time. The default is 30. If the value is 0/no variable is specified, the default behavior will occur.
+@type variable
+@default 0
+
+@param fadeColor
+@text Fade Color
+@desc Enter the RGB values. If you do not want to use this function, enter -1 for red (R).
+@type struct<color>
+@default {"red":"255","green":"0","blue":"0"}
+*/
+
+/*:ja
+@target MV
+@url https://raw.githubusercontent.com/munokura/MNKR-MV-plugins/master/MNKR_ChangeTransfer.js
+@plugindesc イベントコマンド「場所移動」のフェード挙動を変更します。
+@author munokura
+
+@help
+イベントコマンド「場所移動」のフェード挙動を変更します。
+
+利用規約:
+  MITライセンスです。
+  http://opensource.org/licenses/mit-license.php
+  作者に無断で改変、再配布が可能で、
+  利用形態（商用、18禁利用等）についても制限はありません。
+
+@param fadeDurationVariables
+@text フェード速度変数
+@type variable
+@desc 変数の値がフェード時間になります。ツクールデフォルトは30。値が0/変数の指定がない時はデフォルト動作。
+@default 0
+
+@param fadeColor
+@text フェード色
+@type struct<color>
+@desc RGBの値を入力します。機能を使用しない場合、赤(R)に-1と入力。
+@default {"red":"255","green":"0","blue":"0"}
+*/
 
 (() => {
     "use strict";

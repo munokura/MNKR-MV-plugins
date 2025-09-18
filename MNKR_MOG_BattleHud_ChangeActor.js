@@ -9,63 +9,122 @@
  */
 
 /*:
- * @target MV
- * @url https://raw.githubusercontent.com/munokura/MNKR-MV-plugins/master/MNKR_MOG_BattleHud_ChangeActor.js
- * @plugindesc 発動スイッチがONの時、アクターの表示画像を指定番号画像に切り替えます。
- * @author munokura
- *
- * @param Switch Id 1
- * @text 発動スイッチID
- * @type switch
- * @desc 発動させるスイッチID
- * @default 11
- *
- * @param Before Face Id 1
- * @text 変更前アクター画像ID
- * @type number
- * @desc 変更前アクター画像ID
- * @default 1
- *
- * @param After Face Id 1
- * @text 変更後アクター画像ID
- * @type number
- * @desc 変更後アクター画像ID
- * @default 3
- *
- * @param Switch Id 2
- * @text 発動スイッチID
- * @type switch
- * @desc 発動させるスイッチID
- * @default 12
- *
- * @param Before Face Id 2
- * @text 変更前アクター画像ID
- * @type number
- * @desc 変更前アクター画像ID
- * @default 2
- *
- * @param After Face Id 2
- * @text 変更後アクター画像ID
- * @type number
- * @desc 変更後アクター画像ID
- * @default 4
- *
- * @help
- * MOG_BattleHud (v5.04)用のパッチプラグインです。
- * 動作にはMOG_BattleHudが必要です。
- * このプラグインはプラグイン管理でMOG_BattleHudの下に配置してください。
- * 
- * 発動スイッチがONの時、アクターの表示画像を指定番号画像に切り替えます。
- *
- * プラグインコマンドはありません。
- *
- *
- * 利用規約:
- *   MITライセンスです。
- *   https://licenses.opensource.jp/MIT/MIT.html
- *   作者に無断で改変、再配布が可能で、
- *   利用形態（商用、18禁利用等）についても制限はありません。
- */
+@target MV
+@url https://raw.githubusercontent.com/munokura/MNKR-MV-plugins/master/MNKR_MOG_BattleHud_ChangeActor.js
+@plugindesc When the activation switch is ON, the actor's display image will be changed to the image with the specified number.
+@author munokura
+@license MIT License
+
+@help
+This is a patch plugin for MOG_BattleHud (v5.04).
+MOG_BattleHud is required to function.
+Place this plugin under MOG_BattleHud in the Plugin Manager.
+
+When the activation switch is ON, it switches the actor's display image to the
+specified image number.
+
+There are no plugin commands.
+
+Terms of Use:
+MIT License.
+http://opensource.org/licenses/mit-license.php
+You may modify and redistribute this without permission from the author, and
+there are no restrictions on its use (commercial, 18+ use, etc.).
+
+@param Switch Id 1
+@text Activation Switch ID
+@desc Switch ID to activate
+@type switch
+@default 11
+
+@param Before Face Id 1
+@text Previous actor image ID
+@desc Previous actor image ID
+@type number
+@default 1
+
+@param After Face Id 1
+@text Changed actor image ID
+@desc Changed actor image ID
+@type number
+@default 3
+
+@param Switch Id 2
+@text Activation Switch ID
+@desc Switch ID to activate
+@type switch
+@default 12
+
+@param Before Face Id 2
+@text Previous actor image ID
+@desc Previous actor image ID
+@type number
+@default 2
+
+@param After Face Id 2
+@text Changed actor image ID
+@desc Changed actor image ID
+@type number
+@default 4
+*/
+
+/*:ja
+@target MV
+@url https://raw.githubusercontent.com/munokura/MNKR-MV-plugins/master/MNKR_MOG_BattleHud_ChangeActor.js
+@plugindesc 発動スイッチがONの時、アクターの表示画像を指定番号画像に切り替えます。
+@author munokura
+
+@param Switch Id 1
+@text 発動スイッチID
+@type switch
+@desc 発動させるスイッチID
+@default 11
+
+@param Before Face Id 1
+@text 変更前アクター画像ID
+@type number
+@desc 変更前アクター画像ID
+@default 1
+
+@param After Face Id 1
+@text 変更後アクター画像ID
+@type number
+@desc 変更後アクター画像ID
+@default 3
+
+@param Switch Id 2
+@text 発動スイッチID
+@type switch
+@desc 発動させるスイッチID
+@default 12
+
+@param Before Face Id 2
+@text 変更前アクター画像ID
+@type number
+@desc 変更前アクター画像ID
+@default 2
+
+@param After Face Id 2
+@text 変更後アクター画像ID
+@type number
+@desc 変更後アクター画像ID
+@default 4
+
+@help
+MOG_BattleHud (v5.04)用のパッチプラグインです。
+動作にはMOG_BattleHudが必要です。
+このプラグインはプラグイン管理でMOG_BattleHudの下に配置してください。
+
+発動スイッチがONの時、アクターの表示画像を指定番号画像に切り替えます。
+
+プラグインコマンドはありません。
+
+利用規約:
+  MITライセンスです。
+  http://opensource.org/licenses/mit-license.php
+  作者に無断で改変、再配布が可能で、
+  利用形態（商用、18禁利用等）についても制限はありません。
+*/
 
 (function(){
 	'use strict';

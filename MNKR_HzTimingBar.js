@@ -14,138 +14,280 @@ MITライセンスの下で公開されています。
 */
 
 /*:
- * @target MV
- * @url https://raw.githubusercontent.com/munokura/MNKR-MV-plugins/master/MNKR_HzTimingBar.js
- * @plugindesc タイミングを合わせてボタン入力するタイミングバーを実行します。
- * @author hiz（改変munokura）
- * 
- * @param bar width
- * @type number
- * @text バーの幅
- * @desc バーの幅
- * @default 500
- *
- * @param required SE
- * @type file
- * @require 1
- * @dir audio/se/
- * @text 必須エリアヒット時SE
- * @desc 必須エリアヒット時のSE
- * @default Decision2
- *
- * @param hit SE
- * @type file
- * @require 1
- * @dir audio/se/
- * @text ヒットエリアヒット時SE
- * @desc ヒットエリアヒット時のSE
- * @default Attack2
- * 
- * @param critical SE
- * @type file
- * @require 1
- * @dir audio/se/
- * @text クリティカルエリアヒット時SE
- * @desc クリティカルエリアヒット時のSE
- * @default Attack3
- *
- * @param miss SE
- * @type file
- * @require 1
- * @dir audio/se/
- * @text 入力時（失敗）SE
- * @desc 入力時（失敗）のSE
- * @default Buzzer1
- * 
- * @help
- * このプラグインはHzTimingBarを改変したものです。
- * 問い合わせは改変者（munokura）へお願いいたします。
- * 原作者にご迷惑をおかけしないよう、お願いいたします。
- * 
- * 
- * タイミングを合わせてボタン入力するタイミングバーを実行します。
- * プラグインコマンドでタイミングバーを設定・実行します。
- * 
- * カーソルがバー終了地点に向かって動きます。
- * 何もない範囲で入力した時点で終了し、0が代入されます。
- * 終了までに、ヒット(1)・クリティカル(2)のどちらかを入力したポイントの高い方が
- * 変数に代入されます。
- * ただし、入力必須範囲がある場合、それを入力していないと0が代入されます。
- * 
- * バー末端に来るか、クリア条件（必須、ヒット、クリティカルの全てをヒット済）
- * を満たした時点で変数が代入され終了します。
- * 
- * ■プラグインコマンド:
- * HzTimingBar [var_no] [hit_area] [critical_area] [require_area] [x] [y]
- * # コマンド入力起動
- *   
- * ▼[var_no]
- * 【必須】結果を返す変数番号。
- * ミスの場合は0・ヒットの場合は1・クリティカルの場合は2が返される。
- * 
- * ▼[hit_area] 
- * 【必須】ヒット範囲の最小値・最大値を0〜100の間で設定。
- * min-max
- * 例）
- * 70-90
- * 
- * ▼[critical_area]
- * 【任意】クリティカル範囲の最小値・最大値を0〜100の間で設定。
- * min-max
- * 例）
- * 90-95
- * 
- * ▼[require_area]
- * 【任意】入力必須範囲（複数可）の最小値・最大値を0〜100の間で設定。
- * min-max,min-max,...
- * 入力必須範囲で全てボタン入力しないと
- * ヒット範囲・クリティカル範囲でボタン入力してもミスになります。
- * ※ 必ずヒット範囲・クリティカル範囲より前になるように設定して下さい。
- * 
- * 例）
- * [10-20]         # 必須エリアは10〜20の範囲
- * [20-30,50-60]   # 必須エリアは20〜30・50〜60の範囲
- * []              # 必須エリア無し
- * 
- * ▼[x]
- * 【任意】コマンドの表示位置を指定します。（無指定で画面中央）
- * 
- * ▼[y]
- * 【任意】コマンドの表示位置を指定します。（無指定で画面中央）
- *   
- * コマンド例）
- * HzTimingBar 1 70-90 90-95
- * # ヒット範囲は70-90、クリティカル範囲は90-95。
- * 結果は変数番号１にセットされる。
- * 
- * HzTimingBar 1 70-90 90-95 [10-30,40-60]
- * # ヒット範囲は70-90、クリティカル範囲は90-95。
- * 結果は変数番号１にセットされる。
- * # 10-30・40-60の両方の範囲内でボタン入力しないとミス。
- * 
- * HzTimingBar 1 80-90 90-95 [10-20] 413 20
- * # ヒット範囲は80-90、クリティカル範囲は90-95。
- * 結果は変数番号１にセットされる。
- * # 10-20の範囲内でボタン入力しないとミス。
- * # コマンドの表示位置は画面中央上端。
- * 
- * 
- * 利用規約:
- *   MITライセンスです。
- *   https://licenses.opensource.jp/MIT/MIT.html
- *   作者に無断で改変、再配布が可能で、
- *   利用形態（商用、18禁利用等）についても制限はありません。
- * 
- * Ver.0.0.1 by munokura (2022/4/12)
- * 変数に値が代入されない不具合を修正
- * プラグインコマンド後に文章の表示がない場合、無限ループになる不具合を修正
- * 必須エリアが他エリアの後ろにある場合、必ずミスになる不具合を修正
- * 
- * Ver.0.0.2 by munokura (2023/5/7)
- * クリティカルの後にヒットを取ると、ヒットの値を取得する不具合を修正
- * 2回目以降に前回のスコアが影響してしまう不具合を修正
- * ヒット時にクリア条件が揃っている場合、末端まで待たずにクリアする仕様変更
- */
+@target MV
+@url https://raw.githubusercontent.com/munokura/MNKR-MV-plugins/master/MNKR_HzTimingBar.js
+@plugindesc Execute the timing bar by inputting buttons in time.
+@author hiz,munokura
+@license MIT License
+
+@help
+This plugin is a modified version of HzTimingBar.
+Please contact the modifier (munokura) with any inquiries.
+Please refrain from causing any inconvenience to the original author.
+
+Executes a timing bar by timing button presses.
+The timing bar is set and executed using plugin commands.
+
+The cursor moves toward the bar's end point.
+The plugin will end when an empty area is filled in and a value of 0 is
+assigned.
+The higher of the Hit (1) or Critical (2) points entered by the end of the bar
+will be assigned to the variable.
+However, if there is a required input range, 0 will be assigned if that range
+is not filled in.
+
+The variable will be assigned and the plugin will end when the bar's end point
+is reached or the clear condition (all required, hit, and critical hits have
+been met) is met.
+
+■Plugin Command:
+HzTimingBar [var_no] [hit_area] [critical_area] [require_area] [x] [y]
+# Launch Command Input
+
+▼[var_no]
+[Required] The variable number for which the result is returned.
+Returns 0 for a miss, 1 for a hit, and 2 for a critical.
+
+▼[hit_area]
+[Required] Set the minimum and maximum values for the hit area between 0 and
+100.
+min-max
+Example:
+70-90
+
+▼[critical_area]
+[Optional] Set the minimum and maximum values for the critical area between 0
+and 100.
+min-max
+Example:
+90-95
+
+▼[require_area]
+[Optional] Set the minimum and maximum values for the required area(s) between
+0 and 100.
+min-max,min-max,...
+If you do not enter all button presses within the required area,
+button presses within the hit or critical area will result in a miss.
+* Be sure to set the area before the hit or critical area.
+
+Example)
+[10-20] # Required range is 10-20
+[20-30,50-60] # Required range is 20-30 or 50-60
+[] # No required range
+
+▼[x]
+[Optional] Specifies the display position of the command. (Leaving it
+unspecified will set it to the center of the screen)
+
+▼[y]
+[Optional] Specifies the display position of the command. (Leaving it
+unspecified will set it to the center of the screen)
+
+Command Example)
+HzTimingBar 1 70-90 90-95
+# Hit range is 70-90, critical range is 90-95.
+The result is set to variable number 1.
+
+HzTimingBar 1 70-90 90-95 [10-30,40-60]
+# Hit range is 70-90, critical range is 90-95.
+The result is set to variable number 1.
+# A miss occurs if the button press is not within both the 10-30 and 40-60 ranges.
+
+HzTimingBar 1 80-90 90-95 [10-20] 413 20
+# The hit range is 80-90, and the critical range is 90-95.
+The result is set to variable number 1.
+# A miss occurs if the button press is not within the 10-20 range.
+# The command is displayed at the top center of the screen.
+
+Terms of Use:
+MIT License.
+http://opensource.org/licenses/mit-license.php
+You may modify and redistribute this without permission from the author, and
+there are no restrictions on its use (commercial, 18+, etc.).
+
+Ver. 0.0.1 by munokura (April 12, 2022)
+Fixed an issue where values were not assigned to variables.
+Fixed an issue where an infinite loop would occur if no text was displayed
+after a plugin command.
+Fixed an issue where a required area would always result in a miss if it was
+placed after another area.
+
+Ver. 0.0.2 by munokura (May 7, 2023)
+Fixed an issue where the hit value was acquired when scoring a critical hit.
+Fixed an issue where the previous score would affect subsequent attempts.
+Changed the game so that clearing conditions are met when a hit is made
+without waiting until the end of the game.
+
+@param bar width
+@text Bar Width
+@desc Bar Width
+@type number
+@default 500
+
+@param required SE
+@text Required area hit sound effect
+@desc Sound effects when hitting a required area
+@type file
+@default Decision2
+@require 1
+@dir audio/se/
+
+@param hit SE
+@text Hit area hit sound effect
+@desc Sound effect when hitting the hit area
+@type file
+@default Attack2
+@require 1
+@dir audio/se/
+
+@param critical SE
+@text Critical area hit sound effect
+@desc Sound effect when hitting a critical area
+@type file
+@default Attack3
+@require 1
+@dir audio/se/
+
+@param miss SE
+@text Input (failure) SE
+@desc SE when inputting (failed)
+@type file
+@default Buzzer1
+@require 1
+@dir audio/se/
+*/
+
+/*:ja
+@target MV
+@url https://raw.githubusercontent.com/munokura/MNKR-MV-plugins/master/MNKR_HzTimingBar.js
+@plugindesc タイミングを合わせてボタン入力するタイミングバーを実行します。
+@author hiz（改変munokura）
+
+@param bar width
+@type number
+@text バーの幅
+@desc バーの幅
+@default 500
+
+@param required SE
+@type file
+@require 1
+@dir audio/se/
+@text 必須エリアヒット時SE
+@desc 必須エリアヒット時のSE
+@default Decision2
+
+@param hit SE
+@type file
+@require 1
+@dir audio/se/
+@text ヒットエリアヒット時SE
+@desc ヒットエリアヒット時のSE
+@default Attack2
+
+@param critical SE
+@type file
+@require 1
+@dir audio/se/
+@text クリティカルエリアヒット時SE
+@desc クリティカルエリアヒット時のSE
+@default Attack3
+
+@param miss SE
+@type file
+@require 1
+@dir audio/se/
+@text 入力時（失敗）SE
+@desc 入力時（失敗）のSE
+@default Buzzer1
+
+@help
+このプラグインはHzTimingBarを改変したものです。
+問い合わせは改変者（munokura）へお願いいたします。
+原作者にご迷惑をおかけしないよう、お願いいたします。
+
+タイミングを合わせてボタン入力するタイミングバーを実行します。
+プラグインコマンドでタイミングバーを設定・実行します。
+
+カーソルがバー終了地点に向かって動きます。
+何もない範囲で入力した時点で終了し、0が代入されます。
+終了までに、ヒット(1)・クリティカル(2)のどちらかを入力したポイントの高い方が
+変数に代入されます。
+ただし、入力必須範囲がある場合、それを入力していないと0が代入されます。
+
+バー末端に来るか、クリア条件（必須、ヒット、クリティカルの全てをヒット済）
+を満たした時点で変数が代入され終了します。
+
+■プラグインコマンド:
+HzTimingBar [var_no] [hit_area] [critical_area] [require_area] [x] [y]
+# コマンド入力起動
+
+▼[var_no]
+【必須】結果を返す変数番号。
+ミスの場合は0・ヒットの場合は1・クリティカルの場合は2が返される。
+
+▼[hit_area] 
+【必須】ヒット範囲の最小値・最大値を0〜100の間で設定。
+min-max
+例）
+70-90
+
+▼[critical_area]
+【任意】クリティカル範囲の最小値・最大値を0〜100の間で設定。
+min-max
+例）
+90-95
+
+▼[require_area]
+【任意】入力必須範囲（複数可）の最小値・最大値を0〜100の間で設定。
+min-max,min-max,...
+入力必須範囲で全てボタン入力しないと
+ヒット範囲・クリティカル範囲でボタン入力してもミスになります。
+※ 必ずヒット範囲・クリティカル範囲より前になるように設定して下さい。
+
+例）
+[10-20]         # 必須エリアは10〜20の範囲
+[20-30,50-60]   # 必須エリアは20〜30・50〜60の範囲
+[]              # 必須エリア無し
+
+▼[x]
+【任意】コマンドの表示位置を指定します。（無指定で画面中央）
+
+▼[y]
+【任意】コマンドの表示位置を指定します。（無指定で画面中央）
+
+コマンド例）
+HzTimingBar 1 70-90 90-95
+# ヒット範囲は70-90、クリティカル範囲は90-95。
+結果は変数番号１にセットされる。
+
+HzTimingBar 1 70-90 90-95 [10-30,40-60]
+# ヒット範囲は70-90、クリティカル範囲は90-95。
+結果は変数番号１にセットされる。
+# 10-30・40-60の両方の範囲内でボタン入力しないとミス。
+
+HzTimingBar 1 80-90 90-95 [10-20] 413 20
+# ヒット範囲は80-90、クリティカル範囲は90-95。
+結果は変数番号１にセットされる。
+# 10-20の範囲内でボタン入力しないとミス。
+# コマンドの表示位置は画面中央上端。
+
+利用規約:
+  MITライセンスです。
+  http://opensource.org/licenses/mit-license.php
+  作者に無断で改変、再配布が可能で、
+  利用形態（商用、18禁利用等）についても制限はありません。
+
+Ver.0.0.1 by munokura (2022/4/12)
+変数に値が代入されない不具合を修正
+プラグインコマンド後に文章の表示がない場合、無限ループになる不具合を修正
+必須エリアが他エリアの後ろにある場合、必ずミスになる不具合を修正
+
+Ver.0.0.2 by munokura (2023/5/7)
+クリティカルの後にヒットを取ると、ヒットの値を取得する不具合を修正
+2回目以降に前回のスコアが影響してしまう不具合を修正
+ヒット時にクリア条件が揃っている場合、末端まで待たずにクリアする仕様変更
+*/
 
 // 必須エリア追加
 // 必須エリアヒット時、効果音を出す
@@ -276,7 +418,6 @@ MITライセンスの下で公開されています。
         // 描画コンテナ
         this._container = new Sprite();
         this._container.position.set(x - HzTimingBar.WIDTH / 2, y - HzTimingBar.HEIGHT / 2);
-
 
         // 枠
         var barFrameBmp = new Bitmap(HzTimingBar.WIDTH + 4, HzTimingBar.HEIGHT + 4);

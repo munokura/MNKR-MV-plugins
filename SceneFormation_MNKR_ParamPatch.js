@@ -13,31 +13,58 @@
  */
 
  /*:
- * @target MV
- * @url https://raw.githubusercontent.com/munokura/MNKR-MV-plugins/master/SceneFormation_MNKR_ParamPatch.js
- * @plugindesc SceneFormation シーン表示される能力値を攻撃力、防御力、敏捷性の３つだけにします。
- * @author Munokura
- * @license MIT
- * 
- * @help
- * 並び替えシーン SceneFormation ver1.093 （以降SceneFormation）用の
- * パッチプラグインです。
- * 動作には SceneFormation が必要です。
- * https://raw.githubusercontent.com/munokura/Yana-MV-plugins/master/Menu/SceneFormation.js
- * 
- * プラグイン管理で、このプラグインをSceneFormationの下方に配置してください。
- * 
- * SceneFormationのシーン表示能力値を攻撃力、防御力、敏捷性の３つにします。
- *
- * プラグインコマンドや設定はありません。
- *
- *
- * 利用規約:
- *   MITライセンスです。
- *   https://licenses.opensource.jp/MIT/MIT.html
- *   作者に無断で改変、再配布が可能で、
- *   利用形態（商用、18禁利用等）についても制限はありません。
- */
+@target MV
+@url https://raw.githubusercontent.com/munokura/MNKR-MV-plugins/master/SceneFormation_MNKR_ParamPatch.js
+@plugindesc SceneFormation Only three ability values are displayed in the scene: attack power, defense power, and agility.
+@author munokura
+@license MIT
+
+@help
+This is a patch plugin for SceneFormation ver. 1.093 (hereafter referred to as
+SceneFormation).
+
+SceneFormation is required to function.
+https://raw.githubusercontent.com/munokura/Yana-MV-plugins/master/Menu/SceneFormation.js
+
+Place this plugin below SceneFormation in the Plugin Manager.
+
+Sets SceneFormation's scene display ability values to attack, defense, and
+agility.
+
+There are no plugin commands or settings.
+
+Terms of Use:
+MIT License.
+http://opensource.org/licenses/mit-license.php
+You may modify and redistribute this plugin without permission from the
+author, and there are no restrictions on its use (commercial, 18+, etc.).
+*/
+
+/*:ja
+@target MV
+@url https://raw.githubusercontent.com/munokura/MNKR-MV-plugins/master/SceneFormation_MNKR_ParamPatch.js
+@plugindesc SceneFormation シーン表示される能力値を攻撃力、防御力、敏捷性の３つだけにします。
+@author Munokura
+@license MIT
+
+@help
+並び替えシーン SceneFormation ver1.093 （以降SceneFormation）用の
+パッチプラグインです。
+動作には SceneFormation が必要です。
+https://raw.githubusercontent.com/munokura/Yana-MV-plugins/master/Menu/SceneFormation.js
+
+プラグイン管理で、このプラグインをSceneFormationの下方に配置してください。
+
+SceneFormationのシーン表示能力値を攻撃力、防御力、敏捷性の３つにします。
+
+プラグインコマンドや設定はありません。
+
+利用規約:
+  MITライセンスです。
+  http://opensource.org/licenses/mit-license.php
+  作者に無断で改変、再配布が可能で、
+  利用形態（商用、18禁利用等）についても制限はありません。
+*/
 
  (function () {
 
