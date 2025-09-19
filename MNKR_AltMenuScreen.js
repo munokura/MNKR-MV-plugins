@@ -24,7 +24,7 @@ Please contact the modifier with any questions.
 
 # Terms of Use:
 - Please abide by the GGG Product Terms of Use.
-https://rpgmakerofficial.com/support/rule/
+https://rpgmakerofficial.com/en/support/rule/
 There are no other restrictions.
 You may modify and redistribute this plugin without permission from the
 author.
