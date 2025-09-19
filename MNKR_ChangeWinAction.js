@@ -10,7 +10,7 @@
 
 /*:
 @target MZ MV
-@url https://raw.githubusercontent.com/munokura/MNKR-MV-plugins/master/MNKR_ChangeWinAction.js
+@url https://raw.githubusercontent.com/munokura/MNKR-MZ-plugins/master/MNKR_ChangeWinAction.js
 @plugindesc If the designated switch is ON, the SV actor will perform the designated action when the battle is won.
 @author munokura
 @license MIT License
