@@ -85,7 +85,7 @@ https://opensource.org/licenses/mit-license.php
     'use strict';
 
     /**
-     * アイテムの装備タイプ（'weapon', 'armor', 'none'）を返すヘルパー関数
+     * アイテムの装備タイプ（'weapon', 'armor', 'none'）を返す
      */
     const isEquipType = function (item) {
         if (DataManager.isWeapon(item)) {
@@ -110,7 +110,7 @@ https://opensource.org/licenses/mit-license.php
     };
 
     /**
-     * アイテムが指定スロットに装備可能か（追加装備タイプのみ）
+     * アイテムが指定スロットに装備可能か
      */
     const canEquipAdditional = function (actor, item, slotId) {
         if (!item) return false;
@@ -133,7 +133,7 @@ https://opensource.org/licenses/mit-license.php
     };
 
     /**
-     * Game_Actor - 装備可能判定を拡張 (Refactored)
+     * Game_Actor - 装備可能判定を拡張
      */
     const _Game_Actor_canEquip = Game_Actor.prototype.canEquip;
     Game_Actor.prototype.canEquip = function (item) {
@@ -161,7 +161,7 @@ https://opensource.org/licenses/mit-license.php
     };
 
     /**
-     * Game_Actor - 特定スロットに装備可能かチェック (Refactored)
+     * Game_Actor - 特定スロットに装備可能かチェック
      */
     Game_Actor.prototype.canEquipAtSlot = function (item, slotId) {
         if (!item) return false;
@@ -192,6 +192,7 @@ https://opensource.org/licenses/mit-license.php
 
     /**
      * Game_Actor - 装備不可アイテムの解放を拡張
+     * Override
      */
     Game_Actor.prototype.releaseUnequippableItems = function (forcing) {
         for (; ;) {
@@ -227,52 +228,6 @@ https://opensource.org/licenses/mit-license.php
             this._equips[slotId].setObject(item);
             this.refresh();
         }
-    };
-
-    /**
-     * Window_EquipStatus - 能力値比較のための一時装備処理を修正
-     */
-    const _Window_EquipStatus_setTempActor = Window_EquipStatus.prototype.setTempActor;
-    Window_EquipStatus.prototype.setTempActor = function (tempActor) {
-        if (this._actor && tempActor) {
-            tempActor._additionalEquipTypes = {};
-            const equips = this._actor.equips();
-            const slots = this._actor.equipSlots();
-
-            for (let i = 0; i < equips.length; i++) {
-                if (equips[i] && getAdditionalEquipTypes(equips[i]).length > 0) {
-                    tempActor._additionalEquipTypes[i] = slots[i];
-                }
-            }
-        }
-        _Window_EquipStatus_setTempActor.call(this, tempActor);
-    };
-
-    /**
-     * Game_Actor - 装備強制変更を拡張（能力値比較用）
-     */
-    const _Game_Actor_forceChangeEquip = Game_Actor.prototype.forceChangeEquip;
-    Game_Actor.prototype.forceChangeEquip = function (slotId, item) {
-        // 追加装備タイプの情報があれば使用
-        if (this._additionalEquipTypes && this._additionalEquipTypes[slotId]) {
-            const currentItem = this.equips()[slotId];
-            if (currentItem && getAdditionalEquipTypes(currentItem).length > 0) {
-                this._equips[slotId].setObject(item);
-                this.releaseUnequippableItems(true);
-                this.refresh();
-                return;
-            }
-        }
-
-        // 新しく装備するアイテムが追加装備タイプを持つ場合
-        if (item && canEquipAdditional(this, item, slotId)) {
-            this._equips[slotId].setObject(item);
-            this.releaseUnequippableItems(true);
-            this.refresh();
-            return;
-        }
-
-        _Game_Actor_forceChangeEquip.call(this, slotId, item);
     };
 
 })();
