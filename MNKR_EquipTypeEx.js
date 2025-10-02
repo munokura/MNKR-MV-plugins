@@ -1,7 +1,7 @@
 /*
  * --------------------------------------------------
  * MNKR_EquipTypeEx.js
- * Ver.0.0.1
+ * Ver.0.0.2
  * Copyright (c) 2025 Sasuke KANNAZUKI,munokura
  * This software is released under the MIT license.
  * http://opensource.org/licenses/mit-license.php
@@ -77,7 +77,7 @@ You may modify and redistribute this without permission,
 # 利用規約
 MITライセンスです。
 https://opensource.org/licenses/mit-license.php
-作者に無断で改変、再配布が可能で、利用形態（商用、18禁利用等）
+作者に無断で改変、再配布が可能で、利用形態(商用、18禁利用等)
 についても制限はありません。
 */
 
@@ -85,7 +85,7 @@ https://opensource.org/licenses/mit-license.php
     'use strict';
 
     /**
-     * アイテムの装備タイプ（'weapon', 'armor', 'none'）を返す
+     * アイテムの装備タイプ('weapon', 'armor', 'none')を返す
      */
     const isEquipType = function (item) {
         if (DataManager.isWeapon(item)) {
@@ -107,6 +107,13 @@ https://opensource.org/licenses/mit-license.php
         }).filter(function (id) {
             return id > 0;
         });
+    };
+
+    /**
+     * アイテムが追加装備タイプを持っているか
+     */
+    const hasAdditionalEquipTypes = function (item) {
+        return item && getAdditionalEquipTypes(item).length > 0;
     };
 
     /**
@@ -192,14 +199,24 @@ https://opensource.org/licenses/mit-license.php
 
     /**
      * Game_Actor - 装備不可アイテムの解放を拡張
-     * Override
      */
+    const _Game_Actor_releaseUnequippableItems = Game_Actor.prototype.releaseUnequippableItems;
     Game_Actor.prototype.releaseUnequippableItems = function (forcing) {
+        const hasAdditionalTypes = this.equips().some(function (item) {
+            return hasAdditionalEquipTypes(item);
+        });
+        if (!hasAdditionalTypes) {
+            _Game_Actor_releaseUnequippableItems.call(this, forcing);
+            return;
+        }
+
+        // 追加装備タイプを持つアイテムがある場合のみ、拡張処理を実行
         for (; ;) {
             const equips = this.equips();
             let changed = false;
             for (let i = 0; i < equips.length; i++) {
                 const item = equips[i];
+                // canEquipAtSlot を使って判定（追加装備タイプ対応）
                 if (item && !this.canEquipAtSlot(item, i)) {
                     if (!forcing) {
                         this.tradeItemWithParty(null, item);
@@ -208,7 +225,9 @@ https://opensource.org/licenses/mit-license.php
                     changed = true;
                 }
             }
-            if (!changed) break;
+            if (!changed) {
+                break;
+            }
         }
     };
 
