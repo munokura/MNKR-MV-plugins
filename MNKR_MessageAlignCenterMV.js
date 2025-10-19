@@ -34,13 +34,16 @@
 /*:
 @target MV
 @plugindesc Message Centering Plugin
-@author munokura
+@author Triacontane, munokura
 @url https://raw.githubusercontent.com/munokura/MNKR-MV-plugins/master/MNKR_MessageAlignCenterMV.js
 @license MIT License
 
 @help
-MessageAlignCenterMV.js
+# Notes
+This plugin is a modified version of MessageAlignCenter, created by Triacontan, for RPG Maker MV.
+If you have any questions, please contact munokura.
 
+# How to Use
 This allows you to center or right-align messages, skill descriptions, and other text.
 You can change the alignment by placing the following control characters at the beginning of a line.
 \ac: Center alignment
@@ -90,13 +93,16 @@ There are no restrictions on usage (commercial, R18, etc.).
 /*:ja
 @target MV
 @plugindesc メッセージの中央揃えプラグイン
-@author munokura
+@author トリアコンタン, munokura
 @url https://raw.githubusercontent.com/munokura/MNKR-MV-plugins/master/MNKR_MessageAlignCenterMV.js
 @license MIT License
 
 @help
-MessageAlignCenterMV.js
+# 注意点
+このプラグインはトリアコンタン氏作成 MessageAlignCenter をRPGツクールMV用に改変したものです。
+問い合わせは、munokuraにお願いいたします。
 
+# 使い方
 文章の表示などのメッセージやスキルの説明文などを中央揃え、右揃えにできます。
 以下の制御文字を行の先頭に記述すると揃えを変更できます。
 \ac : 中央揃え
